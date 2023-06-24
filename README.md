@@ -1,15 +1,21 @@
 # Fornear (WaffleHacks 2023)
 
+![logo](https://github.com/jibranabsarulislam/Fornear/assets/70596906/a495d28d-7616-4ca3-91d7-df3824a4b133)
+
 ### A click-and-collect solution to benefit the operations of Petey's Pantry @ Oglethorpe University.
 
 ---
 ### Context
+
 
 Oglethorpe University is a school right outside of Atlanta, Georgia that is recognized nationally for their commitment to affordability, individualized student support, their diverse student population, and quality of academic programs. [https://oglethorpe.edu/about/]
 
 They were also the first Georgia college to partner with TheDream.US to provide scholarships to qualified immigrant students who came to the United States as children, known as “DREAMers.” [https://oglethorpe.edu/admission/undergraduate-admission/scholarships-and-aid/dream-us-faqs/]
 
 An on-campus organization called Petey's Pantry stores, maintains an inventory, handles requests, and distributes foodstuffs throughout the Oglethorpe community. [https://health.oglethorpe.edu/food-pantry/]
+
+
+![image](https://github.com/jibranabsarulislam/Fornear/assets/70596906/fef8a16f-8663-433f-8785-df94cf1a84fa)
 
 ---
 
