@@ -1,0 +1,307 @@
+[
+    {
+      "id": "1",
+      "title": "BBQ Party",
+      "description": "Enjoy a delicious BBQ party with friends and family.",
+      "quantity": 15,
+      "items": [
+        {
+          "itemName": "Burger Patties",
+          "itemCount": "10"
+        },
+        {
+          "itemName": "Hot Dog Buns",
+          "itemCount": "12"
+        },
+        {
+          "itemName": "Chicken Wings",
+          "itemCount": "20"
+        },
+        {
+          "itemName": "Steak",
+          "itemCount": "8"
+        },
+        {
+          "itemName": "Sausages",
+          "itemCount": "16"
+        },
+        {
+          "itemName": "Corn on the Cob",
+          "itemCount": "10"
+        },
+        {
+          "itemName": "Potato Salad",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Baked Beans",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Coleslaw",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Condiments",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Soft Drinks",
+          "itemCount": "24"
+        },
+        {
+          "itemName": "Water Bottles",
+          "itemCount": "12"
+        },
+        {
+          "itemName": "Ice",
+          "itemCount": "1"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Pizza Night",
+      "description": "Have a fun pizza night with a variety of delicious pizzas.",
+      "quantity": 8,
+      "items": [
+        {
+          "itemName": "Cheese Pizza",
+          "itemCount": "2"
+        },
+        {
+          "itemName": "Pepperoni Pizza",
+          "itemCount": "2"
+        },
+        {
+          "itemName": "Margherita Pizza",
+          "itemCount": "2"
+        },
+        {
+          "itemName": "Vegetarian Pizza",
+          "itemCount": "2"
+        },
+        {
+          "itemName": "Garlic Bread",
+          "itemCount": "2"
+        },
+        {
+          "itemName": "Caesar Salad",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Soft Drinks",
+          "itemCount": "12"
+        },
+        {
+          "itemName": "Dessert",
+          "itemCount": "1"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Mexican Fiesta",
+      "description": "Spice up your party with a delicious Mexican feast.",
+      "quantity": 10,
+      "items": [
+        {
+          "itemName": "Tacos",
+          "itemCount": "15"
+        },
+        {
+          "itemName": "Burritos",
+          "itemCount": "10"
+        },
+        {
+          "itemName": "Quesadillas",
+          "itemCount": "10"
+        },
+        {
+          "itemName": "Chips",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Salsa",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Guacamole",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Mexican Rice",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Refried Beans",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Soft Drinks",
+          "itemCount": "12"
+        },
+        {
+          "itemName": "Tres Leches Cake",
+          "itemCount": "1"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Picnic in the Park",
+      "description": "Enjoy a lovely picnic in the park with your loved ones.",
+      "quantity": 6,
+      "items": [
+        {
+          "itemName": "Sandwiches",
+          "itemCount": "6"
+        },
+        {
+          "itemName": "Chips",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Fresh Fruits",
+          "itemCount": "10"
+        },
+        {
+          "itemName": "Cheese and Crackers",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Snack Bars",
+          "itemCount": "4"
+        },
+        {
+          "itemName": "Water Bottles",
+          "itemCount": "6"
+        },
+        {
+          "itemName": "Picnic Blanket",
+          "itemCount": "1"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Breakfast Bundle",
+      "description": "Start your day with a delicious breakfast spread.",
+      "quantity": 4,
+      "items": [
+        {
+          "itemName": "Bread",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Eggs",
+          "itemCount": "12"
+        },
+        {
+          "itemName": "Bacon",
+          "itemCount": "8"
+        },
+        {
+          "itemName": "Sausages",
+          "itemCount": "8"
+        },
+        {
+          "itemName": "Butter",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Jam",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Orange Juice",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Coffee",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Tea",
+          "itemCount": "1"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Family Dinner",
+      "description": "Prepare a hearty family dinner with these essentials.",
+      "quantity": 6,
+      "items": [
+        {
+          "itemName": "Chicken",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Beef",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Fish",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Potatoes",
+          "itemCount": "6"
+        },
+        {
+          "itemName": "Vegetables",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Salad",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Dinner Rolls",
+          "itemCount": "6"
+        },
+        {
+          "itemName": "Dessert",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Sodas",
+          "itemCount": "6"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Office Lunch",
+      "description": "Provide a tasty lunch for your office team.",
+      "quantity": 20,
+      "items": [
+        {
+          "itemName": "Sandwiches",
+          "itemCount": "20"
+        },
+        {
+          "itemName": "Wraps",
+          "itemCount": "10"
+        },
+        {
+          "itemName": "Salad",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Chips",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Fruit Platter",
+          "itemCount": "1"
+        },
+        {
+          "itemName": "Cookies",
+          "itemCount": "20"
+        }
+      ]
+    }
+  ]
+  
