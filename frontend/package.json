@@ -16,7 +16,7 @@
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint src/**/*.js --fix",
     "format": "prettier --write \"src/**/*.js\"",
-    "prepare": "husky install"
+    "prepare": "cd ../ && husky install ./frontend/.husky"
   },
   "eslintConfig": {
     "extends": [
