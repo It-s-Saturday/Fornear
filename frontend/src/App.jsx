@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Request from './components/Request';
-import RequestList from './components/RequestList';
 import Staff from './components/staff/Staff';
 
 function App() {
@@ -14,10 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="settings" element={<h1>Settings</h1>} />
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Route path="request/:id" element={<Request />} />
-        <Route path="requests" element={<RequestList />} />
+        <Route path="request/:_id" element={<Request />} />
         <Route path="staff" element={<Staff />} />
       </Routes>
     </BrowserRouter>
