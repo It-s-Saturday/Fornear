@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Request from './components/Request';
 import RequestList from './components/RequestList';
+import Staff from './components/staff/Staff';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Route path="request/:id" element={<Request />} />
         <Route path="requests" element={<RequestList />} />
+        <Route path="staff" element={<Staff />} />
       </Routes>
     </BrowserRouter>
   );
