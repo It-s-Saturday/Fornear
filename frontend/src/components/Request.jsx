@@ -25,6 +25,7 @@ export default function Request() {
 
   const handleOnClick = async (e) => {
     e.preventDefault();
+    console.log(formData.pickupDate);
     if (
       formData.name === ''
       || formData.email === ''

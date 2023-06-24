@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Request from './components/Request';
+import RequestList from './components/RequestList';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="settings" element={<h1>Settings</h1>} />
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Route path="request/:id" element={<Request />} />
+        <Route path="requests" element={<RequestList />} />
       </Routes>
     </BrowserRouter>
   );

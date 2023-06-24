@@ -34,10 +34,10 @@ export default function Navbar() {
             Home
           </a>
           <a
-            href="/settings"
+            href="/requests"
             className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#bb0a5]"
           >
-            Settings
+            Requests
           </a>
         </div>
       </div>
