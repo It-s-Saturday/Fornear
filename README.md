@@ -1,4 +1,4 @@
-## Fornear
+# Fornear (WaffleHacks 2023)
 
 ### A click-and-collect solution to benefit the operations of Petey's Pantry @ Oglethorpe University.
 
