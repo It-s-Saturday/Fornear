@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function Package(props) {
-  const { data, forForm } = props;
+  const { data, showRequest } = props;
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg h-[fit-content]">
       <div className="px-6 py-4">
@@ -29,16 +29,16 @@ export default function Package(props) {
           </span>
         </div>
       </div>
-      {!forForm && (
+      {showRequest && (
         <div className="flex items-center px-6 py-4 justify-end">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
             {data.quantityAvailable ?? 'Quantity not found.'}
             {' available'}
           </span>
-          <Link to={`request/${data.id}`}>
+          <Link to={`request/${data._id}`}>
             <button
               type="button"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded"
             >
               Request
             </button>
@@ -52,7 +52,7 @@ export default function Package(props) {
 Package.propTypes = [
   {
     data: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       items: PropTypes.arrayOf(
