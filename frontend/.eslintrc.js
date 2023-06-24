@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: 'airbnb',
+  extends: ['airbnb', 'prettier'],
   overrides: [
     {
       env: {
@@ -21,5 +21,7 @@ module.exports = {
   },
   rules: {
     'import/no-extraneous-dependencies': 'off',
+    'no-underscore-dangle': 'off',
+    'react/jsx-boolean-value': 'off',
   },
 };
