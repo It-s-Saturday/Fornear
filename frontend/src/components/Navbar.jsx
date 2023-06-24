@@ -26,18 +26,24 @@ export default function Navbar() {
         </button>
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
+        <div className="text-xl lg:flex-grow">
           <a
             href="/"
-            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#bb0a5] mr-4"
+            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-accent-blue mr-4"
           >
             Home
           </a>
           <a
-            href="/settings"
-            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#bb0a5]"
+            href="/requests"
+            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-accent-blue mr-4"
           >
-            Settings
+            Requests
+          </a>
+          <a
+            href="/staff"
+            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-accent-blue"
+          >
+            Staff
           </a>
         </div>
       </div>
