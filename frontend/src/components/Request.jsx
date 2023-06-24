@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import mockData from '../mockData/packages.json';
 import Package from './Package';
 import Input from './Input';
 
@@ -11,7 +10,21 @@ export default function Request() {
     navigate('/');
   };
   const { id } = useParams();
-  const data = mockData.find((d) => d.id === id);
+
+  const [packageData, setPackageData] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/get_package_by_id', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((data) => setPackageData(data));
+  }, [id]);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,8 +49,8 @@ export default function Request() {
       return;
     }
     const postData = {
-      packageId: data.id,
-      packageName: data.title,
+      packageId: id,
+      packageName: packageData.title,
       name: formData.name,
       email: formData.email,
       phoneNumber: formData.phoneNumber,
@@ -45,7 +58,7 @@ export default function Request() {
     };
 
     try {
-      await fetch('/api/request', {
+      await fetch('/api/request_package', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +74,7 @@ export default function Request() {
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
       {/* eslint-disable-next-line react/jsx-boolean-value */}
-      <Package data={data} forForm={true} />
+      <Package data={packageData} forForm={true} />
       <form className="flex flex-col px-6 py-4">
         <Input label="Name">
           <input

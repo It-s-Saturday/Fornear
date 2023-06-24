@@ -1,11 +1,15 @@
-import React from 'react';
-import requests from '../mockData/requests.json';
+import React, { useState, useEffect } from 'react';
 
 export default function RequestList() {
-  // group requests by packageId
-  // for each packageId, create a list of requests
+  const [requestData, setRequestData] = useState([]);
 
-  const groupedRequests = requests.reduce((acc, request) => {
+  useEffect(() => {
+    fetch('/api/get_requests')
+      .then((res) => res.json())
+      .then((data) => setRequestData(data));
+  }, []);
+
+  const groupedRequests = requestData.reduce((acc, request) => {
     if (!acc[request.packageId]) {
       acc[request.packageId] = [];
     }
