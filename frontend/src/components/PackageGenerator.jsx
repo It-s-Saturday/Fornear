@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Package from './Package';
 
-export default function PackageGenerator() {
-  const [packageData, setPackageData] = useState([]);
+export default function PackageGenerator(props) {
+  const { showRequest } = props;
+  const [packageData, setPackageData] = useState(null);
 
   useEffect(() => {
     fetch('/api/get_packages')
@@ -18,8 +20,14 @@ export default function PackageGenerator() {
 
   return (
     <div className="flex flex-row flex-wrap justify-center space-x-10 gap-y-10 align-middle items-center">
-      {packageData.length > 0
-        && packageData.map((data) => <Package data={data} forForm={false} />)}
+      {packageData !== null &&
+        packageData.map((data) => (
+          <Package data={data} showRequest={showRequest} />
+        ))}
     </div>
   );
 }
+
+PackageGenerator.propTypes = {
+  showRequest: PropTypes.bool.isRequired,
+};

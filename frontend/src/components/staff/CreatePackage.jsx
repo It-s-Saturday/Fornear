@@ -1,7 +1,7 @@
 import { Checkbox, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../Input';
+import Input from '../wrappers/Input';
 
 export default function CreatePackage({ refresh, onRefresh }) {
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,8 @@ export default function CreatePackage({ refresh, onRefresh }) {
     setSelectedItems(newSelectedItems);
   };
 
-  const isInSelectedItems = (itemName) => selectedItems.some((item) => item.itemName === itemName);
+  const isInSelectedItems = (itemName) =>
+    selectedItems.some((item) => item.itemName === itemName);
 
   const handleCheckboxChange = (itemName, checked) => {
     if (checked) {
@@ -73,11 +74,29 @@ export default function CreatePackage({ refresh, onRefresh }) {
       title: 'Item',
       dataIndex: 'itemName',
       key: 'itemName',
+      sorter: (a, b) => a.itemName.localeCompare(b.itemName),
     },
     {
       title: 'Quantity',
       dataIndex: 'itemCount',
       key: 'itemCount',
+      sorter: (a, b) => a.itemCount - b.itemCount,
+    },
+    {
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+      filters: [
+        {
+          text: 'Foodstuff',
+          value: 'Foodstuff',
+        },
+        {
+          text: 'Personal Care Product',
+          value: 'PersonalCareProduct',
+        },
+      ],
+      onFilter: (value, record) => record.category.includes(value),
     },
     {
       title: 'Select',
@@ -86,14 +105,15 @@ export default function CreatePackage({ refresh, onRefresh }) {
     },
   ];
 
-  const getMaxPackages = () => Math.min(
-    ...selectedItems.map((item) => {
-      const inventoryItem = inventoryData.find(
-        (invItem) => invItem.itemName === item.itemName,
-      );
-      return Math.floor(inventoryItem.itemCount / item.itemCount);
-    }),
-  );
+  const getMaxPackages = () =>
+    Math.min(
+      ...selectedItems.map((item) => {
+        const inventoryItem = inventoryData.find(
+          (invItem) => invItem.itemName === item.itemName,
+        );
+        return Math.floor(inventoryItem.itemCount / item.itemCount);
+      }),
+    );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,7 +142,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
   };
 
   return (
-    <div className="flex flex-row w-[50%] p-5 border border-black gap-x-10 items-center">
+    <div className="flex flex-row w-[fit-content] px-10 border border-black gap-x-10 items-center justify-center">
       <div>
         <Input label="Package Name">
           <input
@@ -149,7 +169,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
           />
         </Input>
         <Table
-          className="table"
+          className="table table-striped"
           dataSource={inventoryListWithCheckbox}
           columns={columns}
           loading={loading}
@@ -189,11 +209,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
         </div>
         {selectedItems.length > 0 && (
           <p className="text-xl">
-            You can make up to:
-            {' '}
-            <b>{getMaxPackages()}</b>
-            {' '}
-            packages.
+            You can make up to: <b>{getMaxPackages()}</b> packages.
           </p>
         )}
         {selectedItems.length > 0 && getMaxPackages() > 0 && (

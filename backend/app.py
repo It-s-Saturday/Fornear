@@ -26,12 +26,29 @@ def get_inventory():
 @app.route("/api/request_package", methods=["POST"])
 def request_package():
     data = request.json
+    data["request_date"] = datetime.now().strftime("%Y-%m-%d")
+    data["request_time"] = datetime.now().strftime("%H:%M:%S")
     DB["requests"].insert_one(data)
     return jsonify({"message": "success"})
 
 @app.route("/api/get_requests", methods=["GET"])
 def get_requests():
-    requests = list(DB["requests"].find())
+    # group by packageId and get all requests
+    requests = list(DB["requests"].aggregate([
+        {
+            "$group": {
+                "_id": "$packageId",
+                "requests": {
+                    "$push": "$$ROOT"
+                }
+            }
+        }
+    ]))
+    # add package name to each request
+    for request in requests:
+        package = DB["packages"].find_one({"_id": ObjectId(request["_id"])})
+        request["packageName"] = package["packageName"]
+    requests.sort(key=lambda x: x["packageName"])
     return dump_json(requests)
 
 @app.route("/api/get_packages", methods=["GET"])
@@ -42,7 +59,7 @@ def get_packages():
 @app.route("/api/get_package_by_id", methods=["POST"])
 def get_package_by_id():
     data = request.json
-    package = DB["inventory"].find_one({"_id": data["_id"]})
+    package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
     return dump_json(package)
 
 @app.route("/api/insert_item", methods=["POST"])

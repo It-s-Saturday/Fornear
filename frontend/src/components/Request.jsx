@@ -2,16 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Package from './Package';
-import Input from './Input';
+import Input from './wrappers/Input';
+import Button from './wrappers/Button';
 
 export default function Request() {
   const navigate = useNavigate();
   const redirect = () => {
     navigate('/');
   };
-  const { id } = useParams();
 
-  const [packageData, setPackageData] = useState([]);
+  const { _id } = useParams();
+
+  const [packageData, setPackageData] = useState(null);
 
   useEffect(() => {
     fetch('/api/get_package_by_id', {
@@ -19,11 +21,11 @@ export default function Request() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ _id }),
     })
       .then((res) => res.json())
       .then((data) => setPackageData(data));
-  }, [id]);
+  }, []);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -38,18 +40,17 @@ export default function Request() {
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-    console.log(formData.pickupDate);
     if (
-      formData.name === ''
-      || formData.email === ''
-      || formData.phoneNumber === ''
-      || formData.pickupDate === ''
+      formData.name === '' ||
+      formData.email === '' ||
+      formData.phoneNumber === '' ||
+      formData.pickupDate === ''
     ) {
       alert('Please fill out all fields');
       return;
     }
     const postData = {
-      packageId: id,
+      packageId: _id,
       packageName: packageData.title,
       name: formData.name,
       email: formData.email,
@@ -73,8 +74,7 @@ export default function Request() {
 
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
-      {/* eslint-disable-next-line react/jsx-boolean-value */}
-      <Package data={packageData} forForm={true} />
+      {packageData !== null && <Package data={packageData} forForm={true} />}
       <form className="flex flex-col px-6 py-4">
         <Input label="Name">
           <input
@@ -117,13 +117,9 @@ export default function Request() {
           />
         </Input>
 
-        <button
-          type="submit"
-          className="bg-accent-blue hover:bg-secondary text-white hover:text-black font-bold py-2 px-4 rounded mt-5"
-          onClick={(e) => handleOnClick(e)}
-        >
+        <Button linkTo="/" onClick={(e) => handleOnClick(e)}>
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );

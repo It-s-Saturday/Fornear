@@ -25,11 +25,29 @@ export default function FullTable({ refresh, onRefresh }) {
       title: 'Item',
       dataIndex: 'itemName',
       key: 'itemName',
+      sorter: (a, b) => a.itemName.localeCompare(b.itemName),
     },
     {
       title: 'Quantity',
       dataIndex: 'itemCount',
       key: 'itemCount',
+      sorter: (a, b) => a.itemCount - b.itemCount,
+    },
+    {
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+      filters: [
+        {
+          text: 'Foodstuff',
+          value: 'Foodstuff',
+        },
+        {
+          text: 'Personal Care Product',
+          value: 'PersonalCareProduct',
+        },
+      ],
+      onFilter: (value, record) => record.category.includes(value),
     },
   ];
 
