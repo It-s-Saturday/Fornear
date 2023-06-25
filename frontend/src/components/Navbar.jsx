@@ -41,9 +41,15 @@ export default function Navbar() {
           </a>
           <a
             href="/staff"
-            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-accent-blue"
+            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-accent-blue mr-4"
           >
             Staff
+          </a>
+          <a
+            href="/admin"
+            className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-accent-blue"
+          >
+            Admin
           </a>
         </div>
       </div>

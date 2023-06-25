@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Request from './components/Request';
 import Staff from './components/staff/Staff';
+import Admin from './components/admin/Admin';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="request/:_id" element={<Request />} />
         <Route path="staff" element={<Staff />} />
+        <Route path="admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
