@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
+import Input from '../wrappers/Input';
 
 export default function FullTable({ refresh, onRefresh }) {
   const [inventoryData, setInventoryData] = useState([]);
+  const [viewData, setViewData] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,10 +18,19 @@ export default function FullTable({ refresh, onRefresh }) {
           key: index,
         }));
         setInventoryData(dataWithKey);
+        setViewData(dataWithKey);
         setLoading(false);
       });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
+
+  const handleSearchChange = (e) => {
+    const { value } = e.target;
+    const filteredData = inventoryData.filter((item) =>
+      item.itemName.toLowerCase().includes(value.toLowerCase()),
+    );
+    setViewData(filteredData);
+  };
 
   const columns = [
     {
@@ -26,6 +38,8 @@ export default function FullTable({ refresh, onRefresh }) {
       dataIndex: 'itemName',
       key: 'itemName',
       sorter: (a, b) => a.itemName.localeCompare(b.itemName),
+      filterSearch: true,
+      onfilter: (value, record) => record.itemName.includes(value),
     },
     {
       title: 'Quantity',
@@ -54,8 +68,17 @@ export default function FullTable({ refresh, onRefresh }) {
   return (
     <>
       {loading && <h1>Please wait...</h1>}
+      <Input placeholder="Search for an item">
+        <input
+          type="text"
+          className="w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+          name="search"
+          onChange={handleSearchChange}
+        />
+      </Input>
+
       <Table
-        dataSource={inventoryData}
+        dataSource={viewData}
         columns={columns}
         loading={loading}
         pagination={{

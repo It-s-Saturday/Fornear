@@ -7,14 +7,14 @@ import Toast from '../wrappers/Toast';
 export default function Insert({ onInsert }) {
   const [formData, setFormData] = useState({
     itemName: '',
-    itemCount: '',
+    itemCount: null,
     category: '',
   });
 
   const clearFields = () => {
     setFormData({
       itemName: '',
-      itemCount: '',
+      itemCount: null,
       category: '',
     });
   };
@@ -85,7 +85,9 @@ export default function Insert({ onInsert }) {
         </Input>
       </div>
 
-      <Button onClick={handleOnClick}>Insert Item</Button>
+      <Button onClick={handleOnClick} linkTo="#">
+        Insert Item
+      </Button>
     </div>
   );
 }
