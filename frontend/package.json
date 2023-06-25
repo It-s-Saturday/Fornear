@@ -20,8 +20,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint src/**/*.js --fix",
-    "format": "prettier --write \"src/**/*.js\"",
-    "prepare": "cd ../ && husky install ./frontend/.husky"
+    "format": "prettier --write \"src/**/*.js\""
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +43,7 @@
   "devDependencies": {
     "eslint": "^8.43.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",

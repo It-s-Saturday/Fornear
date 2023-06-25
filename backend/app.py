@@ -7,10 +7,7 @@ from flask import Flask, jsonify, request
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from .fornear_secrets import ATLAS_PASS, ATLAS_USERNAME
-
-uri = f"mongodb+srv://{ATLAS_USERNAME}:{ATLAS_PASS}@ganso.koavv7w.mongodb.net/?retryWrites=true&w=majority"
-client = MongoClient(uri, server_api=ServerApi("1"))
+from .fornear_secrets import ATLAS_URI
 
 
 def dump_json(data):
@@ -18,7 +15,7 @@ def dump_json(data):
 
 
 app = Flask(__name__)
-CLIENT = MongoClient(uri, server_api=ServerApi("1"))
+CLIENT = MongoClient(ATLAS_URI, server_api=ServerApi("1"))
 DB = CLIENT["fornear-v1"]
 
 
@@ -47,6 +44,8 @@ def get_inventory():
 @app.route("/api/request_package", methods=["POST"])
 def request_package():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     data["fulfilled"] = 0
     data["request_date"] = datetime.now().strftime("%Y-%m-%d")
     data["request_time"] = datetime.now().strftime("%H:%M:%S")
@@ -67,6 +66,8 @@ def get_requests():
     )
     for request in requests:
         package = DB["packages"].find_one({"_id": ObjectId(request["_id"])})
+        if package is None:
+            continue
         request["packageName"] = package["packageName"]
     requests.sort(key=lambda x: x["packageName"])
     return dump_json(requests)
@@ -80,6 +81,8 @@ def get_packages():
         curr_max = math.inf
         for item in package["selectedItems"]:
             inventory_item = DB["inventory"].find_one({"itemName": item["itemName"]})
+            if inventory_item is None:
+                continue
             curr_max = min(
                 curr_max,
                 math.floor(int(inventory_item["itemCount"]) / int(item["itemCount"])),
@@ -92,6 +95,8 @@ def get_packages():
 @app.route("/api/get_package_by_id", methods=["POST"])
 def get_package_by_id():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
     return dump_json(package)
 
@@ -99,6 +104,8 @@ def get_package_by_id():
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     data["itemCount"] = int(data["itemCount"])
     DB["inventory"].insert_one(data)
     log_action("insert_item", data=data)
@@ -108,6 +115,8 @@ def insert_item():
 @app.route("/api/update_item", methods=["POST"])
 def update_item():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     data["itemCount"] = int(data["itemCount"])
     DB["inventory"].update_one({"_id": ObjectId(data["_id"])}, {"$set": data})
     log_action("update_item", data=data)
@@ -123,6 +132,8 @@ def get_personal_care_products():
 @app.route("/api/create_package", methods=["POST"])
 def create_package():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     data["creation_date"] = datetime.now().strftime("%Y-%m-%d")
     data["creation_time"] = datetime.now().strftime("%H:%M:%S")
     DB["packages"].insert_one(data)
@@ -133,12 +144,20 @@ def create_package():
 @app.route("/api/fulfill_request", methods=["POST"])
 def fullfil_request():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     student_request = DB["requests"].find_one({"_id": ObjectId(data["_id"])})
+    if student_request is None:
+        return jsonify({"message": "error"})
     package = DB["packages"].find_one({"_id": ObjectId(student_request["packageId"])})
     # Update inventory count for each item
+    if package is None:
+        return jsonify({"message": "error"})
     for item in package["selectedItems"]:
         # TODO: Refactor inventory item to use _id instead of itemName
         inventory_item = DB["inventory"].find_one({"itemName": item["itemName"]})
+        if inventory_item is None:
+            continue
         if int(inventory_item["itemCount"]) - int(item["itemCount"]) < 0:
             return jsonify(
                 {
@@ -167,6 +186,8 @@ def fullfil_request():
 @app.route("/api/decline_request", methods=["POST"])
 def decline_request():
     data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
     DB["requests"].update_one(
         {"_id": ObjectId(data["_id"])}, {"$set": {"fulfilled": -1}}
     )
