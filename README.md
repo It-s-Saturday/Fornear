@@ -4,6 +4,8 @@
 
 ### A click-and-collect solution to benefit the operations of Petey's Pantry @ Oglethorpe University.
 
+[View the Wiki!](https://github.com/jibranabsarulislam/Fornear/wiki/Staff:-Navigating-the-Staff-Dashboard)
+
 ---
 ### Context
 
@@ -88,3 +90,75 @@ Students can:
 
 “Downtime”
 - MongoDB hosts database separate from OU infrastructure
+
+---
+
+### Stretch Goals
+
+- fix: TODOs
+- fix: make staff page layout make sense
+- fix: antd table interactions (update tool double renders on checkbox)
+- implement: edit package
+- implement: delete/hide package
+- implement: auto-hide package on out-of-stock (?)
+- implement: expiration date & auto-hide package on expiration date (?)
+- confirm: functionality with Petey's Pantry staff
+- query: further requirements
+
+
+---
+
+### Installation
+
+This is a React/Flask project that uses MongoDB Atlas as a database. To run this project, you will need to have Node.js, Python, and MongoDB installed on your machine.
+
+1. Fork the repository @ https://github.com/jibranabsarulislam/Fornear/fork
+2. Clone the repository to your local machine
+3. Install dependencies
+	cd Fornear
+	
+	Frontend:
+	```
+	cd frontend
+	npm install
+	```
+
+	Backend:
+	```
+	cd backend
+	python -m venv venv
+	. ./venv/bin/activate # (Non-Windows)
+	# OR
+	. ./venv/Scripts/activate # (Windows)
+	pip install -r requirements.txt
+	```
+4. Create a MongoDB Atlas account and create a cluster OR run locally
+	- For either option, create a database and collection
+		- Database: `fornear`
+		- Collection: `inventory`
+	- To run locally, create set `MONGO_URI` to `"mongodb://localhost:27017/<database>"` (skip step 5)
+
+5. Create a `fornear_secrets.py` in `backend/` with the following:
+	```
+	# MongoDB Atlas connection string
+	MONGO_URI = "mongodb+srv://<username>:<password>@<cluster>/<database>?retryWrites=true&w=majority"
+	```
+6. Run the project
+	
+	Terminal 1 - Frontend:
+	```
+	cd frontend
+	npm start
+	```
+
+	Terminal 2 - Backend:
+
+	```
+	cd backend
+	. ./venv/bin/activate # (Non-Windows)
+	# OR
+	. ./venv/Scripts/activate # (Windows)
+	flask run --reload
+	```
+
+
