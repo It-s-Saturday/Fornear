@@ -183,94 +183,101 @@ export default function Update({ refresh, onRefresh }) {
   };
 
   return (
-    <div className="flex flex-row w-[fit-content] h-[40rem] px-10 border border-black gap-x-10 items-center justify-center">
-      <div>
-        <Input label="Auditor">
-          <input type="text" name="auditor" onChange={handleFormInputChange} />
-        </Input>
-        <Input>
-          <input
-            type="text"
-            className="w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-            name="search"
-            onChange={handleSearchChange}
-            placeholder="Search for an item"
-          />
-        </Input>
-        <Table
-          className="table table-striped w-[50rem] h-[30rem] overflow-y-scroll"
-          dataSource={viewData}
-          columns={columns}
-          loading={loading}
-          onRow={(record) => ({
-            onClick: () => {
-              handleCheckboxChange(
-                record.itemName,
-                !isInSelectedItems(record.itemName),
-              );
-            },
-          })}
-          // eslint-disable-next-line react/jsx-boolean-value
-          pagination={{
-            defaultPageSize: 5,
-            showSizeChanger: true,
-            pageSizeOptions: ['5', '10', '25', '50', '100'],
-          }}
-        />
-      </div>
-      <div>
+    <>
+      <h1 className="text-3xl font-bold">Update Tool</h1>
+      <div className="flex flex-row w-[fit-content] h-[40rem] px-10 border border-black rounded-md gap-x-10 items-center justify-center">
         <div>
-          {selectedItems.map((item) => (
-            <Input key={item.itemName} label={item.itemName}>
-              <input
-                type="number"
-                name="quantity"
-                value={item.itemCount}
-                onChange={(e) => {
-                  if (e.target.value < 0) {
-                    return;
-                  }
-                  handleItemCountChange(item.itemName, e.target.value);
-                }}
-              />
-            </Input>
-          ))}
+          <Input label="Auditor">
+            <input
+              type="text"
+              name="auditor"
+              onChange={handleFormInputChange}
+            />
+          </Input>
+          <Input>
+            <input
+              type="text"
+              className="w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              name="search"
+              onChange={handleSearchChange}
+              placeholder="Search for an item"
+            />
+          </Input>
+          <Table
+            className="table table-striped w-[50rem] h-[30rem] overflow-y-scroll"
+            dataSource={viewData}
+            columns={columns}
+            loading={loading}
+            onRow={(record) => ({
+              onClick: () => {
+                handleCheckboxChange(
+                  record.itemName,
+                  !isInSelectedItems(record.itemName),
+                );
+              },
+            })}
+            // eslint-disable-next-line react/jsx-boolean-value
+            pagination={{
+              defaultPageSize: 5,
+              showSizeChanger: true,
+              pageSizeOptions: ['5', '10', '25', '50', '100'],
+            }}
+          />
         </div>
-        {selectedItems.length > 0 && (
-          <p className="text-xl">
-            You are editing <b>{selectedItems.length}</b>
-            {selectedItems.length > 1 ? ' fields.' : ' field.'}
-            {/* , with{' '}
+        <div>
+          <div>
+            {selectedItems.map((item) => (
+              <Input key={item.itemName} label={item.itemName}>
+                <input
+                  type="number"
+                  name="quantity"
+                  value={item.itemCount}
+                  onChange={(e) => {
+                    if (e.target.value < 0) {
+                      return;
+                    }
+                    handleItemCountChange(item.itemName, e.target.value);
+                  }}
+                />
+              </Input>
+            ))}
+          </div>
+          {selectedItems.length > 0 && (
+            <p className="text-xl">
+              You are editing <b>{selectedItems.length}</b>
+              {selectedItems.length > 1 ? ' fields.' : ' field.'}
+              {/* , with{' '}
             <b>
               {selectedItems.reduce(
                 (acc, item) => acc + parseInt(item.itemCount, 10),
                 0,
               )}
-            </b>{' '}
+              </b>{' '}
             changes. */}
-          </p>
-        )}
-        <Input label="Comments">
-          <textarea
-            type="text"
-            name="comments"
-            onChange={handleFormInputChange}
-          />
-        </Input>
-        {selectedItems.length > 0 && (
-          <button
-            type="button"
-            className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded align-center"
-            onClick={handleSubmit}
-          >
-            Update{' '}
-            {selectedItems.length > 1
-              ? `${selectedItems.length} items`
-              : selectedItems[0].itemName}
-          </button>
-        )}
+            </p>
+          )}
+          <Input label="Comments">
+            <textarea
+              type="text"
+              name="comments"
+              onChange={handleFormInputChange}
+            />
+          </Input>
+          {selectedItems.length > 0 && (
+            <button
+              type="button"
+              className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded align-center"
+              onClick={handleSubmit}
+            >
+              Update{' '}
+              {selectedItems.length > 1
+                ? `${selectedItems.length} items`
+                : selectedItems[0].itemName}
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

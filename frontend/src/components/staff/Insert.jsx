@@ -49,7 +49,7 @@ export default function Insert({ onInsert }) {
   <Toast text="Item inserted successfully" type="success" timeout={2000} />;
 
   return (
-    <div className="flex flex-col w-[30rem] h-[fit-content] items-center p-5 border border-black">
+    <div className="flex flex-col w-[30rem] h-[fit-content] items-center p-5 border border-black rounded-md">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold">Insert an Item</h1>
         <Input label="Item Name">

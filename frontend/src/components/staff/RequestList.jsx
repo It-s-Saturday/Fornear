@@ -148,7 +148,7 @@ export default function RequestList({ refresh, onRefresh }) {
   });
   return (
     <div className="flex flex-col w-min-[30rem] h-[fit-content] items-center p-5 border border-black">
-      <h1>Request List</h1>
+      <h1 className="text-3xl font-bold">Request List</h1>
       {requestList.length > 0 ? (
         requestList
       ) : (

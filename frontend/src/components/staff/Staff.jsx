@@ -46,8 +46,10 @@ export default function Staff() {
 
   return (
     <>
-      <Update refresh={refreshUpdatePackage} onRefresh={handleUpdate} />
-      <div className="flex flex-row w-full min-h-[30rem] h-[fit-content] p-5 space-x-10 overflow-y-scroll justify-center">
+      <div className="flex flex-row w-full h-max-[10rem] p-5 space-x-10 overflow-y-scroll justify-center">
+        <Update refresh={refreshUpdatePackage} onRefresh={handleUpdate} />
+      </div>
+      <div className="flex flex-row w-full h-max-[10rem] p-5 space-x-10 overflow-y-scroll justify-center">
         <UnfulfilledRequests
           refresh={refreshRequests}
           onRefresh={handleRefresh}
@@ -68,7 +70,9 @@ export default function Staff() {
         />
         <Inventory refresh={refreshInventory} onRefresh={handleRefresh} />
       </div>
-      <PackageGenerator showRequest={false} />
+      <div className="flex flex-row w-full h-max-[10rem] p-5 space-x-10 overflow-y-scroll justify-center">
+        <PackageGenerator showRequest={false} />
+      </div>
     </>
   );
 }

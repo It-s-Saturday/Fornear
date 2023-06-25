@@ -68,10 +68,12 @@ export default function FullTable({ refresh, onRefresh }) {
   return (
     <>
       {loading && <h1>Please wait...</h1>}
+      <h1 className="text-3xl font-bold text-center">Inventory</h1>
       <Input placeholder="Search for an item">
         <input
           type="text"
           className="w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+          placeholder="Search for an item"
           name="search"
           onChange={handleSearchChange}
         />

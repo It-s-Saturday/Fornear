@@ -42,9 +42,12 @@ export default function Logs() {
   ];
 
   return (
-    <div>
-      <h1>Logs</h1>
-      <Table dataSource={logs} columns={columns} />
+    <div className="flex flex-col items-center w-full">
+      <h1 className="text-3xl font-bold">Logs</h1>
+
+      <div className="flex flex-col w-[50%] p-5 border border-black rounded-md">
+        <Table dataSource={logs} columns={columns} />
+      </div>
     </div>
   );
 }

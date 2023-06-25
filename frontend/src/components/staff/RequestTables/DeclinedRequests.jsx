@@ -31,7 +31,7 @@ export default function DeclinedRequests({ refresh, onRefresh }) {
   }, [, refresh, onRefresh]);
 
   return (
-    <div className="flex flex-col gap-y-5">
+    <div className="flex flex-col gap-y-5 border border-black rounded-md p-5">
       <h1 className="text-3xl font-bold">Declined Packages</h1>
       <Table dataSource={declinedRequestData} columns={columns} />
     </div>
