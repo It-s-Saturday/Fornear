@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
+import PropTypes from 'prop-types';
+
 import Button from '../wrappers/Button';
 
-export default function RequestList() {
+export default function RequestList({ refresh, onRefresh }) {
   const [requestData, setRequestData] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -12,7 +14,8 @@ export default function RequestList() {
     fetch('/api/get_requests')
       .then((res) => res.json())
       .then((data) => setRequestData(data));
-  }, []);
+    // eslint-disable-next-line no-sparse-arrays
+  }, [, refresh, onRefresh]);
 
   useEffect(() => {
     if (selectedRequest === null) return;
@@ -25,7 +28,7 @@ export default function RequestList() {
     })
       .then((res) => res.json())
       .then((data) => setPackageData(data));
-  }, [modalOpen]);
+  }, [modalOpen, selectedRequest]);
 
   const handleRequestClicked = (request) => {
     setSelectedRequest(request);
@@ -46,6 +49,7 @@ export default function RequestList() {
         if (data.status === 'error') {
           alert(data.message);
         } else {
+          onRefresh();
           setModalOpen(false);
         }
       });
@@ -64,6 +68,7 @@ export default function RequestList() {
         if (data.status === 'error') {
           alert(data.message);
         } else {
+          onRefresh();
           setModalOpen(false);
         }
       });
@@ -152,3 +157,8 @@ export default function RequestList() {
     </div>
   );
 }
+
+RequestList.propTypes = {
+  refresh: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+};

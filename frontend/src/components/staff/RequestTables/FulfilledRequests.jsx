@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
+import PropTypes from 'prop-types';
 
-export default function FulfilledRequests() {
+export default function FulfilledRequests({ refresh, onRefresh }) {
   const [fulfilledRequestData, setFulfilledRequestData] = useState([]);
 
   const columns = [
@@ -26,7 +27,8 @@ export default function FulfilledRequests() {
     fetch('/api/get_fulfilled_requests')
       .then((res) => res.json())
       .then((data) => setFulfilledRequestData(data));
-  }, []);
+    // eslint-disable-next-line no-sparse-arrays
+  }, [, refresh, onRefresh]);
 
   return (
     <div className="flex flex-col gap-y-5">
@@ -35,3 +37,8 @@ export default function FulfilledRequests() {
     </div>
   );
 }
+
+FulfilledRequests.propTypes = {
+  refresh: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+};

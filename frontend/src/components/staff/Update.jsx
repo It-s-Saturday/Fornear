@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
 
-export default function CreatePackage({ refresh, onRefresh }) {
+export default function Update({ refresh, onRefresh }) {
   const [loading, setLoading] = useState(true);
   const [inventoryData, setInventoryData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -176,7 +176,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
         body: JSON.stringify(postData),
       });
       console.log(postData);
-      alert('Package created successfully!');
+      onRefresh();
     } catch (err) {
       console.log(err);
     }
@@ -227,7 +227,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
                 name="quantity"
                 value={item.itemCount}
                 onChange={(e) => {
-                  if (e.target.value < 1) {
+                  if (e.target.value < 0) {
                     return;
                   }
                   handleItemCountChange(item.itemName, e.target.value);
@@ -274,7 +274,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
   );
 }
 
-CreatePackage.propTypes = {
+Update.propTypes = {
   refresh: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
 };

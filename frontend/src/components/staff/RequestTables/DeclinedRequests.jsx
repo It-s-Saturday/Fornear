@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
+import PropTypes from 'prop-types';
 
-export default function DeclinedRequests() {
+export default function DeclinedRequests({ refresh, onRefresh }) {
   const [declinedRequestData, setDeclinedRequestData] = useState([]);
 
   const columns = [
@@ -26,7 +27,8 @@ export default function DeclinedRequests() {
     fetch('/api/get_declined_requests')
       .then((res) => res.json())
       .then((data) => setDeclinedRequestData(data));
-  }, []);
+    // eslint-disable-next-line no-sparse-arrays
+  }, [, refresh, onRefresh]);
 
   return (
     <div className="flex flex-col gap-y-5">
@@ -35,3 +37,8 @@ export default function DeclinedRequests() {
     </div>
   );
 }
+
+DeclinedRequests.propTypes = {
+  refresh: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+};
