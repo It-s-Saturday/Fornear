@@ -6,6 +6,8 @@
 
 [View the Wiki!](https://github.com/jibranabsarulislam/Fornear/wiki/Staff:-Navigating-the-Staff-Dashboard)
 
+[View on DevPost](https://devpost.com/software/fornear)
+
 ---
 ### Context
 
