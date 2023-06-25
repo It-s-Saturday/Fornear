@@ -29,7 +29,7 @@ def log_action(action, notes="", data={}):
             "action": action,
             "date": datetime.now().strftime("%Y-%m-%d"),
             "time": datetime.now().strftime("%H:%M:%S"),
-            "payload": data,
+            "payload": str(data),
             "notes": notes,
         }
     )
@@ -211,6 +211,11 @@ def get_declined_requests():
     requests = list(DB["requests"].find({"fulfilled": -1}))
     return dump_json(requests)
 
+
+@app.route("/admin/get_logs", methods=["GET"])
+def get_logs():
+    logs = list(DB["log"].find())
+    return dump_json(logs)
 
 if __name__ == "__main__":
     app.run(debug=True)
