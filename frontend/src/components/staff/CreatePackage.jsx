@@ -126,7 +126,6 @@ export default function CreatePackage({ refresh, onRefresh }) {
       selectedItems,
       quantityAvailable: getMaxPackages(),
     };
-    console.log(postData);
     try {
       await fetch('/api/create_package', {
         method: 'POST',

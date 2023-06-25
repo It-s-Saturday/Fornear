@@ -40,6 +40,7 @@ export default function Package(props) {
               type="button"
               className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded"
             >
+              {/* TODO: Disable button if quantityAvailable < 1 */}
               Request
             </button>
           </Link>
