@@ -20,7 +20,7 @@ An on-campus organization called Petey's Pantry stores, maintains an inventory, 
 ---
 
 ### Background
-Fornear is a play on "For here [or to go?]", derived from the Italian verb "Fornire", which translates to provide, or supply.
+Fornear is a play on "For here [or to go?]", derived from the Italian verb "Fornire", which translates to provide, or supply. Replacing "here" with "near" implies a familiar and community-based connotation.
 
 Petey’s Pantry student workers use Microsoft Forms, Microsoft Excel, and text-communication to operate their service.
 
