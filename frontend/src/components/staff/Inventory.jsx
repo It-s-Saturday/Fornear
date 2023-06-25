@@ -8,7 +8,7 @@ export default function Inventory({ refresh, onRefresh }) {
   }, [refresh, onRefresh]);
 
   return (
-    <div className="flex flex-col w-[50%] p-5 border border-black">
+    <div className="flex flex-col w-[50%] p-5 border border-black rounded-md">
       <FullTable refresh={refresh} onRefresh={onRefresh} />
     </div>
   );

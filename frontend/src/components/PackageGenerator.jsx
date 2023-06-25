@@ -19,11 +19,14 @@ export default function PackageGenerator(props) {
   }, []);
 
   return (
-    <div className="flex flex-row flex-wrap justify-center space-x-10 gap-y-10 align-middle items-center">
-      {packageData !== null &&
-        packageData.map((data) => (
-          <Package data={data} showRequest={showRequest} />
-        ))}
+    <div className="flex flex-col items-center p-10">
+      <h1 className="text-3xl font-bold">Published packages</h1>
+      <div className="flex flex-row flex-wrap justify-center space-x-10 gap-y-10 align-middle items-center">
+        {packageData !== null &&
+          packageData.map((data) => (
+            <Package data={data} showRequest={showRequest} />
+          ))}
+      </div>
     </div>
   );
 }

@@ -228,6 +228,7 @@ def get_declined_requests():
 @app.route("/admin/get_logs", methods=["GET"])
 def get_logs():
     logs = list(DB["log"].find())
+    logs.sort(key=lambda x: x["time"])
     return dump_json(logs)
 
 if __name__ == "__main__":
