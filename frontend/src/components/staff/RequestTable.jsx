@@ -29,7 +29,7 @@ export default function RequestTable({ type, refresh, onRefresh }) {
     columns.push({
       title: `${headerText} Date`,
       dataIndex: `date${type[0].toUpperCase() + type.slice(1)}`,
-      key: `date${type=type[0].toUpperCase() + type.slice(1)}`,
+      key: `date${type[0].toUpperCase() + type.slice(1)}`,
     });
   }
 
