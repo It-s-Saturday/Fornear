@@ -2,7 +2,7 @@
 
 ![logo](https://github.com/jibranabsarulislam/Fornear/assets/70596906/a495d28d-7616-4ca3-91d7-df3824a4b133)
 
-### A click-and-collect solution to benefit the operations of Petey's Pantry @ Oglethorpe University.
+### A click-and-collect ~~solution~~ proposal to benefit the operations of Petey's Pantry @ Oglethorpe University.
 
 [View the Wiki!](https://github.com/jibranabsarulislam/Fornear/wiki/Staff:-Navigating-the-Staff-Dashboard)
 
