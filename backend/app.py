@@ -1,5 +1,6 @@
 import json
 import math
+import sys
 from datetime import datetime
 
 from bson import ObjectId
@@ -9,7 +10,15 @@ from pymongo.server_api import ServerApi
 
 import certifi
 
-from .fornear_secrets import ATLAS_URI
+
+if "--local" in sys.argv:
+    print("Running using local DB")
+    ATLAS_URI = "mongodb://localhost:27017"
+    CLIENT = MongoClient(ATLAS_URI)
+else:
+    from .fornear_secrets import ATLAS_URI
+
+    CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 
 
 def dump_json(data):
@@ -17,7 +26,6 @@ def dump_json(data):
 
 
 app = Flask(__name__)
-CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 DB = CLIENT["fornear-v1"]
 
 
