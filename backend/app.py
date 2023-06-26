@@ -7,6 +7,8 @@ from flask import Flask, jsonify, request
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
+import certifi
+
 from .fornear_secrets import ATLAS_URI
 
 
@@ -15,7 +17,7 @@ def dump_json(data):
 
 
 app = Flask(__name__)
-CLIENT = MongoClient(ATLAS_URI, server_api=ServerApi("1"))
+CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 DB = CLIENT["fornear-v1"]
 
 
