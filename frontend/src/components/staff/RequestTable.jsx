@@ -28,8 +28,8 @@ export default function RequestTable({ type, refresh, onRefresh }) {
   if (type !== 'unfulfilled') {
     columns.push({
       title: `${headerText} Date`,
-      dataIndex: `date_${type}`,
-      key: `date_${type}`,
+      dataIndex: `date${type=type[0].toUpperCase() + type.slice(1)}`,
+      key: `date${type=type[0].toUpperCase() + type.slice(1)}`,
     });
   }
 
