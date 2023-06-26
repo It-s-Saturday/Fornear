@@ -28,7 +28,7 @@ export default function RequestTable({ type, refresh, onRefresh }) {
   if (type !== 'unfulfilled') {
     columns.push({
       title: `${headerText} Date`,
-      dataIndex: `date${type=type[0].toUpperCase() + type.slice(1)}`,
+      dataIndex: `date${type[0].toUpperCase() + type.slice(1)}`,
       key: `date${type=type[0].toUpperCase() + type.slice(1)}`,
     });
   }
