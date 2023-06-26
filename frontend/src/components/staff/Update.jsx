@@ -185,7 +185,7 @@ export default function Update({ refresh, onRefresh }) {
   return (
     <>
       <h1 className="text-3xl font-bold">Update Tool</h1>
-      <div className="flex flex-row w-[fit-content] h-[40rem] px-10 border border-black rounded-md gap-x-10 items-center justify-center">
+      <div className="flex flex-row w-[fit-content] h-[40rem] px-10 border border-black rounded-md gap-x-10 items-center justify-center bg-gray-100">
         <div>
           <Input label="Auditor">
             <input
