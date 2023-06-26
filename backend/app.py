@@ -42,6 +42,7 @@ def get_inventory():
     inventory = list(DB["inventory"].find())
     return dump_json(inventory)
 
+
 @app.route("/api/update_inventory", methods=["POST"])
 def update_inventory():
     data = request.json
@@ -53,8 +54,11 @@ def update_inventory():
         if inventory_item is None:
             continue
         inventory_item["itemCount"] = item["itemCount"]
-        DB["inventory"].update_one({"_id": ObjectId(inventory_item["_id"])}, {"$set": inventory_item})
+        DB["inventory"].update_one(
+            {"_id": ObjectId(inventory_item["_id"])}, {"$set": inventory_item}
+        )
     return jsonify({"message": "success"})
+
 
 @app.route("/api/request_package", methods=["POST"])
 def request_package():
@@ -165,7 +169,6 @@ def fullfil_request():
     if student_request is None:
         return jsonify({"message": "error"})
     package = DB["packages"].find_one({"_id": ObjectId(student_request["packageId"])})
-    # Update inventory count for each item
     if package is None:
         return jsonify({"message": "error"})
     for item in package["selectedItems"]:
@@ -243,6 +246,7 @@ def get_logs():
     logs = list(DB["log"].find())
     logs.sort(key=lambda x: x["time"])
     return dump_json(logs)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
