@@ -26,6 +26,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sejalapeno",
+      "name": "sejalapeno",
+      "avatar_url": "https://avatars.githubusercontent.com/u/110482301?v=4",
+      "profile": "https://github.com/sejalapeno",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -33,5 +42,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "projectName": "Fornear",
-  "projectOwner": "It-s-Saturday"
+  "projectOwner": "It-s-Saturday",
+  "commitType": "docs"
 }
