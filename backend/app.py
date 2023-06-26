@@ -74,10 +74,10 @@ def request_package():
     if data is None:
         return jsonify({"message": "error"})
     data["fulfilled"] = 0
-    data["request_date"] = datetime.now().strftime("%Y-%m-%d")
-    data["request_time"] = datetime.now().strftime("%H:%M:%S")
+    data["requestDate"] = datetime.now().strftime("%Y-%m-%d")
+    data["requestTime"] = datetime.now().strftime("%H:%M:%S")
     DB["requests"].insert_one(data)
-    log_action("request_package", data=data)
+    log_action("requestPackage", data=data)
     return jsonify({"message": "success"})
 
 
@@ -135,7 +135,7 @@ def insert_item():
         return jsonify({"message": "error"})
     data["itemCount"] = int(data["itemCount"])
     DB["inventory"].insert_one(data)
-    log_action("insert_item", data=data)
+    log_action("insertItem", data=data)
     return jsonify({"message": "success"})
 
 
@@ -146,7 +146,7 @@ def update_item():
         return jsonify({"message": "error"})
     data["itemCount"] = int(data["itemCount"])
     DB["inventory"].update_one({"_id": ObjectId(data["_id"])}, {"$set": data})
-    log_action("update_item", data=data)
+    log_action("updateItem", data=data)
     return jsonify({"message": "success"})
 
 
@@ -161,10 +161,10 @@ def create_package():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
-    data["creation_date"] = datetime.now().strftime("%Y-%m-%d")
-    data["creation_time"] = datetime.now().strftime("%H:%M:%S")
+    data["creationDate"] = datetime.now().strftime("%Y-%m-%d")
+    data["creationTime"] = datetime.now().strftime("%H:%M:%S")
     DB["packages"].insert_one(data)
-    log_action("create_package", data=data)
+    log_action("createPackage", data=data)
     return jsonify({"message": "success"})
 
 
@@ -206,11 +206,11 @@ def fullfil_request():
         {
             "$set": {
                 "fulfilled": 1,
-                "date_fulfilled": datetime.now().strftime("%Y-%m-%d"),
+                "dateFulfilled": datetime.now().strftime("%Y-%m-%d"),
             }
         },
     )
-    log_action("fulfill_request", data=data)
+    log_action("fulfillRequest", data=data)
     return jsonify({"message": "success"})
 
 
@@ -224,7 +224,7 @@ def decline_request():
         {
             "$set": {
                 "fulfilled": -1,
-                "date_declined": datetime.now().strftime("%Y-%m-%d"),
+                "dateDeclined": datetime.now().strftime("%Y-%m-%d"),
             }
         },
     )
