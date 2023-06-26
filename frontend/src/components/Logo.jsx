@@ -1,6 +1,8 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Logo() {
+export default function Logo({ style = null, color = '#000' }) {
   return (
     <svg
       version="1.1"
@@ -9,10 +11,12 @@ export default function Logo() {
       x="0px"
       y="0px"
       viewBox="0 0 100.199 99.881"
-      style={{
-        enableBackground: 'new 0 0 100.199 99.881',
-        marginRight: '10px',
-      }}
+      style={
+        style ?? {
+          enableBackground: 'new 0 0 100.199 99.881',
+          marginRight: '10px',
+        }
+      }
       xmlSpace="preserve"
       preserveAspectRatio="xMidYMid meet"
       width="60"
@@ -20,7 +24,7 @@ export default function Logo() {
     >
       <g id="Oglethorpe_x5F_University">
         <path
-          style={{ fillRule: 'evenodd', clipRule: 'evenodd' }}
+          style={{ fill: color, fillRule: 'evenodd', clipRule: 'evenodd' }}
           d="M47.388,0.129c15.838-1.171,28.821,5.802,36.818,13.312 c8.412,7.9,15.347,18.691,15.95,34.18c0.592,15.157-5.062,27.794-12.952,36.219c-8.134,8.686-19.316,15.111-34.18,15.951
 c-15.727,0.888-28.201-4.933-36.819-12.833c-4.248-3.895-7.94-8.648-10.793-14.272c-2.709-5.339-5.26-12.49-5.397-19.668
 c-0.163-8.512,1.05-15.157,3.478-21.348c2.444-6.232,5.716-10.686,9.714-15.351c3.685-4.298,8.577-8.098,14.152-10.914
@@ -51,3 +55,9 @@ C58.385,88.793,53.359,84.585,50.386,78.324z"
     </svg>
   );
 }
+
+Logo.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  style: PropTypes.object,
+  color: PropTypes.string,
+};
