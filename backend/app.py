@@ -190,9 +190,14 @@ def fullfil_request():
             },
         )
 
-    data["date_fulfilled"] = datetime.now().strftime("%Y-%m-%d")
     DB["requests"].update_one(
-        {"_id": ObjectId(data["_id"])}, {"$set": {"fulfilled": 1}}
+        {"_id": ObjectId(data["_id"])},
+        {
+            "$set": {
+                "fulfilled": 1,
+                "date_fulfilled": datetime.now().strftime("%Y-%m-%d"),
+            }
+        },
     )
     log_action("fulfill_request", data=data)
     return jsonify({"message": "success"})
@@ -204,7 +209,13 @@ def decline_request():
     if data is None:
         return jsonify({"message": "error"})
     DB["requests"].update_one(
-        {"_id": ObjectId(data["_id"])}, {"$set": {"fulfilled": -1}}
+        {"_id": ObjectId(data["_id"])},
+        {
+            "$set": {
+                "fulfilled": -1,
+                "date_declined": datetime.now().strftime("%Y-%m-%d"),
+            }
+        },
     )
     return jsonify({"message": "success"})
 
