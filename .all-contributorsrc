@@ -4,9 +4,20 @@
   ],
   "imageSize": 100,
   "commit": false,
-  "commitType": "docs",
-  "commitConvention": "angular",
+  "commitConvention": "eslint",
   "contributors": [
+    {
+      "login": "jibranabsarulislam",
+      "name": "jayway",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70596906?v=4",
+      "profile": "https://www.jibran.me",
+      "contributions": [
+        "maintenance",
+        "code",
+        "doc",
+        "review"
+      ]
+    },
     {
       "login": "neeravbhaskarla",
       "name": "Neerav",
