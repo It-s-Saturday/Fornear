@@ -22,10 +22,10 @@ export default function Navbar() {
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="flex items-center flex-shrink-0 text-black mr-6">
-          <a href="/">
+          <a href="/" className="flex flex-row items-center">
             <Logo />
+            <span className="text-2xl tracking-tight">Fornear @ OU</span>
           </a>
-          <span className="text-link tracking-tight">Fornear @ OU</span>
         </div>
         <div className="text-xl lg:flex-grow flex">
           {[
