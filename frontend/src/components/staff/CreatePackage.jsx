@@ -118,7 +118,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.packageName === '' || formData.author === '') {
-      alert('Please fill out all fields');
+      // alert('Please fill out all fields');
       return;
     }
     const postData = {
@@ -134,9 +134,9 @@ export default function CreatePackage({ refresh, onRefresh }) {
         },
         body: JSON.stringify(postData),
       });
-      alert('Package created successfully!');
+      // alert('Package created successfully!');
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

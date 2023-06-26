@@ -159,7 +159,7 @@ export default function Update({ refresh, onRefresh }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.packageName === '' || formData.author === '') {
-      alert('Please fill out all fields');
+      // alert('Please fill out all fields');
       return;
     }
     const postData = {
@@ -175,10 +175,10 @@ export default function Update({ refresh, onRefresh }) {
         },
         body: JSON.stringify(postData),
       });
-      console.log(postData);
+      // console.log(postData);
       onRefresh();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

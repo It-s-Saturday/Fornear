@@ -47,7 +47,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'error') {
-          alert(data.message);
+          // alert(data.message);
         } else {
           onRefresh();
           setModalOpen(false);
@@ -66,7 +66,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'error') {
-          alert(data.message);
+          // alert(data.message);
         } else {
           onRefresh();
           setModalOpen(false);

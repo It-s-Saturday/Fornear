@@ -42,7 +42,7 @@ export default function Insert({ onInsert }) {
       onInsert();
       clearFields();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

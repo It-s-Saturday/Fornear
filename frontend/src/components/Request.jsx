@@ -83,7 +83,7 @@ export default function Request() {
       formData.phoneNumber === '' ||
       formData.pickupDate === ''
     ) {
-      alert('Please fill out all fields');
+      // alert('Please fill out all fields');
       return;
     }
     const postData = {

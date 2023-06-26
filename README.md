@@ -1,4 +1,4 @@
-[![Node.js CI](https://github.com/It-s-Saturday/Fornear/actions/workflows/node.js.yml/badge.svg)](https://github.com/It-s-Saturday/Fornear/actions/workflows/node.js.yml)
+[![Build](https://github.com/It-s-Saturday/Fornear/actions/workflows/build.yml/badge.svg)](https://github.com/It-s-Saturday/Fornear/actions/workflows/build.yml)
 
 # Fornear (WaffleHacks 2023)
 

@@ -10,7 +10,7 @@ export default function Logs() {
       .then((data) => {
         setLogs(data);
       });
-    console.log(logs);
+    // console.log(logs);
   }, []);
 
   const columns = [
