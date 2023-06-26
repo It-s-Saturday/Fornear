@@ -12,7 +12,7 @@ import certifi
 from .fornear_secrets import ATLAS_URI
 
 
-def dump_json(data):
+def dumpJson(data):
     return json.dumps(data, default=str)
 
 
@@ -23,7 +23,7 @@ DB = CLIENT["fornear-v1"]
 
 # My own code
 # https://github.com/It-s-Saturday/BillTracker/blob/c07f83c78f10259aed621f6c4d5ae9d526903898/backend/main.py#L25
-def log_action(action, notes="", data={}):
+def logAction(action, notes="", data={}):
     """ONLY USE IN INSERT, UPDATE, DELETE ACTIONS"""
     LOG_COLLECTION = DB["log"]
     LOG_COLLECTION.insert_one(
@@ -37,215 +37,215 @@ def log_action(action, notes="", data={}):
     )
 
 
-@app.route("/api/get_inventory", methods=["GET"])
-def get_inventory():
+@app.route("/api/getInventory", methods=["GET"])
+def getInventory():
     inventory = list(DB["inventory"].find())
-    return dump_json(inventory)
+    return dumpJson(inventory)
 
 
-@app.route("/api/update_inventory", methods=["POST"])
-def update_inventory():
+@app.route("/api/updateInventory", methods=["POST"])
+def updateInventory():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
     selectedItems = data["selectedItems"]
     for item in selectedItems:
-        inventory_item = DB["inventory"].find_one({"itemName": item["itemName"]})
-        if inventory_item is None:
+        inventoryItem = DB["inventory"].find_one({"itemName": item["itemName"]})
+        if inventoryItem is None:
             continue
-        inventory_item["itemCount"] = item["itemCount"]
+        inventoryItem["itemCount"] = item["itemCount"]
         DB["inventory"].update_one(
-            {"_id": ObjectId(inventory_item["_id"])}, {"$set": inventory_item}
+            {"Id": ObjectId(inventoryItem["Id"])}, {"$set": inventoryItem}
         )
     return jsonify({"message": "success"})
 
 
-@app.route("/api/request_package", methods=["POST"])
-def request_package():
+@app.route("/api/requestPackage", methods=["POST"])
+def requestPackage():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
     data["fulfilled"] = 0
-    data["request_date"] = datetime.now().strftime("%Y-%m-%d")
-    data["request_time"] = datetime.now().strftime("%H:%M:%S")
+    data["requestDate"] = datetime.now().strftime("%Y-%m-%d")
+    data["requestTime"] = datetime.now().strftime("%H:%M:%S")
     DB["requests"].insert_one(data)
-    log_action("request_package", data=data)
+    log_action("requestPackage", data=data)
     return jsonify({"message": "success"})
 
 
-@app.route("/api/get_requests", methods=["GET"])
-def get_requests():
+@app.route("/api/getRequests", methods=["GET"])
+def getRequests():
     requests = list(
         DB["requests"].aggregate(
             [
                 {"$match": {"fulfilled": 0}},
-                {"$group": {"_id": "$packageId", "requests": {"$push": "$$ROOT"}}},
+                {"$group": {"Id": "$packageId", "requests": {"$push": "$$ROOT"}}},
             ]
         )
     )
     for request in requests:
-        package = DB["packages"].find_one({"_id": ObjectId(request["_id"])})
+        package = DB["packages"].find_one({"Id": ObjectId(request["Id"])})
         if package is None:
             continue
         request["packageName"] = package["packageName"]
     requests.sort(key=lambda x: x["packageName"])
-    return dump_json(requests)
+    return dumpJson(requests)
 
 
-@app.route("/api/get_packages", methods=["GET"])
-def get_packages():
+@app.route("/api/getPackages", methods=["GET"])
+def getPackages():
     packages = list(DB["packages"].find())
 
     for package in packages:
-        curr_max = math.inf
+        currMax = math.inf
         for item in package["selectedItems"]:
-            inventory_item = DB["inventory"].find_one({"itemName": item["itemName"]})
-            if inventory_item is None:
+            inventoryItem = DB["inventory"].find_one({"itemName": item["itemName"]})
+            if inventoryItem is None:
                 continue
-            curr_max = min(
-                curr_max,
-                math.floor(int(inventory_item["itemCount"]) / int(item["itemCount"])),
+            currMax = min(
+                currMax,
+                math.floor(int(inventoryItem["itemCount"]) / int(item["itemCount"])),
             )
-        package["quantityAvailable"] = curr_max
+        package["quantityAvailable"] = currMax
 
-    return dump_json(packages)
+    return dumpJson(packages)
 
 
-@app.route("/api/get_package_by_id", methods=["POST"])
-def get_package_by_id():
+@app.route("/api/getPackageById", methods=["POST"])
+def getPackageById():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
-    package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
-    return dump_json(package)
+    package = DB["packages"].find_one({"Id": ObjectId(data["Id"])})
+    return dumpJson(package)
 
 
-@app.route("/api/insert_item", methods=["POST"])
-def insert_item():
+@app.route("/api/insertItem", methods=["POST"])
+def insertItem():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
     data["itemCount"] = int(data["itemCount"])
     DB["inventory"].insert_one(data)
-    log_action("insert_item", data=data)
+    log_action("insertItem", data=data)
     return jsonify({"message": "success"})
 
 
-@app.route("/api/update_item", methods=["POST"])
-def update_item():
+@app.route("/api/updateItem", methods=["POST"])
+def updateItem():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
     data["itemCount"] = int(data["itemCount"])
-    DB["inventory"].update_one({"_id": ObjectId(data["_id"])}, {"$set": data})
-    log_action("update_item", data=data)
+    DB["inventory"].update_one({"Id": ObjectId(data["Id"])}, {"$set": data})
+    log_action("updateItem", data=data)
     return jsonify({"message": "success"})
 
 
-@app.route("/api/get_personal_care_products", methods=["GET"])
-def get_personal_care_products():
+@app.route("/api/getPersonalCareProducts", methods=["GET"])
+def getPersonalCareProducts():
     products = list(DB["inventory"].find({"category": f"PersonalCareProduct"}))
-    return dump_json(products)
+    return dumpJson(products)
 
 
-@app.route("/api/create_package", methods=["POST"])
-def create_package():
+@app.route("/api/createPackage", methods=["POST"])
+def createPackage():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
-    data["creation_date"] = datetime.now().strftime("%Y-%m-%d")
-    data["creation_time"] = datetime.now().strftime("%H:%M:%S")
+    data["creationDate"] = datetime.now().strftime("%Y-%m-%d")
+    data["creationTime"] = datetime.now().strftime("%H:%M:%S")
     DB["packages"].insert_one(data)
-    log_action("create_package", data=data)
+    log_action("createPackage", data=data)
     return jsonify({"message": "success"})
 
 
-@app.route("/api/fulfill_request", methods=["POST"])
-def fullfil_request():
+@app.route("/api/fulfillRequest", methods=["POST"])
+def fulfillRequest():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
-    student_request = DB["requests"].find_one({"_id": ObjectId(data["_id"])})
+    student_request = DB["requests"].find_one({"Id": ObjectId(data["Id"])})
     if student_request is None:
         return jsonify({"message": "error"})
-    package = DB["packages"].find_one({"_id": ObjectId(student_request["packageId"])})
+    package = DB["packages"].find_one({"Id": ObjectId(student_request["packageId"])})
     if package is None:
         return jsonify({"message": "error"})
     for item in package["selectedItems"]:
         # TODO: Refactor inventory item to use _id instead of itemName
-        inventory_item = DB["inventory"].find_one({"itemName": item["itemName"]})
-        if inventory_item is None:
+        inventoryItem = DB["inventory"].find_one({"itemName": item["itemName"]})
+        if inventoryItem is None:
             continue
-        if int(inventory_item["itemCount"]) - int(item["itemCount"]) < 0:
+        if int(inventoryItem["itemCount"]) - int(item["itemCount"]) < 0:
             return jsonify(
                 {
                     "status": "error",
-                    "message": f"Not enough {inventory_item['itemName']} in stock",
+                    "message": f"Not enough {inventoryItem['itemName']} in stock",
                 }
             )
         DB["inventory"].update_one(
             {"itemName": item["itemName"]},
             {
                 "$set": {
-                    "itemCount": int(inventory_item["itemCount"])
+                    "itemCount": int(inventoryItem["itemCount"])
                     - int(item["itemCount"])
                 }
             },
         )
 
     DB["requests"].update_one(
-        {"_id": ObjectId(data["_id"])},
+        {"Id": ObjectId(data["Id"])},
         {
             "$set": {
                 "fulfilled": 1,
-                "date_fulfilled": datetime.now().strftime("%Y-%m-%d"),
+                "dateFulfilled": datetime.now().strftime("%Y-%m-%d"),
             }
         },
     )
-    log_action("fulfill_request", data=data)
+    log_action("fulfillRequest", data=data)
     return jsonify({"message": "success"})
 
 
-@app.route("/api/decline_request", methods=["POST"])
-def decline_request():
+@app.route("/api/declineRequest", methods=["POST"])
+def declineRequest():
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
     DB["requests"].update_one(
-        {"_id": ObjectId(data["_id"])},
+        {"Id": ObjectId(data["Id"])},
         {
             "$set": {
                 "fulfilled": -1,
-                "date_declined": datetime.now().strftime("%Y-%m-%d"),
+                "dateDeclined": datetime.now().strftime("%Y-%m-%d"),
             }
         },
     )
     return jsonify({"message": "success"})
 
 
-@app.route("/api/get_fulfilled_requests", methods=["GET"])
-def get_fulfilled_requests():
+@app.route("/api/getFulfilledRequests", methods=["GET"])
+def getFulfilledRequests():
     requests = list(DB["requests"].find({"fulfilled": 1}))
-    return dump_json(requests)
+    return dumpJson(requests)
 
 
-@app.route("/api/get_unfulfilled_requests", methods=["GET"])
-def get_unfulfilled_requests():
+@app.route("/api/getUnfulfilledRequests", methods=["GET"])
+def getUnfulfilledRequests():
     requests = list(DB["requests"].find({"fulfilled": 0}))
-    return dump_json(requests)
+    return dumpJson(requests)
 
 
-@app.route("/api/get_declined_requests", methods=["GET"])
-def get_declined_requests():
+@app.route("/api/getDeclinedRequests", methods=["GET"])
+def getDeclinedRequests():
     requests = list(DB["requests"].find({"fulfilled": -1}))
-    return dump_json(requests)
+    return dumpJson(requests)
 
 
-@app.route("/admin/get_logs", methods=["GET"])
-def get_logs():
+@app.route("/admin/getLogs", methods=["GET"])
+def getLogs():
     logs = list(DB["log"].find())
     logs.sort(key=lambda x: x["time"])
-    return dump_json(logs)
+    return dumpJson(logs)
 
 
 if __name__ == "__main__":
