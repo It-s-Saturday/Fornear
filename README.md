@@ -181,6 +181,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.jibran.me"><img src="https://avatars.githubusercontent.com/u/70596906?v=4?s=100" width="100px;" alt="jayway"/><br /><sub><b>jayway</b></sub></a><br /><a href="#maintenance-jibranabsarulislam" title="Maintenance">🚧</a> <a href="https://github.com/It-s-Saturday/Fornear/commits?author=jibranabsarulislam" title="Code">💻</a> <a href="https://github.com/It-s-Saturday/Fornear/commits?author=jibranabsarulislam" title="Documentation">📖</a> <a href="https://github.com/It-s-Saturday/Fornear/pulls?q=is%3Apr+reviewed-by%3Ajibranabsarulislam" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/neeravbhaskarla"><img src="https://avatars.githubusercontent.com/u/57148990?v=4?s=100" width="100px;" alt="Neerav"/><br /><sub><b>Neerav</b></sub></a><br /><a href="https://github.com/It-s-Saturday/Fornear/commits?author=neeravbhaskarla" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
