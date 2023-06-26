@@ -1,4 +1,4 @@
-# Fornear (WaffleHacks 2023)
+# Fornear
 
 ![logo](https://github.com/jibranabsarulislam/Fornear/assets/70596906/a495d28d-7616-4ca3-91d7-df3824a4b133)
 
