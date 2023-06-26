@@ -125,7 +125,7 @@ export default function RequestList({ refresh, onRefresh }) {
     return (
       <>
         {modalOpen && modal}
-        <div className="rounded overflow-hidden px-6 py-4">
+        <div className="rounded overflow-hidden px-6 py-4 bg-white shadow-lg">
           <h2 className="text-2xl font-bold">{request.packageName}</h2>
           <div className="flex gap-x-10">
             {requests.map((req) => (
@@ -147,7 +147,7 @@ export default function RequestList({ refresh, onRefresh }) {
     );
   });
   return (
-    <div className="flex flex-col w-min-[30rem] h-[fit-content] items-center p-5 border border-black">
+    <div className="flex flex-col w-min-[30rem] h-[fit-content] items-center p-5 border border-black bg-gray-100">
       <h1 className="text-3xl font-bold">Request List</h1>
       {requestList.length > 0 ? (
         requestList

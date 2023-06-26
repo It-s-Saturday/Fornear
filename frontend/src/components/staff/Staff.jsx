@@ -5,9 +5,7 @@ import Inventory from './Inventory';
 import CreatePackage from './CreatePackage';
 import PackageGenerator from '../PackageGenerator';
 import RequestList from './RequestList';
-import FulfilledRequests from './RequestTables/FulfilledRequests';
-import UnfulfilledRequests from './RequestTables/UnfulfilledRequests';
-import DeclinedRequests from './RequestTables/DeclinedRequests';
+import RequestTable from './RequestTable';
 import Update from './Update';
 
 export default function Staff() {
@@ -50,15 +48,13 @@ export default function Staff() {
         <Update refresh={refreshUpdatePackage} onRefresh={handleUpdate} />
       </div>
       <div className="flex flex-row w-full h-max-[10rem] p-5 space-x-10 overflow-y-scroll justify-center">
-        <UnfulfilledRequests
-          refresh={refreshRequests}
-          onRefresh={handleRefresh}
-        />
-        <FulfilledRequests
-          refresh={refreshRequests}
-          onRefresh={handleRefresh}
-        />
-        <DeclinedRequests refresh={refreshRequests} onRefresh={handleRefresh} />
+        {['unfulfilled', 'fulfilled', 'declined'].map((tableType) => (
+          <RequestTable
+            refresh={refreshRequests}
+            onRefresh={handleRefresh}
+            type={tableType}
+          />
+        ))}
       </div>
       {/* TODO: Implement better way of handling onRefresh for each component */}
       <RequestList refresh={refreshRequestList} onRefresh={handleUpdate} />{' '}
