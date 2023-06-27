@@ -1,6 +1,6 @@
 [![Build](https://github.com/It-s-Saturday/Fornear/actions/workflows/build.yml/badge.svg)](https://github.com/It-s-Saturday/Fornear/actions/workflows/build.yml)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # Fornear (WaffleHacks 2023)
@@ -183,6 +183,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://www.jibran.me"><img src="https://avatars.githubusercontent.com/u/70596906?v=4?s=100" width="100px;" alt="jayway"/><br /><sub><b>jayway</b></sub></a><br /><a href="#maintenance-jibranabsarulislam" title="Maintenance">🚧</a> <a href="https://github.com/It-s-Saturday/Fornear/commits?author=jibranabsarulislam" title="Code">💻</a> <a href="https://github.com/It-s-Saturday/Fornear/commits?author=jibranabsarulislam" title="Documentation">📖</a> <a href="https://github.com/It-s-Saturday/Fornear/pulls?q=is%3Apr+reviewed-by%3Ajibranabsarulislam" title="Reviewed Pull Requests">👀</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/neeravbhaskarla"><img src="https://avatars.githubusercontent.com/u/57148990?v=4?s=100" width="100px;" alt="Neerav"/><br /><sub><b>Neerav</b></sub></a><br /><a href="https://github.com/It-s-Saturday/Fornear/commits?author=neeravbhaskarla" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sejalapeno"><img src="https://avatars.githubusercontent.com/u/110482301?v=4?s=100" width="100px;" alt="sejalapeno"/><br /><sub><b>sejalapeno</b></sub></a><br /><a href="https://github.com/It-s-Saturday/Fornear/commits?author=sejalapeno" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://colbe.me"><img src="https://avatars.githubusercontent.com/u/90277989?v=4?s=100" width="100px;" alt="Colbe Roberson"/><br /><sub><b>Colbe Roberson</b></sub></a><br /><a href="https://github.com/It-s-Saturday/Fornear/commits?author=cgr28" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
