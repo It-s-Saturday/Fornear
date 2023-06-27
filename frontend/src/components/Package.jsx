@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function Package(props) {
   const { data, showRequest } = props;
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg h-[fit-content]">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg h-[fit-content] bg-white">
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">
           {data.packageName ?? 'Title not found.'}
