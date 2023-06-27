@@ -39,6 +39,8 @@ export default function Request() {
     phoneNumber: '',
     pickupDate: '',
     selectedPersonalCareProducts: [],
+    dietaryNeeds: '',
+    allergies: '',
   });
 
   const handleInputChange = (e) => {
@@ -165,6 +167,26 @@ export default function Request() {
             name="pickupDate"
             placeholder="Date"
             value={formData.pickupDate}
+            onChange={handleInputChange}
+            required
+          />
+        </Input>
+        <Input label="Delivery Needs">
+          <input
+            type="text"
+            name="deliveryNeeds"
+            placeholder="Delivery Needs"
+            value={formData.deliveryNeeds}
+            onChange={handleInputChange}
+            required
+          />
+        </Input>
+        <Input label="Allergies">
+          <input
+            type="text"
+            name="allergies"
+            placeholder="Allergies"
+            value={formData.allergies}
             onChange={handleInputChange}
             required
           />
