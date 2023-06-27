@@ -29,10 +29,10 @@ export default function Package(props) {
           </span>
         </div>
       </div>
-      {showRequest && (
+      {showRequest ? (
         <div className="flex items-center px-6 py-4 justify-end">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-            {data.quantityAvailable ?? 'Quantity not found.'}
+            {data.quantityAvailable ?? '0'}
             {' available'}
           </span>
           <Link to={`request/${data._id}`}>
@@ -44,6 +44,13 @@ export default function Package(props) {
               Request
             </button>
           </Link>
+        </div>
+      ) : (
+        <div className="flex items-center px-6 py-4 justify-end">
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+            {data.requests ? data.requests.length : '0'}
+            {' requested'}
+          </span>
         </div>
       )}
     </div>
@@ -63,6 +70,14 @@ Package.propTypes = [
         }),
       ).isRequired,
       quantity: PropTypes.number.isRequired,
+      requests: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          email: PropTypes.string.isRequired,
+          phoneNumber: PropTypes.string.isRequired,
+          pickupDate: PropTypes.string.isRequired,
+        }),
+      ),
     }).isRequired,
   },
   {
