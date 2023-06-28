@@ -39,7 +39,6 @@ export default function Request() {
     phoneNumber: '',
     pickupDate: '',
     selectedPersonalCareProducts: [],
-    dietaryNeeds: '',
     allergies: '',
   });
 
@@ -171,16 +170,7 @@ export default function Request() {
             required
           />
         </Input>
-        <Input label="Delivery Needs">
-          <input
-            type="text"
-            name="deliveryNeeds"
-            placeholder="Delivery Needs"
-            value={formData.deliveryNeeds}
-            onChange={handleInputChange}
-            required
-          />
-        </Input>
+
         <Input label="Allergies">
           <input
             type="text"
