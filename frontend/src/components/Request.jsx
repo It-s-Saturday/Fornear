@@ -5,6 +5,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Input from './wrappers/Input';
 import Button from './wrappers/Button';
 
+import Package from './Package';
+
 /**
  * Form object for requesting a package
  * @returns {JSX.Element} Request
@@ -123,6 +125,9 @@ export default function Request() {
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
       {/* Render the package card on the screen next to the form */}
+      {packageData !== null && (
+        <Package data={packageData} showRequest={false} />
+      )}
       <Input label="Choose 3 Personal Care Products">
         <div className="flex flex-col flex-wrap justify-center">
           {personalCareProducts.map((product) => (
