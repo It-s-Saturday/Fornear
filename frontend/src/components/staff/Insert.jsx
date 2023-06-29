@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
 import Button from '../wrappers/Button';
-import Toast from '../wrappers/Toast';
 
 /**
  * Staff view for all unfulfilled requests. Contains modal as well (TODO)
@@ -50,8 +49,6 @@ export default function Insert({ onInsert }) {
       // console.log(err);
     }
   };
-
-  <Toast text="Item inserted successfully" type="success" timeout={2000} />;
 
   return (
     <div className="flex flex-col w-[30rem] h-[fit-content] items-center p-5 border border-black rounded-md bg-gray-100">
