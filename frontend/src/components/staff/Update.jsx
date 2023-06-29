@@ -24,6 +24,7 @@ export default function Update({ refresh, onRefresh }) {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Update selectedItems with the selected item's associated quantity (TODO: util)
   const handleItemCountChange = (itemName, newQuantity) => {
     const newSelectedItems = selectedItems.map((item) => {
       if (item.itemName === itemName) {
@@ -37,14 +38,17 @@ export default function Update({ refresh, onRefresh }) {
     setSelectedItems(newSelectedItems);
   };
 
+  // Return whether itemName is already in selectedItems (TODO: util)
   const isInSelectedItems = (itemName) =>
     selectedItems.some((item) => item.itemName === itemName);
 
   const handleCheckboxChange = (itemName, checked) => {
+    // Item cannot be deselected if it is not in selectedItems
     if (!isInSelectedItems(itemName) && !checked) {
       return;
     }
     if (checked) {
+      // Create new item object to format selectedItems entry
       const newItem = {
         itemName,
         itemCount:
@@ -54,6 +58,7 @@ export default function Update({ refresh, onRefresh }) {
           ) || 0,
       };
       setSelectedItems((prevSelectedItems) => [...prevSelectedItems, newItem]);
+      // Update viewData to show checkbox as checked for selected item
       setViewData((prevViewData) => {
         const updatedViewData = prevViewData.map((item) => {
           if (item.itemName === itemName) {
@@ -64,9 +69,11 @@ export default function Update({ refresh, onRefresh }) {
         return updatedViewData;
       });
     } else {
+      // Keep items in selectedItems whose itemName attribute is not itemName
       setSelectedItems((prevSelectedItems) =>
         prevSelectedItems.filter((item) => item.itemName !== itemName),
       );
+      // Update viewData to show checkbox as unchecked for deselected item
       setViewData((prevViewData) => {
         const updatedViewData = prevViewData.map((item) => {
           if (item.itemName === itemName) {
@@ -79,6 +86,7 @@ export default function Update({ refresh, onRefresh }) {
     }
   };
 
+  // TODO (util)
   const inventoryListWithCheckbox = inventoryData.map((item) => ({
     ...item,
     checkbox: (
@@ -90,6 +98,7 @@ export default function Update({ refresh, onRefresh }) {
   }));
   const handleSearchChange = (e) => {
     const { value } = e.target;
+    // Filter inventoryListWithCheckbox to show items whose name includes the searchbox contents
     const filteredData = inventoryListWithCheckbox.filter((item) =>
       item.itemName.toLowerCase().includes(value.toLowerCase()),
     );
@@ -100,6 +109,7 @@ export default function Update({ refresh, onRefresh }) {
     fetch('/api/get_inventory')
       .then((res) => res.json())
       .then((data) => {
+        // Add key to data for antd table
         const dataWithKey = data.map((item, index) => ({
           ...item,
           key: index,
@@ -110,6 +120,7 @@ export default function Update({ refresh, onRefresh }) {
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
+  // Update viewData to show checkboxes when inventoryData changes
   useEffect(() => {
     setViewData(inventoryListWithCheckbox);
   }, [inventoryData]);
@@ -214,15 +225,17 @@ export default function Update({ refresh, onRefresh }) {
             dataSource={viewData}
             columns={columns}
             loading={loading}
+            // On antd table rowClick
             onRow={(record) => ({
               onClick: () => {
                 handleCheckboxChange(
                   record.itemName,
+                  // Set checked to opposite of what current item is
                   !isInSelectedItems(record.itemName),
                 );
               },
             })}
-            // eslint-disable-next-line react/jsx-boolean-value
+            // TODO: Determine pageSizeOptions
             pagination={{
               defaultPageSize: 5,
               showSizeChanger: true,
@@ -252,6 +265,13 @@ export default function Update({ refresh, onRefresh }) {
             <p className="text-xl">
               You are editing <b>{selectedItems.length}</b>
               {selectedItems.length > 1 ? ' fields.' : ' field.'}
+              {/* 
+              TODO: Calculate the number of actual items changed.
+              i.e. if inventory reports:
+                30 cans and 20 jars,
+                cans input becomes  28 and jars input becomes 22,
+                display "with 4 changes"
+              */}
               {/* , with{' '}
             <b>
               {selectedItems.reduce(

@@ -23,6 +23,7 @@ export default function RequestList({ refresh, onRefresh }) {
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
+  // When modal is opened, fetch packageData of associated source Request via packageId
   useEffect(() => {
     if (selectedRequest === null) return;
     fetch('/api/get_package_by_id', {
@@ -36,6 +37,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((data) => setPackageData(data));
   }, [modalOpen, selectedRequest]);
 
+  // Set data to request and render, then open modal
   const handleRequestClicked = (request) => {
     setSelectedRequest(request);
     setPackageData(requestData.find((item) => item._id === request.packageId));

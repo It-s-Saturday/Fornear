@@ -25,6 +25,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Update selectedItems with the selected item's associated quantity (TODO: util)
   const handleItemCountChange = (itemName, newQuantity) => {
     const newSelectedItems = selectedItems.map((item) => {
       if (item.itemName === itemName) {
@@ -38,6 +39,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
     setSelectedItems(newSelectedItems);
   };
 
+  // Return whether itemName is already in selectedItems (TODO: util)
   const isInSelectedItems = (itemName) =>
     selectedItems.some((item) => item.itemName === itemName);
 
@@ -51,6 +53,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
     }
   };
 
+  // TODO (util)
   const inventoryListWithCheckbox = inventoryData.map((item) => ({
     ...item,
     checkbox: (
@@ -111,8 +114,15 @@ export default function CreatePackage({ refresh, onRefresh }) {
     },
   ];
 
+  // Calculate the number of packages that can be created with current count of each selected item
   const getMaxPackages = () =>
     Math.min(
+      /*  return the minimum integer from an array of integers,
+      where each integer is based on each item "i" in selectedItems, such that:
+        i's itemCount in its inventory document,
+        divided by
+        i's itemCount in selectedItems
+      */
       ...selectedItems.map((item) => {
         const inventoryItem = inventoryData.find(
           (invItem) => invItem.itemName === item.itemName,

@@ -2,6 +2,10 @@ import React from 'react';
 import Logo from '../Logo';
 import NavLink from './NavLink';
 
+/**
+ * Navigation bar
+ * @returns {JSX.Element} Navbar
+ */
 export default function Navbar() {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-[#ffdd00] p-6">

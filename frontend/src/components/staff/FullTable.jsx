@@ -32,6 +32,7 @@ export default function FullTable({ refresh, onRefresh }) {
 
   const handleSearchChange = (e) => {
     const { value } = e.target;
+    // Filter inventoryData to show items whose name includes the searchbox contents
     const filteredData = inventoryData.filter((item) =>
       item.itemName.toLowerCase().includes(value.toLowerCase()),
     );
