@@ -139,7 +139,7 @@ export default function RequestList({ refresh, onRefresh }) {
                   <p>Email: {req.email}</p>
                   <p>Phone Number: {req.phoneNumber}</p>
                   <p>Pickup Date: {req.pickupDate}</p>
-                  <p>Allergies: {req.allergies}</p>
+                  <p>Restrictions: {req.restrictions}</p>
                 </div>
               </Button>
             ))}
