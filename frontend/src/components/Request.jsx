@@ -171,7 +171,7 @@ export default function Request() {
           />
         </Input>
 
-        <Input label="Allergies">
+        <Input label="Restrictions (dietary, allergies, etc.)">
           <input
             type="text"
             name="allergies"
