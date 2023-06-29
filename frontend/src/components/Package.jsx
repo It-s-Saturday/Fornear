@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Chip from './Chip';
 
 export default function Package(props) {
   const { data, showRequest } = props;
@@ -31,10 +32,7 @@ export default function Package(props) {
       </div>
       {showRequest ? (
         <div className="flex items-center px-6 py-4 justify-end">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-            {data.quantityAvailable ?? '0'}
-            {' available'}
-          </span>
+          <Chip label={`${data.quantityAvailable ?? '0'} available`} />
           <Link to={`request/${data._id}`}>
             <button
               type="button"
@@ -47,10 +45,9 @@ export default function Package(props) {
         </div>
       ) : (
         <div className="flex items-center px-6 py-4 justify-end">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-            {data.requests ? data.requests.length : '0'}
-            {' requested'}
-          </span>
+          <Chip
+            label={`${data.requests ? data.requests.length : '0'} requested`}
+          />
         </div>
       )}
     </div>
