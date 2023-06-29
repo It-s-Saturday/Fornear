@@ -39,7 +39,7 @@ export default function Request() {
     phoneNumber: '',
     pickupDate: '',
     selectedPersonalCareProducts: [],
-    allergies: '',
+    restrictions: '',
   });
 
   const handleInputChange = (e) => {
