@@ -37,13 +37,13 @@ export default function Navbar() {
             {
               name: 'Staff',
               link: '/staff',
-              dropdown: {
-                Requests: '/staff/requests',
-                Inventory: '/staff/inventory',
-                'Create Package': '/staff/create-package',
-                Insert: '/staff/insert',
-                Update: '/staff/update',
-              },
+              dropdown: [
+                { name: 'Requests', link: '/staff/requests' },
+                { name: 'Inventory', link: '/staff/inventory' },
+                { name: 'Create', link: 'staff/create-package' },
+                { name: 'Insert', link: '/staff/insert' },
+                { name: 'Update', link: '/staff/update' },
+              ],
             },
             { name: 'Admin', link: '/admin' },
           ].map((item) => (
