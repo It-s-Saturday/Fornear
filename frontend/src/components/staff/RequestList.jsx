@@ -89,7 +89,7 @@ export default function RequestList({ refresh, onRefresh }) {
             <p>Email: {selectedRequest?.email}</p>
             <p>Phone Number: {selectedRequest?.phoneNumber}</p>
             <p>Pickup Date: {selectedRequest?.pickupDate}</p>
-            <p>Allergies: {selectedRequest?.allergies}</p>
+            <p>Restrictions: {selectedRequest?.restrictions}</p>
           </div>
           <div>
             <h2 className="text-2xl font-bold">Package Contents</h2>
