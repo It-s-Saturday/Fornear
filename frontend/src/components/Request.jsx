@@ -41,6 +41,7 @@ export default function Request() {
     phoneNumber: '',
     pickupDate: '',
     selectedPersonalCareProducts: [],
+    restrictions: '',
   });
 
   const handleInputChange = (e) => {
@@ -172,6 +173,17 @@ export default function Request() {
             name="pickupDate"
             placeholder="Date"
             value={formData.pickupDate}
+            onChange={handleInputChange}
+            required
+          />
+        </Input>
+
+        <Input label="Restrictions (dietary, allergies, etc.)">
+          <input
+            type="text"
+            name="restrictions"
+            placeholder="peanuts, vegan, gluten, etc."
+            value={formData.restrictions}
             onChange={handleInputChange}
             required
           />
