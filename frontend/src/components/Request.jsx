@@ -174,7 +174,7 @@ export default function Request() {
         <Input label="Restrictions (dietary, allergies, etc.)">
           <input
             type="text"
-            name="allergies"
+            name="restrictions"
             placeholder="Allergies"
             value={formData.allergies}
             onChange={handleInputChange}
