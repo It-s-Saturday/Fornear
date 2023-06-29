@@ -18,6 +18,10 @@ import Admin from './components/admin/Admin';
 
 import Background from './components/Background';
 
+/**
+ * Holds the navbar, routes, and background of the app
+ * @returns {JSX.Element} App
+ */
 function App() {
   return (
     <>

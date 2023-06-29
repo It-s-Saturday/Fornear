@@ -8,6 +8,10 @@ import RequestList from './RequestList';
 import RequestTable from './RequestTable';
 import Update from './Update';
 
+/**
+ * Complete layout of all Staff tools.
+ * @returns {JSX.Element} Staff
+ */
 export default function Staff() {
   const [refreshInventory, setRefreshInventory] = useState(false);
   const [refreshCreatePackage, setRefreshCreatePackage] = useState(false);

@@ -2,6 +2,10 @@ import React from 'react';
 
 import Logs from './Logs';
 
+/**
+ * Admin dashboard
+ * @returns {JSX.Element} Admin
+ */
 export default function Admin() {
   return (
     <div>

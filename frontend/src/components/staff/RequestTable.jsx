@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
 
+/**
+ * Shared component for generating a table of unfulfilled, fulfilled, or declined requests.
+ * @param {type} String: Query unfulfilled, fulfilled, or declined requests
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} RequestTable
+ */
 export default function RequestTable({ type, refresh, onRefresh }) {
   const [requestTableData, setRequestTableData] = useState([]);
 

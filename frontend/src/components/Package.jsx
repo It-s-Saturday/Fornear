@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/**
+ *
+ * @param {data} Object: Package data used to render component
+ * @param {showRequest} Boolean: Request button and quantity shown
+ * @returns {JSX.Element} Package
+ */
 export default function Package(props) {
   const { data, showRequest } = props;
   return (

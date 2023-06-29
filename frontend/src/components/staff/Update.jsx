@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
 
+/**
+ * Update inventory items individually or in bulk
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} Update
+ */
 export default function Update({ refresh, onRefresh }) {
   const [loading, setLoading] = useState(true);
   const [inventoryData, setInventoryData] = useState([]);

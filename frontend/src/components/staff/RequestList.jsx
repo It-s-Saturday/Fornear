@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 
 import Button from '../wrappers/Button';
 
+/**
+ * Staff view for all unfulfilled requests. Contains modal as well (TODO)
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} RequestList
+ */
 export default function RequestList({ refresh, onRefresh }) {
   const [requestData, setRequestData] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);

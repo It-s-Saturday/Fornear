@@ -1,6 +1,10 @@
 import React from 'react';
 import Logo from './Logo';
 
+/**
+ * Renders OU logo as a background
+ * @returns {JSX.Element} Background
+ */
 export default function Background() {
   const size = 60;
   const className = `fixed bottom-[-15rem] left-[-15rem] z-[-20]`;

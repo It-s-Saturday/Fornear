@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
 
+/**
+ * Create package component, with item and quantity inputs
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} CreatePackage
+ */
 export default function CreatePackage({ refresh, onRefresh }) {
   const [loading, setLoading] = useState(true);
   const [inventoryData, setInventoryData] = useState([]);

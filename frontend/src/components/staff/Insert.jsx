@@ -4,6 +4,11 @@ import Input from '../wrappers/Input';
 import Button from '../wrappers/Button';
 import Toast from '../wrappers/Toast';
 
+/**
+ * Staff view for all unfulfilled requests. Contains modal as well (TODO)
+ * @param {onInsert} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} RequestList
+ */
 export default function Insert({ onInsert }) {
   const [formData, setFormData] = useState({
     itemName: '',

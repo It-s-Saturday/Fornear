@@ -6,6 +6,10 @@ import Package from './Package';
 import Input from './wrappers/Input';
 import Button from './wrappers/Button';
 
+/**
+ * Form object for requesting a package
+ * @returns {JSX.Element} Request
+ */
 export default function Request() {
   const navigate = useNavigate();
   const redirect = () => {

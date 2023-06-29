@@ -3,6 +3,12 @@ import { Table } from 'antd';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
 
+/**
+ * Antd table of complete inventory
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} FullTable
+ */
 export default function FullTable({ refresh, onRefresh }) {
   const [inventoryData, setInventoryData] = useState([]);
   const [viewData, setViewData] = useState([]);

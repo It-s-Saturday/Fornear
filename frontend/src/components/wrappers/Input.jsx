@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Input wrapper to label and style form fields.
+ * @param {children} Node: Field to wrap
+ * @param {label} String: Label for field
+ * @returns
+ */
 export default function Input(props) {
   const { children, label } = props;
 

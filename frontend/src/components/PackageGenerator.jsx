@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Package from './Package';
 
+/**
+ * Displays all packages
+ * @param {showRequest} Boolean: Request button and quantity shown
+ * @returns {JSX.Element} PackageGenerator
+ */
 export default function PackageGenerator(props) {
   const { showRequest } = props;
   const [packageData, setPackageData] = useState(null);
