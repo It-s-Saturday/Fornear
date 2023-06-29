@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import { moment } from 'moment';
 
 /**
  * Shared component for generating a table of unfulfilled, fulfilled, or declined requests.
