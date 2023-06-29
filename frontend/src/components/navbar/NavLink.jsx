@@ -1,41 +1,58 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function NavLink({ name, link, dropdown }) {
+/**
+ * Link component to handle redirect and dropdown onMouseEnter
+ * @param {name} String: Text
+ * @param {link} String: Path to redirect
+ * @param {dropdown} Object: Object of paths to create dropdown
+ * @returns {JSX.Element} NavLink
+ */
+export default function NavLink({
+  name,
+  link,
+  dropdown,
+  isDropdown,
+  className,
+}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
-    <div
+    <a
+      href={link}
+      key={name}
       onMouseEnter={() => setDropdownOpen(true)}
       onMouseLeave={() => setDropdownOpen(false)}
+      className={className}
     >
-      <a
-        key={name}
-        href={link}
-        className="text-link font-bold tracking-[.0625em]"
-      >
-        {name.toUpperCase()}
-        {dropdown !== undefined && (dropdownOpen ? '▲' : '▼')}
-      </a>
+      {!isDropdown ? name.toUpperCase() : name}
+      {dropdown !== undefined && (dropdownOpen ? '▲' : '▼')}
       {dropdown !== undefined && dropdownOpen && (
         <div className="flex flex-col absolute bg-gray-200 w-[10rem] shadow-md">
-          {Object.entries(dropdown).map(([dropdownName, dropdownLink]) => (
-            <a
-              key={dropdownName}
-              href={dropdownLink}
-              className="text-link hover:bg-gray-300 p-2 w-full font-light"
-            >
-              {dropdownName}
-            </a>
+          {dropdown.map((nestedDropdown) => (
+            <NavLink
+              name={nestedDropdown.name}
+              link={nestedDropdown.link}
+              dropdown={nestedDropdown.dropdown}
+              isDropdown={true}
+              className="text-link w-full p-2"
+            />
           ))}
         </div>
       )}
-    </div>
+    </a>
   );
 }
 
 NavLink.propTypes = {
   name: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props, react/forbid-prop-types
+  // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
   dropdown: PropTypes.object,
+  isDropdown: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+NavLink.defaultProps = {
+  isDropdown: false,
+  className: 'text-link font-bold tracking-[.0625em]',
 };
