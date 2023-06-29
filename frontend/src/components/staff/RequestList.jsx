@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import PropTypes from 'prop-types';
 
 import Button from '../wrappers/Button';
@@ -9,6 +9,7 @@ export default function RequestList({ refresh, onRefresh }) {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [packageData, setPackageData] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     fetch('/api/get_requests')
@@ -47,7 +48,10 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'error') {
-          // alert(data.message);
+          api.open({
+            message: 'Error',
+            description: `${data.message}`,
+          });
         } else {
           onRefresh();
           setModalOpen(false);
@@ -66,7 +70,10 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'error') {
-          // alert(data.message);
+          api.open({
+            message: 'Error',
+            description: `${data.message}`,
+          });
         } else {
           onRefresh();
           setModalOpen(false);
@@ -125,6 +132,7 @@ export default function RequestList({ refresh, onRefresh }) {
     return (
       <>
         {modalOpen && modal}
+        {contextHolder}
         <div className="rounded overflow-hidden px-6 py-4 bg-white shadow-lg">
           <h2 className="text-2xl font-bold">{request.packageName}</h2>
           <div className="flex gap-x-10">

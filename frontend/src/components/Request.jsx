@@ -1,12 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { notification } from 'antd';
 
 import Package from './Package';
 import Input from './wrappers/Input';
 import Button from './wrappers/Button';
 
 export default function Request() {
+  const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const redirect = () => {
     navigate('/');
@@ -83,7 +85,11 @@ export default function Request() {
       formData.phoneNumber === '' ||
       formData.pickupDate === ''
     ) {
-      // alert('Please fill out all fields');
+      api.open({
+        message: 'Error',
+        description:
+          'Please fill in all the fields before submitting the form.',
+      });
       return;
     }
     const postData = {
@@ -111,6 +117,7 @@ export default function Request() {
 
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
+      {contextHolder}
       {packageData !== null && <Package data={packageData} forForm={true} />}
       <Input label="Choose 3 Personal Care Products">
         <div className="flex flex-col flex-wrap justify-center">
