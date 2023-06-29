@@ -175,7 +175,7 @@ export default function Request() {
           <input
             type="text"
             name="restrictions"
-            placeholder="Allergies"
+            placeholder="peanuts, vegan, gluten, etc."
             value={formData.allergies}
             onChange={handleInputChange}
             required
