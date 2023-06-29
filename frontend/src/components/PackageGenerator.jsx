@@ -12,10 +12,15 @@ export default function PackageGenerator(props) {
   const [packageData, setPackageData] = useState(null);
   const [requestData, setRequestData] = useState(null);
 
-  // https://stackoverflow.com/a/55642683/14879329
-  const leftJoin = (objArr1, objArr2, key1, key2) =>
-    objArr1.map((anObj1) => ({
-      ...objArr2.find((anObj2) => anObj1[key1] === anObj2[key2]),
+  /**
+   * https://stackoverflow.com/a/55642683/14879329
+   * Produces all records from packages and requests where the _id matches
+   * @param {packages} Array: alias for packageData
+   * @param {requests} Array: alias for requestData
+   */
+  const leftJoin = (packages, requests) =>
+    packages.map((anObj1) => ({
+      ...requests.find((anObj2) => anObj1._id === anObj2._id),
       ...anObj1,
     }));
 
@@ -44,7 +49,7 @@ export default function PackageGenerator(props) {
   let mergedData = null;
 
   if (packageData !== null && requestData !== null) {
-    mergedData = leftJoin(packageData, requestData, '_id', '_id');
+    mergedData = leftJoin(packageData, requestData);
   }
 
   return (
