@@ -111,7 +111,7 @@ export default function Request() {
 
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
-      {packageData !== null && <Package data={packageData} forForm={true} />}
+      <Package data={packageData} showRequest={true} />
       <Input label="Choose 3 Personal Care Products">
         <div className="flex flex-col flex-wrap justify-center">
           {personalCareProducts.map((product) => (
