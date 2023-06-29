@@ -7,8 +7,7 @@ import Package from './Package';
  * @param {showRequest} Boolean: Request button and quantity shown
  * @returns {JSX.Element} PackageGenerator
  */
-export default function PackageGenerator(props) {
-  const { showRequest } = props;
+export default function PackageGenerator({ showRequest }) {
   const [packageData, setPackageData] = useState(null);
   const [requestData, setRequestData] = useState(null);
 

@@ -9,9 +9,13 @@ import PropTypes from 'prop-types';
  * @param {className} String: Class override to apply to button
  * @returns {JSX.Element} Button
  */
-export default function Button(props) {
-  const { linkTo, onClick, className, children, color } = props;
-
+export default function Button({
+  linkTo,
+  onClick,
+  className,
+  children,
+  color,
+}) {
   const classes =
     className ??
     `${color} hover:bg-accent-blue text-black font-bold py-2 px-4 rounded`;

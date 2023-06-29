@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
  * @param {label} String: Label for field
  * @returns
  */
-export default function Input(props) {
-  const { children, label } = props;
-
+export default function Input({ children, label }) {
   return (
     <div className="flex flex-col inline-block text-md font-semibold text-gray-700 my-5">
       {label}

@@ -8,9 +8,7 @@ import { Link } from 'react-router-dom';
  * @param {showRequest} Boolean: Request button and quantity shown
  * @returns {JSX.Element} Package
  */
-export default function Package(props) {
-  const { data, showRequest } = props;
-
+export default function Package({ data, showRequest }) {
   const dataValues = {
     packageName: data.packageName ?? 'Title not found.',
     description: {
