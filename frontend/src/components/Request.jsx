@@ -128,22 +128,24 @@ export default function Request() {
       {packageData !== null && (
         <Package data={packageData} showRequest={false} />
       )}
-      <Input label="Choose 3 Personal Care Products">
-        <div className="flex flex-col flex-wrap justify-center">
-          {personalCareProducts.map((product) => (
-            <div key={product._id} className="flex flex-row">
-              <input
-                type="checkbox"
-                name="personalCareProduct"
-                value={product._id}
-                onChange={handleInputChange}
-              />
-              <p className="ml-2">x1 {product.itemName}</p>
-              {/* TODO: Add quantity selector */}
-            </div>
-          ))}
-        </div>
-      </Input>
+      {personalCareProducts.length > 0 && (
+        <Input label="Choose 3 Personal Care Products">
+          <div className="flex flex-col flex-wrap justify-center">
+            {personalCareProducts.map((product) => (
+              <div key={product._id} className="flex flex-row">
+                <input
+                  type="checkbox"
+                  name="personalCareProduct"
+                  value={product._id}
+                  onChange={handleInputChange}
+                />
+                <p className="ml-2">x1 {product.itemName}</p>
+                {/* TODO: Add quantity selector */}
+              </div>
+            ))}
+          </div>
+        </Input>
+      )}
       <form className="flex flex-col px-6 py-4">
         <Input label="Name">
           <input
