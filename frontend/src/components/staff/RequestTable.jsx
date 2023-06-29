@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 /**
  * Shared component for generating a table of unfulfilled, fulfilled, or declined requests.
@@ -11,6 +12,9 @@ import PropTypes from 'prop-types';
  */
 export default function RequestTable({ type, refresh, onRefresh }) {
   const [requestTableData, setRequestTableData] = useState([]);
+
+  // Set first letter to uppercase for usage in column and table titles
+  const headerText = type.charAt(0).toUpperCase() + type.slice(1);
 
   const columns = [
     {
@@ -27,16 +31,28 @@ export default function RequestTable({ type, refresh, onRefresh }) {
       title: 'Requested Pickup Date',
       dataIndex: 'pickupDate',
       key: 'pickupDate',
+      sorter: (a, b) =>
+        new Date(moment(a.pickupDate, 'YYYY-MM-DD').format('LLL')) -
+        new Date(moment(b.pickupDate, 'YYYY-MM-DD').format('LLL')),
+    },
+    {
+      title: 'Date Requested',
+      dataIndex: 'requestDate',
+      key: 'requestDate',
+      sorter: (a, b) =>
+        new Date(moment(a.requestDate, 'YYYY-MM-DD').format('LLL')) -
+        new Date(moment(b.requestDate, 'YYYY-MM-DD').format('LLL')),
     },
   ];
-
-  const headerText = type.charAt(0).toUpperCase() + type.slice(1);
 
   if (type !== 'unfulfilled') {
     columns.push({
       title: `${headerText} Date`,
       dataIndex: `date${type[0].toUpperCase() + type.slice(1)}`,
       key: `date${type[0].toUpperCase() + type.slice(1)}`,
+      sorter: (a, b) =>
+        new Date(moment(a.requestDate, 'YYYY-MM-DD').format('LLL')) -
+        new Date(moment(b.requestDate, 'YYYY-MM-DD').format('LLL')),
     });
   }
 
