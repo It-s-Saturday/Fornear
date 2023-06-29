@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# Fornear (WaffleHacks 2023)
+# Fornear
 
 ![logo](https://github.com/jibranabsarulislam/Fornear/assets/70596906/a495d28d-7616-4ca3-91d7-df3824a4b133)
 
@@ -46,8 +46,7 @@ This is a React/Flask project that uses MongoDB Atlas as a database. To run this
 1. Fork the repository @ https://github.com/jibranabsarulislam/Fornear/fork
 2. Clone the repository to your local machine
 3. Install dependencies
-	cd Fornear
-	
+
 	Frontend:
 	```
 	cd frontend
@@ -65,9 +64,9 @@ This is a React/Flask project that uses MongoDB Atlas as a database. To run this
 	```
 4. Create a MongoDB Atlas account and create a cluster OR run locally
 	- For either option, create a database and collection
-		- Database: `fornear`
+		- Database: `fornear-v1`
 		- Collection: `inventory`
-	- To run locally, create set `MONGO_URI` to `"mongodb://localhost:27017/<database>"` (skip step 5)
+	- To run locally, `python app.py --local` (skip to step 6)
 
 5. Create a `fornear_secrets.py` in `backend/` with the following:
 	```
@@ -90,6 +89,8 @@ This is a React/Flask project that uses MongoDB Atlas as a database. To run this
 	# OR
 	. ./venv/Scripts/activate # (Windows)
 	flask run --reload
+ 	# OR, if you have MongoDB Community Server running locally,
+  	python app.py --local
 	```
 
 
