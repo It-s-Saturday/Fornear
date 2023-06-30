@@ -3,18 +3,23 @@ import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
 import Button from '../wrappers/Button';
 
+/**
+ * Staff view for all unfulfilled requests. Contains modal as well (TODO)
+ * @param {onInsert} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} RequestList
+ */
 export default function Insert({ onInsert }) {
   const [formData, setFormData] = useState({
     itemName: '',
-    itemCount: null,
-    category: '',
+    itemCount: '',
+    category: 'Foodstuff',
   });
 
   const clearFields = () => {
     setFormData({
       itemName: '',
-      itemCount: null,
-      category: '',
+      itemCount: '',
+      category: formData.category,
     });
   };
 
@@ -24,11 +29,13 @@ export default function Insert({ onInsert }) {
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-    const postData = {
-      itemName: formData.itemName,
-      itemCount: formData.itemCount,
-      category: formData.category,
-    };
+    if (
+      formData.itemName === '' ||
+      formData.itemCount === '' ||
+      formData.category === ''
+    ) {
+      // alert("Please fill all fields!");
+    }
 
     try {
       await fetch('/api/insert_item', {
@@ -36,7 +43,7 @@ export default function Insert({ onInsert }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(postData),
+        body: JSON.stringify(formData),
       });
       onInsert();
       clearFields();

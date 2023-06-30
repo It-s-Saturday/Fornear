@@ -1,6 +1,10 @@
 import { Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 
+/**
+ * Displays all insert, update, drop actions
+ * @returns {JSX.Element} Logs
+ */
 export default function Logs() {
   const [logs, setLogs] = useState([]);
 

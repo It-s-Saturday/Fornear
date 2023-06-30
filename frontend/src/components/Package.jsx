@@ -2,19 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function Package(props) {
-  const { data, showRequest } = props;
+/**
+ *
+ * @param {data} Object: Package data used to render component
+ * @param {showRequest} Boolean: Request button and quantity shown
+ * @returns {JSX.Element} Package
+ */
+export default function Package({ data, showRequest }) {
+  const dataValues = {
+    packageName: data.packageName ?? 'Title not found.',
+    description: {
+      text: data.description ?? 'No Description Provided',
+      grayValue: data.description ? '700' : '300',
+    },
+    quantityAvailable: data.quantityAvailable ?? 0,
+    requestCount: data.requests ?? 0,
+  };
+
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg h-[fit-content] bg-white">
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">
-          {data.packageName ?? 'Title not found.'}
-        </div>
-        {data.description ? (
-          <p className="text-gray-700 text-base">{data.description}</p>
-        ) : (
-          <p className="text-gray-300 text-base">No Description Provided</p>
-        )}
+        <div className="font-bold text-xl mb-2">{dataValues.packageName}</div>
+        <p
+          className={`text-gray-${dataValues.description.grayValue} text-base`}
+        >
+          {dataValues.description.text}
+        </p>
       </div>
       <div className="flex flex-col px-6 py-4">
         <div className="flex flex-row flex-wrap justify-center items-center">
@@ -32,8 +45,7 @@ export default function Package(props) {
       {showRequest ? (
         <div className="flex items-center px-6 py-4 justify-end">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-            {data.quantityAvailable ?? '0'}
-            {' available'}
+            {`${dataValues.quantityAvailable} available`}
           </span>
           <Link to={`request/${data._id}`}>
             <button
@@ -48,8 +60,7 @@ export default function Package(props) {
       ) : (
         <div className="flex items-center px-6 py-4 justify-end">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-            {data.requests ? data.requests.length : '0'}
-            {' requested'}
+            {`${dataValues.requestCount} requests`}
           </span>
         </div>
       )}

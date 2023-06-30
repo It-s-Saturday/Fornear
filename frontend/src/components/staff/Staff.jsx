@@ -8,13 +8,17 @@ import RequestList from './RequestList';
 import RequestTable from './RequestTable';
 import Update from './Update';
 
+/**
+ * Complete layout of all Staff tools.
+ * @returns {JSX.Element} Staff
+ */
 export default function Staff() {
   const [refreshInventory, setRefreshInventory] = useState(false);
   const [refreshCreatePackage, setRefreshCreatePackage] = useState(false);
   const [refreshUpdatePackage, setRefreshUpdatePackage] = useState(false);
   const [refreshRequestList, setRefreshRequestList] = useState(false);
   const [refreshRequests, setRefreshRequests] = useState(false);
-
+  // TODO: Test if single function can be used to trigger all refreshes
   const handleRefresh = () => {
     setRefreshInventory(false);
     setRefreshCreatePackage(false);
@@ -28,13 +32,15 @@ export default function Staff() {
     setRefreshUpdatePackage(true);
   };
 
+  // Trigger useEffect update in Inventory, Update, Create, Requests, and RequestList
   const handleUpdate = () => {
     setRefreshInventory(true);
     setRefreshUpdatePackage(true);
     setRefreshCreatePackage(true);
     setRefreshRequests(true);
     setRefreshRequestList(true);
-    // to all my mentors... look away x_x
+
+    // Terminate refresh trigger after 100ms
     setTimeout(() => {
       setRefreshUpdatePackage(false);
       setRefreshRequests(false);

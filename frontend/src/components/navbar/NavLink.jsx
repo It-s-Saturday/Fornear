@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Link component to handle redirect and dropdown onMouseEnter
+ * @param {name} String: Text
+ * @param {link} String: Path to redirect
+ * @param {dropdown} Object: Object of paths to create dropdown
+ * @returns {JSX.Element} NavLink
+ */
 export default function NavLink({ name, link, dropdown }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
@@ -18,14 +25,12 @@ export default function NavLink({ name, link, dropdown }) {
       </a>
       {dropdown !== undefined && dropdownOpen && (
         <div className="flex flex-col absolute bg-gray-200 w-[10rem] shadow-md">
-          {Object.entries(dropdown).map(([dropdownName, dropdownLink]) => (
-            <a
-              key={dropdownName}
-              href={dropdownLink}
-              className="text-link hover:bg-gray-300 p-2 w-full font-light"
-            >
-              {dropdownName}
-            </a>
+          {dropdown.map((nestedDropdown) => (
+            <NavLink
+              name={nestedDropdown.name}
+              link={nestedDropdown.link}
+              dropdown={nestedDropdown.dropdown}
+            />
           ))}
         </div>
       )}

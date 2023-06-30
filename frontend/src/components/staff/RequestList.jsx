@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 
 import Button from '../wrappers/Button';
 
+/**
+ * Staff view for all unfulfilled requests. Contains modal as well (TODO)
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} RequestList
+ */
 export default function RequestList({ refresh, onRefresh }) {
   const [requestData, setRequestData] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -18,6 +24,7 @@ export default function RequestList({ refresh, onRefresh }) {
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
+  // When modal is opened, fetch packageData of associated source Request via packageId
   useEffect(() => {
     if (selectedRequest === null) return;
     fetch('/api/get_package_by_id', {
@@ -31,6 +38,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((data) => setPackageData(data));
   }, [modalOpen, selectedRequest]);
 
+  // Set data to request and render, then open modal
   const handleRequestClicked = (request) => {
     setSelectedRequest(request);
     setPackageData(requestData.find((item) => item._id === request.packageId));
