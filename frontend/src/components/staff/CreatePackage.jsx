@@ -1,4 +1,4 @@
-import { Checkbox, Table } from 'antd';
+import { Checkbox, Table, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
@@ -10,6 +10,7 @@ import Input from '../wrappers/Input';
  * @returns {JSX.Element} CreatePackage
  */
 export default function CreatePackage({ refresh, onRefresh }) {
+  const [api, contextHolder] = notification.useNotification();
   const [loading, setLoading] = useState(true);
   const [inventoryData, setInventoryData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -134,7 +135,11 @@ export default function CreatePackage({ refresh, onRefresh }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.packageName === '' || formData.author === '') {
-      // alert('Please fill out all fields');
+      api.open({
+        message: 'Error',
+        description:
+          'Please fill in all the fields before submitting the form.',
+      });
       return;
     }
     const postData = {
@@ -150,7 +155,10 @@ export default function CreatePackage({ refresh, onRefresh }) {
         },
         body: JSON.stringify(postData),
       });
-      // alert('Package created successfully!');
+      api.open({
+        message: 'Success',
+        description: 'Package successfully created.',
+      });
     } catch (err) {
       // console.log(err);
     }
@@ -158,6 +166,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
 
   return (
     <div className="flex flex-col w-[fit-content] px-10 border border-black rounded-md gap-x-10 items-center justify-center bg-gray-100">
+      {contextHolder}
       <h1 className="text-3xl font-bold">Package Creator</h1>
       <div>
         <Input label="Package Name">

@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { notification } from 'antd';
 
 import Input from './wrappers/Input';
 import Button from './wrappers/Button';
@@ -13,6 +14,7 @@ import Package from './Package';
  */
 export default function Request() {
   // Used to redirect to home page
+  const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const redirect = () => {
     navigate('/');
@@ -47,6 +49,7 @@ export default function Request() {
     phoneNumber: '',
     pickupDate: '',
     personalCareProducts: [],
+    restrictions: '',
   });
 
   const handleInputChange = (e) => {
@@ -96,7 +99,11 @@ export default function Request() {
       formData.phoneNumber === '' ||
       formData.pickupDate === ''
     ) {
-      // alert('Please fill out all fields');
+      api.open({
+        message: 'Error',
+        description:
+          'Please fill in all the fields before submitting the form.',
+      });
       return;
     }
 
@@ -124,6 +131,7 @@ export default function Request() {
 
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
+      {contextHolder}
       {/* Render the package card on the screen next to the form */}
       {packageData !== null && (
         <Package data={packageData} showRequest={false} />
@@ -183,6 +191,17 @@ export default function Request() {
             name="pickupDate"
             placeholder="Date"
             value={formData.pickupDate}
+            onChange={handleInputChange}
+            required
+          />
+        </Input>
+
+        <Input label="Restrictions (dietary, allergies, etc.)">
+          <input
+            type="text"
+            name="restrictions"
+            placeholder="peanuts, vegan, gluten, etc."
+            value={formData.restrictions}
             onChange={handleInputChange}
             required
           />

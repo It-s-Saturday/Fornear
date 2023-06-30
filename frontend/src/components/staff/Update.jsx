@@ -1,4 +1,4 @@
-import { Checkbox, Table } from 'antd';
+import { Checkbox, Table, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../wrappers/Input';
@@ -14,6 +14,7 @@ export default function Update({ refresh, onRefresh }) {
   const [inventoryData, setInventoryData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [viewData, setViewData] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
 
   const [formData, setFormData] = useState({
     auditor: '',
@@ -176,7 +177,11 @@ export default function Update({ refresh, onRefresh }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.packageName === '' || formData.author === '') {
-      // alert('Please fill out all fields');
+      api.open({
+        message: 'Error',
+        description:
+          'Please fill in all the fields before submitting the form.',
+      });
       return;
     }
     const postData = {
@@ -201,6 +206,7 @@ export default function Update({ refresh, onRefresh }) {
 
   return (
     <>
+      {contextHolder}
       <h1 className="text-3xl font-bold">Update Tool</h1>
       <div className="flex flex-row w-[fit-content] h-[40rem] px-10 border border-black rounded-md gap-x-10 items-center justify-center bg-gray-100">
         <div>
