@@ -3,22 +3,30 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { notification } from 'antd';
 
-import Package from './Package';
 import Input from './wrappers/Input';
 import Button from './wrappers/Button';
 
+import Package from './Package';
+
+/**
+ * Form object for requesting a package
+ * @returns {JSX.Element} Request
+ */
 export default function Request() {
+  // Used to redirect to home page
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const redirect = () => {
     navigate('/');
   };
 
+  // Get package ID from URL
   const { _id } = useParams();
 
   const [packageData, setPackageData] = useState(null);
   const [personalCareProducts, setPersonalCareProducts] = useState([]);
 
+  // Fetch package data by id and personal care products
   useEffect(() => {
     fetch('/api/get_package_by_id', {
       method: 'POST',
@@ -40,11 +48,12 @@ export default function Request() {
     email: '',
     phoneNumber: '',
     pickupDate: '',
-    selectedPersonalCareProducts: [],
+    personalCareProducts: [],
     restrictions: '',
   });
 
   const handleInputChange = (e) => {
+    // Only allow 3 personal care products to be selected
     if (e.target.name === 'personalCareProduct') {
       const checkboxes = document.getElementsByName('personalCareProduct');
       let checkedCount = 0;
@@ -53,6 +62,7 @@ export default function Request() {
           checkedCount += 1;
         }
       }
+      // Disable unchecked checkboxes if 3 are checked
       if (checkedCount >= 3) {
         for (let i = 0; i < checkboxes.length; i += 1) {
           if (!checkboxes[i].checked) {
@@ -60,15 +70,17 @@ export default function Request() {
           }
         }
       } else {
+        // Enable all disabled checkboxes
         for (let i = 0; i < checkboxes.length; i += 1) {
           checkboxes[i].disabled = false;
         }
       }
+      // Update whether a personal care product is selected in the form data
       if (e.target.checked) {
         setFormData({
           ...formData,
-          selectedPersonalCareProducts: [
-            ...formData.selectedPersonalCareProducts,
+          personalCareProducts: [
+            ...formData.personalCareProducts,
             e.target.value,
           ],
         });
@@ -80,6 +92,7 @@ export default function Request() {
 
   const handleOnClick = async (e) => {
     e.preventDefault();
+    // Require all fields
     if (
       formData.name === '' ||
       formData.email === '' ||
@@ -93,14 +106,13 @@ export default function Request() {
       });
       return;
     }
+
+    // Consolidate data with package data
     const postData = {
       packageId: _id,
+      // TODO: Remove packageName and construct aggregate in backend when name is needed
       packageName: packageData.packageName,
-      name: formData.name,
-      email: formData.email,
-      phoneNumber: formData.phoneNumber,
-      pickupDate: formData.pickupDate,
-      personalCareProducts: formData.selectedPersonalCareProducts,
+      ...formData,
     };
     try {
       await fetch('/api/request_package', {
@@ -110,6 +122,7 @@ export default function Request() {
         },
         body: JSON.stringify(postData),
       });
+      // If post is successful, redirect to home page
       redirect();
     } catch (error) {
       // console.error(error);
@@ -119,23 +132,28 @@ export default function Request() {
   return (
     <div className="flex flex-row flex-wrap justify-center items-center">
       {contextHolder}
-      {packageData !== null && <Package data={packageData} forForm={true} />}
-      <Input label="Choose 3 Personal Care Products">
-        <div className="flex flex-col flex-wrap justify-center">
-          {personalCareProducts.map((product) => (
-            <div key={product._id} className="flex flex-row">
-              <input
-                type="checkbox"
-                name="personalCareProduct"
-                value={product._id}
-                onChange={handleInputChange}
-              />
-              <p className="ml-2">x1 {product.itemName}</p>
-              {/* TODO: Add quantity selector */}
-            </div>
-          ))}
-        </div>
-      </Input>
+      {/* Render the package card on the screen next to the form */}
+      {packageData !== null && (
+        <Package data={packageData} showRequest={false} />
+      )}
+      {personalCareProducts.length > 0 && (
+        <Input label="Choose 3 Personal Care Products">
+          <div className="flex flex-col flex-wrap justify-center">
+            {personalCareProducts.map((product) => (
+              <div key={product._id} className="flex flex-row">
+                <input
+                  type="checkbox"
+                  name="personalCareProduct"
+                  value={product._id}
+                  onChange={handleInputChange}
+                />
+                <p className="ml-2">x1 {product.itemName}</p>
+                {/* TODO: Add quantity selector */}
+              </div>
+            ))}
+          </div>
+        </Input>
+      )}
       <form className="flex flex-col px-6 py-4">
         <Input label="Name">
           <input

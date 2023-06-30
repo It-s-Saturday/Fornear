@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Input(props) {
-  const { children, label } = props;
-
+/**
+ * Input wrapper to label and style form fields.
+ * @param {children} Node: Field to wrap
+ * @param {label} String: Label for field
+ * @returns
+ */
+export default function Input({ children, label }) {
   return (
     <div className="flex flex-col inline-block text-md font-semibold text-gray-700 my-5">
       {label}

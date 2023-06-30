@@ -2,6 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FullTable from './FullTable';
 
+/**
+ * Wrapper for FullTable component
+ * @param {refresh} Boolean: Trigger refresh of data
+ * @param {onRefresh} Function: Callback to trigger refresh of other components. See Inventory
+ * @returns {JSX.Element} Inventory
+ */
 export default function Inventory({ refresh, onRefresh }) {
   useEffect(() => {
     onRefresh();

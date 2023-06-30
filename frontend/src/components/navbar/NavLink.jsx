@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
  * @param {name} String: Text
  * @param {link} String: Path to redirect
  * @param {dropdown} Object: Object of paths to create dropdown
+ * @param {isDropdown} Boolean?: Apply styles according to where NavLink is rendered (used for letter case)
+ * @param {className} string?: apply custom className as needed (for NavLink in dropdown)
  * @returns {JSX.Element} NavLink
  */
 export default function NavLink({

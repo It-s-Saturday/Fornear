@@ -2,6 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Exports svg logo with designated fill and style
+ * @param {style} Object: CSS style
+ * @param {color} String: Hex color code
+ * @returns {JSX.Element} Logo
+ */
 export default function Logo({ style = null, color = '#000' }) {
   return (
     <svg
