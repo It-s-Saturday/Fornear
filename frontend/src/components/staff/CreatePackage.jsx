@@ -252,6 +252,11 @@ export default function CreatePackage({ refresh, onRefresh }) {
 }
 
 CreatePackage.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+CreatePackage.defaultProps = {
+  refresh: false,
+  onRefresh: () => {},
 };

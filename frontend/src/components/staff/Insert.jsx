@@ -13,13 +13,15 @@ export default function Insert({ onInsert }) {
     itemName: '',
     itemCount: '',
     category: 'Foodstuff',
+    itemCount: 0,
+    category: '',
   });
 
   const clearFields = () => {
     setFormData({
       itemName: '',
-      itemCount: '',
-      category: formData.category,
+      itemCount: 0,
+      category: '',
     });
   };
 
@@ -97,5 +99,9 @@ export default function Insert({ onInsert }) {
 }
 
 Insert.propTypes = {
-  onInsert: PropTypes.func.isRequired,
+  onInsert: PropTypes.func,
+};
+
+Insert.defaultProps = {
+  onInsert: () => {},
 };

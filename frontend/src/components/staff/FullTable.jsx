@@ -101,6 +101,11 @@ export default function FullTable({ refresh, onRefresh }) {
 }
 
 FullTable.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+FullTable.defaultProps = {
+  refresh: false,
+  onRefresh: () => {},
 };

@@ -17,6 +17,11 @@ export default function Input({ children, label }) {
 }
 
 Input.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
+
+Input.defaultProps = {
+  children: null,
+  label: null,
 };

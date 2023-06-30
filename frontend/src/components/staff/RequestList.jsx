@@ -178,6 +178,11 @@ export default function RequestList({ refresh, onRefresh }) {
 }
 
 RequestList.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+RequestList.defaultProps = {
+  refresh: false,
+  onRefresh: () => {},
 };

@@ -321,6 +321,11 @@ export default function Update({ refresh, onRefresh }) {
 }
 
 Update.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+Update.defaultProps = {
+  refresh: false,
+  onRefresh: () => {},
 };
