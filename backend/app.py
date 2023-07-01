@@ -219,6 +219,21 @@ def fullfil_request():
             },
         )
 
+    if "personalCareProducts" in student_request:
+        for _id in student_request["personalCareProducts"]:
+            inventory_item = DB["inventory"].find_one({"_id": ObjectId(_id)})
+            if inventory_item is None:
+                continue
+            DB["inventory"].update_one(
+                {"_id": ObjectId(_id)},
+                {
+                    "$set": {
+                        "itemCount": int(inventory_item["itemCount"])
+                        - 1
+                    }
+                },
+            )
+
     DB["requests"].update_one(
         {"_id": ObjectId(data["_id"])},
         {
