@@ -184,5 +184,5 @@ RequestList.propTypes = {
 
 RequestList.defaultProps = {
   refresh: false,
-  onRefresh: () => {},
+  onRefresh: undefined,
 };
