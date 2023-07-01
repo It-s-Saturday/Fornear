@@ -39,6 +39,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .then((res) => res.json())
       .then((data) => setPackageData(data));
 
+    // TODO: Better way of storing this data to reduce DB calls
     fetch('/api/get_personal_care_products_by_request_id', {
       method: 'POST',
       headers: {
