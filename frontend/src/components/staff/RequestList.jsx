@@ -116,7 +116,11 @@ export default function RequestList({ refresh, onRefresh }) {
             <p>Email: {selectedRequest?.email}</p>
             <p>Phone Number: {selectedRequest?.phoneNumber}</p>
             <p>Pickup Date: {selectedRequest?.pickupDate}</p>
-            <p>Restrictions: {selectedRequest?.restrictions}</p>
+            {selectedRequest?.restrictions && (
+              <p className="text-accent-red">
+                Restrictions: {selectedRequest.restrictions}
+              </p>
+            )}
           </div>
           <div>
             <h2 className="text-2xl font-bold">Package Contents</h2>
@@ -177,7 +181,11 @@ export default function RequestList({ refresh, onRefresh }) {
                   <p>Email: {req.email}</p>
                   <p>Phone Number: {req.phoneNumber}</p>
                   <p>Pickup Date: {req.pickupDate}</p>
-                  <p>Restrictions: {req.restrictions}</p>
+                  {req.restrictions && (
+                    <p className="text-accent-red">
+                      Restrictions: {req.restrictions}
+                    </p>
+                  )}
                 </div>
               </Button>
             ))}
