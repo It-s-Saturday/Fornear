@@ -124,10 +124,9 @@ export default function RequestList({ refresh, onRefresh }) {
           </div>
           <div>
             <h2 className="text-2xl font-bold">Package Contents</h2>
-            <p>{packageData?.packageName}</p>
+            <h3 className="text-lg">{packageData?.packageName}</h3>
             <p>{packageData?.description}</p>
             <span>
-              Contents:
               {packageData?.selectedItems?.map((content) => (
                 <p>
                   {content.itemCount}x {content.itemName}
