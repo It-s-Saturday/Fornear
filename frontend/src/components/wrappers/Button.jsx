@@ -38,8 +38,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  linkTo: null,
+  linkTo: undefined,
   color: 'bg-primary',
-  className: null,
-  children: null,
+  className: undefined,
+  children: undefined,
 };
