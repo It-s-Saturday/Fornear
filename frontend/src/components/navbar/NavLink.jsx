@@ -19,32 +19,32 @@ export default function NavLink({
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
-    <button
-      type="button"
-      key={name}
-      onClick={() => {
-        window.location.href = link;
-      }}
-      onMouseEnter={() => setDropdownOpen(true)}
-      onMouseLeave={() => setDropdownOpen(false)}
-      className={className}
-    >
-      {!isDropdown ? name.toUpperCase() : name}
-      {dropdown !== undefined && (dropdownOpen ? '▲' : '▼')}
+    <div onMouseLeave={() => setDropdownOpen(false)}>
+      <a
+        key={name}
+        href={link}
+        onMouseEnter={() => setDropdownOpen(true)}
+        className={className}
+      >
+        {!isDropdown ? name.toUpperCase() : name}
+        {dropdown !== undefined && (dropdownOpen ? ' ▲' : ' ▼')}
+      </a>
       {dropdown !== undefined && dropdownOpen && (
-        <div className="flex flex-col absolute bg-gray-200 w-[10rem] shadow-md">
+        <div className="flex flex-col absolute flex-center bg-gray-200 w-[10rem] shadow-md z-[99]">
           {dropdown.map((nestedDropdown) => (
-            <a
-              key={nestedDropdown.name}
-              href={nestedDropdown.link}
-              className="text-link w-full p-2"
-            >
-              {nestedDropdown.name}
-            </a>
+            <span className='p-2 font-bold z-[99]'>
+              <NavLink
+                key={nestedDropdown.name}
+                link={nestedDropdown.link}
+                name={nestedDropdown.name}
+                isDropdown={true}
+                className="text-link w-full"
+              />
+            </span>
           ))}
         </div>
       )}
-    </button>
+    </div>
   );
 }
 
@@ -59,5 +59,5 @@ NavLink.propTypes = {
 
 NavLink.defaultProps = {
   isDropdown: false,
-  className: 'text-link font-bold tracking-[.0625em] z-[99]',
+  className: 'text-link font-bold tracking-[.0625em]',
 };
