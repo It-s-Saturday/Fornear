@@ -260,7 +260,7 @@ export default function Update({ refresh, onRefresh }) {
           <div>
             {selectedItems.map((item) => (
               <Input
-                key={item.itemName + Math.floor(Math.random() * 100)}
+                key={item.itemName}
                 label={item.itemName}
               >
                 <input
