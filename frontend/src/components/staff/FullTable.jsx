@@ -107,5 +107,5 @@ FullTable.propTypes = {
 
 FullTable.defaultProps = {
   refresh: false,
-  onRefresh: () => {},
+  onRefresh: undefined,
 };
