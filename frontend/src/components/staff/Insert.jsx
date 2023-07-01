@@ -101,5 +101,5 @@ Insert.propTypes = {
 };
 
 Insert.defaultProps = {
-  onInsert: () => {},
+  onInsert: undefined,
 };
