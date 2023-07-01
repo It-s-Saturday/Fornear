@@ -113,7 +113,7 @@ export default function RequestList({ refresh, onRefresh }) {
             <span>
               Contents:
               {packageData?.selectedItems?.map((content) => (
-                <p key={content.itemName + content.itemCount}>
+                <p key={content.itemName}>
                   {content.itemCount}x {content.itemName}
                 </p>
               ))}
