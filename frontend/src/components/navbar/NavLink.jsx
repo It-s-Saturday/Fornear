@@ -19,9 +19,12 @@ export default function NavLink({
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
-    <a
-      href={link}
+    <button
+      type="button"
       key={name}
+      onClick={() => {
+        window.location.href = link;
+      }}
       onMouseEnter={() => setDropdownOpen(true)}
       onMouseLeave={() => setDropdownOpen(false)}
       className={className}
@@ -31,17 +34,17 @@ export default function NavLink({
       {dropdown !== undefined && dropdownOpen && (
         <div className="flex flex-col absolute bg-gray-200 w-[10rem] shadow-md">
           {dropdown.map((nestedDropdown) => (
-            <NavLink
-              name={nestedDropdown.name}
-              link={nestedDropdown.link}
-              dropdown={nestedDropdown.dropdown}
-              isDropdown={true}
+            <a
+              key={nestedDropdown.name}
+              href={nestedDropdown.link}
               className="text-link w-full p-2"
-            />
+            >
+              {nestedDropdown.name}
+            </a>
           ))}
         </div>
       )}
-    </a>
+    </button>
   );
 }
 
@@ -49,12 +52,12 @@ NavLink.propTypes = {
   name: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
-  dropdown: PropTypes.object,
+  dropdown: PropTypes.array,
   isDropdown: PropTypes.bool,
   className: PropTypes.string,
 };
 
 NavLink.defaultProps = {
   isDropdown: false,
-  className: 'text-link font-bold tracking-[.0625em]',
+  className: 'text-link font-bold tracking-[.0625em] z-[99]',
 };
