@@ -19,7 +19,7 @@ export default function Insert({ onInsert }) {
     setFormData({
       itemName: '',
       itemCount: 0,
-      category: '',
+      category: 'Foodstuff',
     });
   };
 
