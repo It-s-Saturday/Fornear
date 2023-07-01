@@ -13,8 +13,6 @@ export default function Insert({ onInsert }) {
     itemName: '',
     itemCount: '',
     category: 'Foodstuff',
-    itemCount: 0,
-    category: '',
   });
 
   const clearFields = () => {
