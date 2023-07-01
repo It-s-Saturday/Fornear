@@ -49,7 +49,7 @@ export default function RequestList({ refresh, onRefresh }) {
     })
       .then((res) => res.json())
       .then((data) => setCurrentPersonalCareProducts(data));
-  }, [modalOpen, selectedRequest]);
+  }, [selectedRequest]);
 
   // Set data to request and render, then open modal
   const handleRequestClicked = (request) => {
