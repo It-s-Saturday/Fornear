@@ -258,5 +258,5 @@ CreatePackage.propTypes = {
 
 CreatePackage.defaultProps = {
   refresh: false,
-  onRefresh: () => {},
+  onRefresh: undefined,
 };
