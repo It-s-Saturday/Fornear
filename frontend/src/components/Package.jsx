@@ -77,7 +77,7 @@ Package.propTypes = {
     selectedItems: PropTypes.arrayOf(
       PropTypes.shape({
         itemName: PropTypes.string.isRequired,
-        itemCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        itemCount: PropTypes.number.isRequired,
       }),
     ).isRequired,
     quantityAvailable: PropTypes.number.isRequired,
