@@ -33,7 +33,7 @@ export default function Package({ data, showRequest }) {
         <div className="flex flex-row flex-wrap justify-center items-center">
           <span className="flex flex-col inline-block bg-gray-200 rounded-[5rem] px-10 py-10 text-md font-semibold text-gray-700 mr-2 min-w-[50%] w-[fit-content]">
             {data.selectedItems.map((item) => (
-              <span key={item.itemCount + item.itemName}>
+              <span key={item.itemName}>
                 {item.itemCount}
                 {'x \t'}
                 {item.itemName}
