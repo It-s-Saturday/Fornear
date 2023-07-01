@@ -18,7 +18,7 @@ export default function Insert({ onInsert }) {
   const clearFields = () => {
     setFormData({
       itemName: '',
-      itemCount: '',
+      itemCount: 0,
       category: formData.category,
     });
   };
@@ -97,5 +97,9 @@ export default function Insert({ onInsert }) {
 }
 
 Insert.propTypes = {
-  onInsert: PropTypes.func.isRequired,
+  onInsert: PropTypes.func,
+};
+
+Insert.defaultProps = {
+  onInsert: undefined,
 };

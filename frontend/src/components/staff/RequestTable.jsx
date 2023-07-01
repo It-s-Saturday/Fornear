@@ -59,6 +59,13 @@ export default function RequestTable({ type, refresh, onRefresh }) {
   useEffect(() => {
     fetch(`/api/get_${type}_requests`)
       .then((res) => res.json())
+      .then((data) => {
+        const keyAddedData = data.map((item) => ({
+          key: item._id,
+          ...item,
+        }));
+        return keyAddedData;
+      })
       .then((data) => setRequestTableData(data));
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);

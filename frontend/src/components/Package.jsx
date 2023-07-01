@@ -33,7 +33,7 @@ export default function Package({ data, showRequest }) {
         <div className="flex flex-row flex-wrap justify-center items-center">
           <span className="flex flex-col inline-block bg-gray-200 rounded-[5rem] px-10 py-10 text-md font-semibold text-gray-700 mr-2 min-w-[50%] w-[fit-content]">
             {data.selectedItems.map((item) => (
-              <span>
+              <span key={item.itemName}>
                 {item.itemCount}
                 {'x \t'}
                 {item.itemName}
@@ -68,30 +68,32 @@ export default function Package({ data, showRequest }) {
   );
 }
 
-Package.propTypes = [
-  {
-    data: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      items: PropTypes.arrayOf(
-        PropTypes.shape({
-          itemName: PropTypes.string.isRequired,
-          itemCount: PropTypes.number.isRequired,
-        }),
-      ).isRequired,
-      quantity: PropTypes.number.isRequired,
-      requests: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          email: PropTypes.string.isRequired,
-          phoneNumber: PropTypes.string.isRequired,
-          pickupDate: PropTypes.string.isRequired,
-        }),
-      ),
-    }).isRequired,
-  },
-  {
-    forForm: PropTypes.bool.isRequired,
-  },
-];
+Package.propTypes = {
+  data: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    packageName: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    selectedItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        itemName: PropTypes.string.isRequired,
+        itemCount: PropTypes.number.isRequired,
+      }),
+    ).isRequired,
+    quantityAvailable: PropTypes.number.isRequired,
+    requests: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        phoneNumber: PropTypes.string.isRequired,
+        pickupDate: PropTypes.string.isRequired,
+      }),
+    ),
+  }).isRequired,
+
+  showRequest: PropTypes.bool,
+};
+
+Package.defaultProps = {
+  showRequest: false,
+};

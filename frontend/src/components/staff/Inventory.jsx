@@ -21,6 +21,11 @@ export default function Inventory({ refresh, onRefresh }) {
 }
 
 Inventory.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+Inventory.defaultProps = {
+  refresh: false,
+  onRefresh: undefined,
 };

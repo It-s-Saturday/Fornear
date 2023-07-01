@@ -53,12 +53,12 @@ export default function CreatePackage({ refresh, onRefresh }) {
       );
     }
   };
-
   // TODO (util)
   const inventoryListWithCheckbox = inventoryData.map((item) => ({
     ...item,
     checkbox: (
       <Checkbox
+        key={item._id}
         checked={isInSelectedItems(item.itemName)}
         onChange={(e) => handleCheckboxChange(item.itemName, e.target.checked)}
       />
@@ -252,6 +252,11 @@ export default function CreatePackage({ refresh, onRefresh }) {
 }
 
 CreatePackage.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+CreatePackage.defaultProps = {
+  refresh: false,
+  onRefresh: undefined,
 };

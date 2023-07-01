@@ -56,6 +56,7 @@ export default function Staff() {
       <div className="flex flex-row w-full h-max-[10rem] p-5 space-x-10 overflow-y-scroll justify-center">
         {['unfulfilled', 'fulfilled', 'declined'].map((tableType) => (
           <RequestTable
+            key={tableType}
             refresh={refreshRequests}
             onRefresh={handleRefresh}
             type={tableType}
