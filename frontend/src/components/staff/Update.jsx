@@ -330,5 +330,5 @@ Update.propTypes = {
 
 Update.defaultProps = {
   refresh: false,
-  onRefresh: () => {},
+  onRefresh: undefined,
 };
