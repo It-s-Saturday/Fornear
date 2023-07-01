@@ -27,5 +27,5 @@ Inventory.propTypes = {
 
 Inventory.defaultProps = {
   refresh: false,
-  onRefresh: () => {},
+  onRefresh: undefined,
 };
