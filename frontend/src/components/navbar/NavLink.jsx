@@ -19,29 +19,32 @@ export default function NavLink({
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
-    <a
-      href={link}
-      key={name}
-      onMouseEnter={() => setDropdownOpen(true)}
-      onMouseLeave={() => setDropdownOpen(false)}
-      className={className}
-    >
-      {!isDropdown ? name.toUpperCase() : name}
-      {dropdown !== undefined && (dropdownOpen ? '▲' : '▼')}
+    <div onMouseLeave={() => setDropdownOpen(false)}>
+      <a
+        key={name}
+        href={link}
+        onMouseEnter={() => setDropdownOpen(true)}
+        className={className}
+      >
+        {!isDropdown ? name.toUpperCase() : name}
+        {dropdown !== undefined && (dropdownOpen ? ' ▲' : ' ▼')}
+      </a>
       {dropdown !== undefined && dropdownOpen && (
-        <div className="flex flex-col absolute bg-gray-200 w-[10rem] shadow-md">
+        <div className="flex flex-col absolute flex-center bg-gray-200 w-[10rem] shadow-md z-[99]">
           {dropdown.map((nestedDropdown) => (
-            <NavLink
-              name={nestedDropdown.name}
-              link={nestedDropdown.link}
-              dropdown={nestedDropdown.dropdown}
-              isDropdown={true}
-              className="text-link w-full p-2"
-            />
+            <span className='p-2 font-bold z-[99]'>
+              <NavLink
+                key={nestedDropdown.name}
+                link={nestedDropdown.link}
+                name={nestedDropdown.name}
+                isDropdown={true}
+                className="text-link w-full"
+              />
+            </span>
           ))}
         </div>
       )}
-    </a>
+    </div>
   );
 }
 
@@ -49,7 +52,7 @@ NavLink.propTypes = {
   name: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
-  dropdown: PropTypes.object,
+  dropdown: PropTypes.array,
   isDropdown: PropTypes.bool,
   className: PropTypes.string,
 };
