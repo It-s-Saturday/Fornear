@@ -63,7 +63,10 @@ export default function Update({ refresh, onRefresh }) {
       setViewData((prevViewData) => {
         const updatedViewData = prevViewData.map((item) => {
           if (item.itemName === itemName) {
-            return { ...item, checkbox: <Checkbox checked={true} /> };
+            return {
+              ...item,
+              checkbox: <Checkbox key={item._id} checked={true} />,
+            };
           }
           return item;
         });
@@ -78,7 +81,10 @@ export default function Update({ refresh, onRefresh }) {
       setViewData((prevViewData) => {
         const updatedViewData = prevViewData.map((item) => {
           if (item.itemName === itemName) {
-            return { ...item, checkbox: <Checkbox checked={false} /> };
+            return {
+              ...item,
+              checkbox: <Checkbox key={item._id} checked={false} />,
+            };
           }
           return item;
         });
@@ -92,6 +98,7 @@ export default function Update({ refresh, onRefresh }) {
     ...item,
     checkbox: (
       <Checkbox
+        key={item._id}
         checked={isInSelectedItems(item.itemName)}
         onChange={(e) => handleCheckboxChange(item.itemName, e.target.checked)}
       />

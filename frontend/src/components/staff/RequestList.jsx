@@ -113,7 +113,7 @@ export default function RequestList({ refresh, onRefresh }) {
             <span>
               Contents:
               {packageData?.selectedItems?.map((content) => (
-                <p>
+                <p key={content.itemName + content.itemCount}>
                   {content.itemCount}x {content.itemName}
                 </p>
               ))}
@@ -139,7 +139,7 @@ export default function RequestList({ refresh, onRefresh }) {
   const requestList = requestData.map((request) => {
     const { requests } = request;
     return (
-      <>
+      <div key={request._id}>
         {modalOpen && modal}
         {contextHolder}
         <div className="rounded overflow-hidden px-6 py-4 bg-white shadow-lg">
@@ -147,6 +147,7 @@ export default function RequestList({ refresh, onRefresh }) {
           <div className="flex gap-x-10">
             {requests.map((req) => (
               <Button
+                key={req._id}
                 className="flex flex-col inline-block bg-gray-200 hover:bg-gray-300 rounded-[5rem] px-10 py-10 text-md font-semibold text-gray-700 mr-2 w-[fit-content]"
                 onClick={() => handleRequestClicked(req)}
               >
@@ -161,7 +162,7 @@ export default function RequestList({ refresh, onRefresh }) {
             ))}
           </div>
         </div>
-      </>
+      </div>
     );
   });
   return (
