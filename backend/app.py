@@ -127,6 +127,24 @@ def get_package_by_id():
     package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
     return dump_json(package)
 
+@app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
+def get_personal_care_products_by_request_id():
+    data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
+    request_ = DB["requests"].find_one({"_id": ObjectId(data["_id"])})
+    if request_ is None:
+        return jsonify({"message": "error"})
+    products = []
+    print(request_)
+    if "personalCareProducts" in request_:
+        current_personal_care_products = request_["personalCareProducts"]
+        for _id in current_personal_care_products:
+            inventory_item = DB["inventory"].find_one({"_id": ObjectId(_id)})
+            if inventory_item is None:
+                continue
+            products.append(inventory_item['itemName'])
+    return dump_json(products)
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
