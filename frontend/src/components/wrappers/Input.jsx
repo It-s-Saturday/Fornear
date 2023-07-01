@@ -22,6 +22,6 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
-  children: null,
-  label: null,
+  children: undefined,
+  label: undefined,
 };
