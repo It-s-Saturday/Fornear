@@ -68,30 +68,32 @@ export default function Package({ data, showRequest }) {
   );
 }
 
-Package.propTypes = [
-  {
-    data: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      items: PropTypes.arrayOf(
-        PropTypes.shape({
-          itemName: PropTypes.string.isRequired,
-          itemCount: PropTypes.number.isRequired,
-        }),
-      ).isRequired,
-      quantity: PropTypes.number.isRequired,
-      requests: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          email: PropTypes.string.isRequired,
-          phoneNumber: PropTypes.string.isRequired,
-          pickupDate: PropTypes.string.isRequired,
-        }),
-      ),
-    }).isRequired,
-  },
-  {
-    forForm: PropTypes.bool.isRequired,
-  },
-];
+Package.propTypes = {
+  data: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    packageName: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    selectedItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        itemName: PropTypes.string.isRequired,
+        itemCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    ).isRequired,
+    quantityAvailable: PropTypes.number.isRequired,
+    requests: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        phoneNumber: PropTypes.string.isRequired,
+        pickupDate: PropTypes.string.isRequired,
+      }),
+    ),
+  }).isRequired,
+
+  showRequest: PropTypes.bool,
+};
+
+Package.defaultProps = {
+  showRequest: false,
+};
