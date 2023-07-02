@@ -30,13 +30,16 @@ export default function Button({
 }
 
 Button.propTypes = {
-  linkTo: PropTypes.string.isRequired,
+  linkTo: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node,
   color: PropTypes.string,
 };
 
 Button.defaultProps = {
+  linkTo: undefined,
   color: 'bg-primary',
+  className: undefined,
+  children: undefined,
 };

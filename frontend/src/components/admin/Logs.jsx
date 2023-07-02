@@ -12,6 +12,13 @@ export default function Logs() {
     fetch('/admin/get_logs')
       .then((res) => res.json())
       .then((data) => {
+        const keyAddedData = data.map((item) => ({
+          key: item._id,
+          ...item,
+        }));
+        return keyAddedData;
+      })
+      .then((data) => {
         setLogs(data);
       });
     // console.log(logs);

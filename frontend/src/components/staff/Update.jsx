@@ -63,7 +63,10 @@ export default function Update({ refresh, onRefresh }) {
       setViewData((prevViewData) => {
         const updatedViewData = prevViewData.map((item) => {
           if (item.itemName === itemName) {
-            return { ...item, checkbox: <Checkbox checked={true} /> };
+            return {
+              ...item,
+              checkbox: <Checkbox key={item._id} checked={true} />,
+            };
           }
           return item;
         });
@@ -78,7 +81,10 @@ export default function Update({ refresh, onRefresh }) {
       setViewData((prevViewData) => {
         const updatedViewData = prevViewData.map((item) => {
           if (item.itemName === itemName) {
-            return { ...item, checkbox: <Checkbox checked={false} /> };
+            return {
+              ...item,
+              checkbox: <Checkbox key={item._id} checked={false} />,
+            };
           }
           return item;
         });
@@ -92,6 +98,7 @@ export default function Update({ refresh, onRefresh }) {
     ...item,
     checkbox: (
       <Checkbox
+        key={item._id}
         checked={isInSelectedItems(item.itemName)}
         onChange={(e) => handleCheckboxChange(item.itemName, e.target.checked)}
       />
@@ -252,7 +259,10 @@ export default function Update({ refresh, onRefresh }) {
         <div>
           <div>
             {selectedItems.map((item) => (
-              <Input key={item.itemName} label={item.itemName}>
+              <Input
+                key={item.itemName}
+                label={item.itemName}
+              >
                 <input
                   type="number"
                   name="quantity"
@@ -314,6 +324,11 @@ export default function Update({ refresh, onRefresh }) {
 }
 
 Update.propTypes = {
-  refresh: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool,
+  onRefresh: PropTypes.func,
+};
+
+Update.defaultProps = {
+  refresh: false,
+  onRefresh: undefined,
 };

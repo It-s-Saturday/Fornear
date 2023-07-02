@@ -57,7 +57,7 @@ export default function PackageGenerator({ showRequest }) {
       <div className="flex flex-row flex-wrap justify-center space-x-10 gap-y-10 align-middle items-center">
         {mergedData !== null &&
           mergedData.map((data) => (
-            <Package data={data} showRequest={showRequest} />
+            <Package key={data._id} data={data} showRequest={showRequest} />
           ))}
       </div>
     </div>
