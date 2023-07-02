@@ -1,7 +1,8 @@
-import { Checkbox, Table, notification } from 'antd';
+import { Checkbox, Input, notification, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../wrappers/Input';
+import InputLabel from '../wrappers/InputLabel';
+import Button from '../wrappers/Button';
 
 /**
  * Create package component, with item and quantity inputs
@@ -165,34 +166,37 @@ export default function CreatePackage({ refresh, onRefresh }) {
   };
 
   return (
-    <div className="flex flex-col w-[fit-content] px-10 border border-black rounded-md gap-x-10 items-center justify-center bg-gray-100">
+    <div className="flex flex-row w-[fit-content] px-10 border border-black rounded-md gap-x-10 items-center justify-center bg-gray-100">
       {contextHolder}
-      <h1 className="text-3xl font-bold">Package Creator</h1>
       <div>
-        <Input label="Package Name">
-          <input
+        <h1 className="text-3xl text-center font-bold">Package Creator</h1>
+        <InputLabel label="Package Name">
+          <Input
+            className="input"
             type="text"
             name="packageName"
             value={formData.packageName}
             onChange={handleFormInputChange}
           />
-        </Input>
-        <Input label="Author">
-          <input
+        </InputLabel>
+        <InputLabel label="Author">
+          <Input
+            className="input"
             type="text"
             name="author"
             value={formData.author}
             onChange={handleFormInputChange}
           />
-        </Input>
-        <Input label="Description">
-          <input
+        </InputLabel>
+        <InputLabel label="Description">
+          <Input
+            className="input"
             type="text"
             name="description"
             value={formData.description}
             onChange={handleFormInputChange}
           />
-        </Input>
+        </InputLabel>
         <Table
           className="table table-striped"
           dataSource={inventoryListWithCheckbox}
@@ -217,8 +221,9 @@ export default function CreatePackage({ refresh, onRefresh }) {
       <div>
         <div>
           {selectedItems.map((item) => (
-            <Input key={item.itemName} label={item.itemName}>
-              <input
+            <InputLabel key={item.itemName} label={item.itemName}>
+              <Input
+                label={item.itemName}
                 type="number"
                 name="quantity"
                 value={item.itemCount}
@@ -229,7 +234,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
                   handleItemCountChange(item.itemName, e.target.value);
                 }}
               />
-            </Input>
+            </InputLabel>
           ))}
         </div>
         {selectedItems.length > 0 && (
@@ -238,13 +243,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
           </p>
         )}
         {selectedItems.length > 0 && getMaxPackages() > 0 && (
-          <button
-            type="button"
-            className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded align-center"
-            onClick={handleSubmit}
-          >
-            Create Package
-          </button>
+          <Button onClick={handleSubmit}>Create Package</Button>
         )}
       </div>
     </div>
