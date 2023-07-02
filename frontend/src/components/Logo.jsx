@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * Exports svg logo with designated fill and style
