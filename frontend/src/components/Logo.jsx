@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -64,6 +63,6 @@ C58.385,88.793,53.359,84.585,50.386,78.324z"
 
 Logo.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  style: PropTypes.object,
-  color: PropTypes.string,
+  style: PropTypes.object.isRequired,
+  color: PropTypes.string.isRequired,
 };

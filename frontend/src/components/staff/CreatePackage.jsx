@@ -1,6 +1,7 @@
-import { Checkbox, Table, notification } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Checkbox, notification, Table } from 'antd';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import Input from '../wrappers/Input';
 
 /**

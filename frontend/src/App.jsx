@@ -1,22 +1,19 @@
-import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/navbar/Navbar';
-
-import Home from './components/Home';
-import Request from './components/Request';
-
-import Staff from './components/staff/Staff';
-import RequestList from './components/staff/RequestList';
-import Inventory from './components/staff/Inventory';
-import CreatePackage from './components/staff/CreatePackage';
-import Insert from './components/staff/Insert';
-import Update from './components/staff/Update';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Admin from './components/admin/Admin';
-
 import Background from './components/Background';
+import Home from './components/Home';
+import Navbar from './components/navbar/Navbar';
+import Request from './components/Request';
+import CreatePackage from './components/staff/CreatePackage';
+import Insert from './components/staff/Insert';
+import Inventory from './components/staff/Inventory';
+import RequestList from './components/staff/RequestList';
+import Staff from './components/staff/Staff';
+import Update from './components/staff/Update';
 
 /**
  * Holds the navbar, routes, and background of the app

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
+import PackageGenerator from '../PackageGenerator';
+import CreatePackage from './CreatePackage';
 import Insert from './Insert';
 import Inventory from './Inventory';
-import CreatePackage from './CreatePackage';
-import PackageGenerator from '../PackageGenerator';
 import RequestList from './RequestList';
 import RequestTable from './RequestTable';
 import Update from './Update';

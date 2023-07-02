@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../wrappers/Input';
+import React, { useState } from 'react';
+
 import Button from '../wrappers/Button';
+import Input from '../wrappers/Input';
 
 /**
  * Staff view for all unfulfilled requests. Contains modal as well (TODO)

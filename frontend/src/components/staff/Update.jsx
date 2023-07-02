@@ -1,6 +1,7 @@
-import { Checkbox, Table, notification } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Checkbox, notification, Table } from 'antd';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import Input from '../wrappers/Input';
 
 /**
@@ -259,10 +260,7 @@ export default function Update({ refresh, onRefresh }) {
         <div>
           <div>
             {selectedItems.map((item) => (
-              <Input
-                key={item.itemName}
-                label={item.itemName}
-              >
+              <Input key={item.itemName} label={item.itemName}>
                 <input
                   type="number"
                   name="quantity"

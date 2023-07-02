@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import Input from '../wrappers/Input';
 
 /**
