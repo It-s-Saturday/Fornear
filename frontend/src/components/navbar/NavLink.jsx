@@ -19,9 +19,8 @@ export default function NavLink({
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
-    <div onMouseLeave={() => setDropdownOpen(false)}>
+    <div key={`${name}-div`} onMouseLeave={() => setDropdownOpen(false)}>
       <a
-        key={name}
         href={link}
         onMouseEnter={() => setDropdownOpen(true)}
         className={className}
@@ -32,9 +31,8 @@ export default function NavLink({
       {dropdown !== undefined && dropdownOpen && (
         <div className="flex flex-col absolute flex-center bg-gray-200 w-[10rem] shadow-md z-[99]">
           {dropdown.map((nestedDropdown) => (
-            <span className='p-2 font-bold z-[99]'>
+            <span key={nestedDropdown.name} className="p-2 font-bold z-[99]">
               <NavLink
-                key={nestedDropdown.name}
                 link={nestedDropdown.link}
                 name={nestedDropdown.name}
                 isDropdown={true}

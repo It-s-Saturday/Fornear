@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { notification } from 'antd';
+import { Input, notification } from 'antd';
 
-import Input from './wrappers/Input';
 import Button from './wrappers/Button';
 
 import Package from './Package';
+import InputLabel from './wrappers/InputLabel';
 
 /**
  * Form object for requesting a package
@@ -137,7 +137,7 @@ export default function Request() {
         <Package data={packageData} showRequest={false} />
       )}
       {personalCareProducts.length > 0 && (
-        <Input label="Choose 3 Personal Care Products">
+        <InputLabel label="Choose 3 Personal Care Products">
           <div className="flex flex-col flex-wrap justify-center">
             {personalCareProducts.map((product) => (
               <div key={product._id} className="flex flex-row">
@@ -152,60 +152,64 @@ export default function Request() {
               </div>
             ))}
           </div>
-        </Input>
+        </InputLabel>
       )}
       <form className="flex flex-col px-6 py-4">
-        <Input label="Name">
-          <input
-            type="text"
+        <InputLabel label="Name">
+          <Input
             name="name"
+            className="input"
             placeholder="Full Name"
             value={formData.name}
             onChange={handleInputChange}
             required
           />
-        </Input>
-        <Input label="Email">
-          <input
+        </InputLabel>
+
+        <InputLabel label="Email">
+          <Input
             type="email"
+            className="input"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
             required
           />
-        </Input>
-        <Input label="Phone Number">
-          <input
+        </InputLabel>
+        <InputLabel label="Phone Number">
+          <Input
             type="text"
+            className="input"
             name="phoneNumber"
             placeholder="###-###-####"
             value={formData.phoneNumber}
             onChange={handleInputChange}
             required
           />
-        </Input>
-        <Input label="Requested Pickup Date">
-          <input
+        </InputLabel>
+        <InputLabel label="Requested Pickup Date">
+          <Input
             type="date"
+            className="input"
             name="pickupDate"
             placeholder="Date"
             value={formData.pickupDate}
             onChange={handleInputChange}
             required
           />
-        </Input>
-
-        <Input label="Restrictions (dietary, allergies, etc.)">
-          <input
+        </InputLabel>
+        <InputLabel label="Restrictions (dietary, allergies, etc.)">
+          <Input
             type="text"
+            className="input"
             name="restrictions"
             placeholder="peanuts, vegan, gluten, etc."
             value={formData.restrictions}
             onChange={handleInputChange}
             required
           />
-        </Input>
+        </InputLabel>
 
         <Button linkTo="/" onClick={(e) => handleOnClick(e)}>
           Submit
