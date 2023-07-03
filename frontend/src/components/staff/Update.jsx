@@ -1,7 +1,7 @@
-import { Checkbox, Table, notification } from 'antd';
+import { Checkbox, Input, notification, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../wrappers/Input';
+import InputLabel from '../wrappers/InputLabel';
 
 /**
  * Update inventory items individually or in bulk
@@ -19,6 +19,8 @@ export default function Update({ refresh, onRefresh }) {
   const [formData, setFormData] = useState({
     auditor: '',
   });
+
+  const { TextArea } = Input;
 
   const handleFormInputChange = (e) => {
     const { name, value } = e.target;
@@ -217,22 +219,22 @@ export default function Update({ refresh, onRefresh }) {
       <h1 className="text-3xl font-bold">Update Tool</h1>
       <div className="flex flex-row w-[fit-content] h-[40rem] px-10 border border-black rounded-md gap-x-10 items-center justify-center bg-gray-100">
         <div>
-          <Input label="Auditor">
-            <input
+          <InputLabel label="Auditor">
+            <Input
               type="text"
+              className="input"
               name="auditor"
               onChange={handleFormInputChange}
+              placeholder="Full Name"
             />
-          </Input>
-          <Input>
-            <input
-              type="text"
-              className="w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-              name="search"
-              onChange={handleSearchChange}
-              placeholder="Search for an item"
-            />
-          </Input>
+          </InputLabel>
+          <Input
+            type="text"
+            className="input"
+            name="search"
+            onChange={handleSearchChange}
+            placeholder="Search for an item"
+          />
           <Table
             className="table table-striped w-[50rem] h-[30rem] overflow-y-scroll"
             dataSource={viewData}
@@ -259,11 +261,16 @@ export default function Update({ refresh, onRefresh }) {
         <div>
           <div>
             {selectedItems.map((item) => (
-              <Input
-                key={item.itemName}
-                label={item.itemName}
-              >
-                <input
+              <div key={`${item.itemName}-div`}>
+                <Input
+                  className="mb-5"
+                  key={item.itemName}
+                  addonBefore={`${item.itemName}`}
+                  addonAfter={`(Current: ${
+                    inventoryData.find(
+                      (invData) => invData.itemName === item.itemName,
+                    ).itemCount
+                  })`}
                   type="number"
                   name="quantity"
                   value={item.itemCount}
@@ -274,21 +281,22 @@ export default function Update({ refresh, onRefresh }) {
                     handleItemCountChange(item.itemName, e.target.value);
                   }}
                 />
-              </Input>
+              </div>
             ))}
           </div>
           {selectedItems.length > 0 && (
-            <p className="text-xl">
-              You are editing <b>{selectedItems.length}</b>
-              {selectedItems.length > 1 ? ' fields.' : ' field.'}
-              {/* 
+            <>
+              <p className="text-xl">
+                You are editing <b>{selectedItems.length}</b>
+                {selectedItems.length > 1 ? ' fields.' : ' field.'}
+                {/* 
               TODO: Calculate the number of actual items changed.
               i.e. if inventory reports:
                 30 cans and 20 jars,
                 cans input becomes  28 and jars input becomes 22,
                 display "with 4 changes"
               */}
-              {/* , with{' '}
+                {/* , with{' '}
             <b>
               {selectedItems.reduce(
                 (acc, item) => acc + parseInt(item.itemCount, 10),
@@ -296,15 +304,17 @@ export default function Update({ refresh, onRefresh }) {
               )}
               </b>{' '}
             changes. */}
-            </p>
+              </p>
+              {/* <h3>Comments</h3> */}
+              <TextArea
+                type="textarea"
+                rows={4}
+                name="comments"
+                onChange={handleFormInputChange}
+                className="input"
+              />
+            </>
           )}
-          <Input label="Comments">
-            <textarea
-              type="text"
-              name="comments"
-              onChange={handleFormInputChange}
-            />
-          </Input>
           {selectedItems.length > 0 && (
             <button
               type="button"

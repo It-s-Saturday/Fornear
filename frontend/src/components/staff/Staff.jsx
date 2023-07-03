@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 import Insert from './Insert';
-import Inventory from './Inventory';
 import CreatePackage from './CreatePackage';
 import PackageGenerator from '../PackageGenerator';
 import RequestList from './RequestList';
 import RequestTable from './RequestTable';
 import Update from './Update';
+import FullTable from './FullTable';
 
 /**
  * Complete layout of all Staff tools.
@@ -71,7 +71,9 @@ export default function Staff() {
           refresh={refreshCreatePackage}
           onRefresh={handleRefresh}
         />
-        <Inventory refresh={refreshInventory} onRefresh={handleRefresh} />
+        <div className="flex flex-col w-[50%] p-5 border border-black rounded-md bg-gray-100">
+          <FullTable refresh={refreshInventory} onRefresh={handleRefresh} />
+        </div>
       </div>
       <div className="flex flex-row w-full h-max-[10rem] p-5 space-x-10 overflow-y-scroll justify-center">
         <PackageGenerator showRequest={false} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { Input, Table } from 'antd';
 import PropTypes from 'prop-types';
-import Input from '../wrappers/Input';
+import InputLabel from '../wrappers/InputLabel';
 
 /**
  * Antd table of complete inventory
@@ -76,15 +76,15 @@ export default function FullTable({ refresh, onRefresh }) {
     <>
       {loading && <h1>Please wait...</h1>}
       <h1 className="text-3xl font-bold text-center">Inventory</h1>
-      <Input placeholder="Search for an item">
-        <input
+      <InputLabel label="Search for an item">
+        <Input
           type="text"
-          className="w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+          className="input w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
           placeholder="Search for an item"
           name="search"
           onChange={handleSearchChange}
         />
-      </Input>
+      </InputLabel>
 
       <Table
         dataSource={viewData}
