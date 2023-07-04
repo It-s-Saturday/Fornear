@@ -6,7 +6,6 @@ from datetime import datetime
 from bson import ObjectId
 from flask import Flask, jsonify, request
 from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 
 # Run using local DB if "--local" is passed as an argument
 if "--local" in sys.argv:
