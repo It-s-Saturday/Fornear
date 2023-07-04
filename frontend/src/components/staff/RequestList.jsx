@@ -13,6 +13,8 @@ import Button from '../wrappers/Button';
 export default function RequestList({ refresh, onRefresh }) {
   const [requestData, setRequestData] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [currentPersonalCareProducts, setCurrentPersonalCareProducts] =
+    useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [packageData, setPackageData] = useState([]);
   const [api, contextHolder] = notification.useNotification();
@@ -36,7 +38,18 @@ export default function RequestList({ refresh, onRefresh }) {
     })
       .then((res) => res.json())
       .then((data) => setPackageData(data));
-  }, [modalOpen, selectedRequest]);
+
+    // TODO: Better way of storing this data to reduce DB calls
+    fetch('/api/get_personal_care_products_by_request_id', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id: selectedRequest?._id }),
+    })
+      .then((res) => res.json())
+      .then((data) => setCurrentPersonalCareProducts(data));
+  }, [selectedRequest]);
 
   // Set data to request and render, then open modal
   const handleRequestClicked = (request) => {
@@ -104,14 +117,17 @@ export default function RequestList({ refresh, onRefresh }) {
             <p>Email: {selectedRequest?.email}</p>
             <p>Phone Number: {selectedRequest?.phoneNumber}</p>
             <p>Pickup Date: {selectedRequest?.pickupDate}</p>
-            <p>Restrictions: {selectedRequest?.restrictions}</p>
+            {selectedRequest?.restrictions && (
+              <p className="text-accent-red">
+                Restrictions: {selectedRequest.restrictions}
+              </p>
+            )}
           </div>
           <div>
             <h2 className="text-2xl font-bold">Package Contents</h2>
-            <p>{packageData?.packageName}</p>
+            <h3 className="text-lg">{packageData?.packageName}</h3>
             <p>{packageData?.description}</p>
             <span>
-              Contents:
               {packageData?.selectedItems?.map((content) => (
                 <p key={content.itemName}>
                   {content.itemCount}x {content.itemName}
@@ -119,6 +135,16 @@ export default function RequestList({ refresh, onRefresh }) {
               ))}
             </span>
           </div>
+          {currentPersonalCareProducts && (
+            <>
+              <h2 className="mt-5 text-2xl font-bold">
+                Personal Care Products
+              </h2>
+              {currentPersonalCareProducts.map((content) => (
+                <p>1x {content}</p>
+              ))}
+            </>
+          )}
         </div>
         <span className="flex flex-col justify-end">
           <Button onClick={handleFulfillClicked} linkTo="/staff">
@@ -156,7 +182,11 @@ export default function RequestList({ refresh, onRefresh }) {
                   <p>Email: {req.email}</p>
                   <p>Phone Number: {req.phoneNumber}</p>
                   <p>Pickup Date: {req.pickupDate}</p>
-                  <p>Restrictions: {req.restrictions}</p>
+                  {req.restrictions && (
+                    <p className="text-accent-red">
+                      Restrictions: {req.restrictions}
+                    </p>
+                  )}
                 </div>
               </Button>
             ))}
