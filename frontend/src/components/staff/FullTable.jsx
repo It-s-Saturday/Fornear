@@ -32,8 +32,8 @@ export default function FullTable({ refresh, onRefresh }) {
           message: err.message,
           description: 'Unable to get inventory data',
         });
-        setLoading(false);
       });
+    setLoading(false);
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
