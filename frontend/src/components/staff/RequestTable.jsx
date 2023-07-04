@@ -70,7 +70,7 @@ export default function RequestTable({ type, refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: `Cannot able to get ${type} request data`,
+          description: `Unable to get ${type} request data`,
         });
       });
     // eslint-disable-next-line no-sparse-arrays
