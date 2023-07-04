@@ -99,6 +99,7 @@ def update_inventory():
         DB["inventory"].update_one(
             {"_id": ObjectId(inventory_item["_id"])}, {"$set": inventory_item}
         )
+    log_action("updateInventory", data=data)
     return jsonify({"message": "success"})
 
 
