@@ -126,7 +126,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to decline request',
+          description: 'Unable to decline request',
         });
       });
   };
