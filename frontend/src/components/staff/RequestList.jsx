@@ -47,7 +47,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: `Cannot able to get package of ID: ${selectedRequest.packageId}`,
+          description: `Unable to get package with _id: ${selectedRequest.packageId}`,
         });
       });
     // TODO: Better way of storing this data to reduce DB calls
