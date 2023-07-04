@@ -299,7 +299,7 @@ def get_personal_care_products():
     Returns:
         Response: A JSON response with all personal care products
     """
-    products = list(DB["inventory"].find({"category": f"PersonalCareProduct"}))
+    products = list(DB["inventory"].find({"category": "PersonalCareProduct"}))
     return json.dumps(products)
     """Get all personal care products
 
