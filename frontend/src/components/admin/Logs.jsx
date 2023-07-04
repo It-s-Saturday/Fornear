@@ -1,4 +1,4 @@
-import { Table } from 'antd';
+import { Table, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 /**
@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
  */
 export default function Logs() {
   const [logs, setLogs] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     fetch('/admin/get_logs')
@@ -20,6 +21,12 @@ export default function Logs() {
       })
       .then((data) => {
         setLogs(data);
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Unable to fetch logs',
+        });
       });
     // console.log(logs);
   }, []);
@@ -54,6 +61,7 @@ export default function Logs() {
 
   return (
     <div className="flex flex-col items-center w-full">
+      {contextHolder}
       <h1 className="text-3xl font-bold">Logs</h1>
 
       <div className="flex flex-col w-[50%] p-5 border border-black rounded-md">

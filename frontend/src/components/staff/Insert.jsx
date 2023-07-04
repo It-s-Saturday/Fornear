@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from 'antd';
+import { Input, notification } from 'antd';
 import PropTypes from 'prop-types';
 
 import Button from '../wrappers/Button';
@@ -15,6 +15,7 @@ export default function Insert({ onInsert }) {
     itemCount: '',
     category: 'Foodstuff',
   });
+  const [api, contextHolder] = notification.useNotification();
 
   const clearFields = () => {
     setFormData({
@@ -48,7 +49,10 @@ export default function Insert({ onInsert }) {
         onInsert();
         clearFields();
       } catch (err) {
-        // console.log(err);
+        api.error({
+          message: err.message,
+          description: 'Unable to insert item',
+        });
       }
     } else {
       // alert('Please enter a number for item count.');
@@ -57,6 +61,7 @@ export default function Insert({ onInsert }) {
 
   return (
     <div className="flex flex-col w-[30rem] h-[fit-content] items-center p-5 border border-black rounded-md bg-gray-100">
+      {contextHolder}
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold">Insert an Item</h1>
         <Input
