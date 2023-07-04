@@ -40,7 +40,7 @@ export default function Navbar() {
               dropdown: [
                 { name: 'Requests', link: '/staff/requests' },
                 { name: 'Inventory', link: '/staff/inventory' },
-                { name: 'Create', link: 'staff/create-package' },
+                { name: 'Create', link: '/staff/create-package' },
                 { name: 'Insert', link: '/staff/insert' },
                 { name: 'Update', link: '/staff/update' },
               ],

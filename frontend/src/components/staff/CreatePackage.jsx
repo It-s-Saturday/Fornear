@@ -75,7 +75,13 @@ export default function CreatePackage({ refresh, onRefresh }) {
           key: index,
         }));
         setInventoryData(dataWithKey);
-        setLoading(false);
+      })
+      .then(() => setLoading(false))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to fetch inventory data',
+        });
       });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
@@ -161,7 +167,10 @@ export default function CreatePackage({ refresh, onRefresh }) {
         description: 'Package successfully created.',
       });
     } catch (err) {
-      // console.log(err);
+      api.error({
+        message: err.message,
+        description: 'Cannot able to create new package',
+      });
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'antd';
+import { Table, notification } from 'antd';
 import PropTypes from 'prop-types';
 import { moment } from 'moment';
 
@@ -12,7 +12,7 @@ import { moment } from 'moment';
  */
 export default function RequestTable({ type, refresh, onRefresh }) {
   const [requestTableData, setRequestTableData] = useState([]);
-
+  const [api, contextHolder] = notification.useNotification();
   // Set first letter to uppercase for usage in column and table titles
   const headerText = type.charAt(0).toUpperCase() + type.slice(1);
 
@@ -66,12 +66,19 @@ export default function RequestTable({ type, refresh, onRefresh }) {
         }));
         return keyAddedData;
       })
-      .then((data) => setRequestTableData(data));
+      .then((data) => setRequestTableData(data))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: `Unable to get ${type} request data`,
+        });
+      });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
   return (
     <div className="flex flex-col gap-y-5 border border-black rounded-md p-5 bg-gray-100">
+      {contextHolder}
       <h1 className="text-3xl font-bold">{headerText} Packages</h1>
       <Table dataSource={requestTableData} columns={columns} />
     </div>
