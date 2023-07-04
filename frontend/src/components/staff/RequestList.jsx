@@ -63,7 +63,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: `Cannot able to get the product`,
+          description: `Unable to get this request's personal care products`,
         });
       });
   }, [selectedRequest]);
