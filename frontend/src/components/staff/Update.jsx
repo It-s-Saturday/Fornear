@@ -130,7 +130,7 @@ export default function Update({ refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to get inventory data',
+          description: 'Unable to get inventory data',
         });
         setLoading(false);
       });
