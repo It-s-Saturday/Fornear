@@ -33,7 +33,13 @@ DB = CLIENT["fornear-v1"]
 # My own code
 # https://github.com/It-s-Saturday/BillTracker/blob/c07f83c78f10259aed621f6c4d5ae9d526903898/backend/main.py#L25
 def log_action(action, notes="", data={}):
-    """ONLY USE IN INSERT, UPDATE, DELETE ACTIONS"""
+    """Log create, update, delete actions to the log collection
+
+    Args:
+        action (str): The action that was performed
+        notes (str, optional: Notes/comments about the action. Defaults to "".
+        data (dict, optional): The data that was used to perform the action. Defaults to {}.
+    """
     LOG_COLLECTION = DB["log"]
     LOG_COLLECTION.insert_one(
         {
@@ -48,12 +54,39 @@ def log_action(action, notes="", data={}):
 
 @app.route("/api/get_inventory", methods=["GET"])
 def get_inventory():
+    """Get the inventory from the database
+
+    Returns:
+        Response: The inventory as a JSON response
+    """
     inventory = list(DB["inventory"].find())
     return json.dumps(inventory)
 
 
 @app.route("/api/update_inventory", methods=["POST"])
 def update_inventory():
+    """Update the inventory in the database
+
+    data should be a JSON object with the following structure:
+
+    {
+        "auditor": "someone's name",
+        "selectedItems": [
+            {
+                "itemName": "item1",
+                "itemCount": 5
+            },
+
+            {
+                "itemName": "item2",
+                "itemCount": 10
+            }
+        ]
+    }
+
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -71,6 +104,27 @@ def update_inventory():
 
 @app.route("/api/request_package", methods=["POST"])
 def request_package():
+    """(Student) Request a package
+
+    data should be a JSON object with the following structure:
+
+    {
+        packageId: '000000000000000000000000',
+        packageName: 'Package Name',
+        name: 'Someone',
+        email: 'someone@fakemail.com',
+        phoneNumber: '555-555-5555',
+        pickupDate: '2021-01-01',
+        personalCareProducts: [
+            'Toothbrush',
+            'Toothpaste',
+            'Deodorant',
+        ],
+        restrictions: '',
+    }
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -84,6 +138,11 @@ def request_package():
 
 @app.route("/api/get_requests", methods=["GET"])
 def get_requests():
+    """Get all requests
+
+    Returns:
+        Response: A JSON response with all requests
+    """
     requests = list(
         DB["requests"].aggregate(
             [
@@ -103,6 +162,11 @@ def get_requests():
 
 @app.route("/api/get_packages", methods=["GET"])
 def get_packages():
+    """Get all packages
+
+    Returns:
+        Response: A JSON response with all packages
+    """
     packages = list(DB["packages"].find())
 
     for package in packages:
@@ -122,6 +186,19 @@ def get_packages():
 
 @app.route("/api/get_package_by_id", methods=["POST"])
 def get_package_by_id():
+    """Get a package by its ID
+
+    data should be a JSON object with the following structure:
+
+    {
+        "_id": {
+            "$oid": "649d258978ab9985ce22081b"
+        }
+    }
+
+    Returns:
+        Response: A JSON response with the package
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -130,6 +207,19 @@ def get_package_by_id():
 
 @app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
 def get_personal_care_products_by_request_id():
+    """Get a package by its ID
+    
+    data should be a JSON object with the following structure:
+    
+    {
+        "_id": {
+            "$oid": "649d258978ab9985ce22081b"
+        }
+    }
+
+    Returns:
+        Response: A JSON response; a list of personal care products in the request
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -149,6 +239,22 @@ def get_personal_care_products_by_request_id():
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
+    """Insert an item into the inventory
+
+    data should be a JSON object with the following structure:
+
+    {
+        "_id": {
+            "$oid": "649d238278ab9985ce220817"
+        },
+        "itemName": "Jars",
+        "itemCount": "20",
+        "category": "Foodstuff"
+    }
+
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -160,6 +266,22 @@ def insert_item():
 
 @app.route("/api/update_item", methods=["POST"])
 def update_item():
+    """Update an item in the inventory
+
+    data should be a JSON object with the following structure:
+
+    {
+        "_id": {
+            "$oid": "649d238278ab9985ce220817"
+        },
+        "itemName": "Jars",
+        "itemCount": "20",
+        "category": "Foodstuff"
+    }
+
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -171,12 +293,37 @@ def update_item():
 
 @app.route("/api/get_personal_care_products", methods=["GET"])
 def get_personal_care_products():
+    """Get all personal care products
+
+    Returns:
+        Response: A JSON response with all personal care products
+    """
     products = list(DB["inventory"].find({"category": f"PersonalCareProduct"}))
     return json.dumps(products)
 
 
 @app.route("/api/create_package", methods=["POST"])
 def create_package():
+    """Create a package
+
+    data should be a JSON object with the following structure:
+
+    {
+        "packageName": "Just Beans",
+        "author": "jayway",
+        "description": "",
+        "selectedItems": [
+            {
+            "itemName": "Canned Beans",
+            "itemCount": 1
+            }
+        ],
+        "quantityAvailable": 40,
+    }
+
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -189,6 +336,17 @@ def create_package():
 
 @app.route("/api/fulfill_request", methods=["POST"])
 def fullfil_request():
+    """Fulfill a request
+
+    data should be a JSON object with the following structure:
+
+    {
+        "_id": "5f9b3b3b9b9b9b9b9b9b9b9b",
+    }
+
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -250,6 +408,17 @@ def fullfil_request():
 
 @app.route("/api/decline_request", methods=["POST"])
 def decline_request():
+    """Decline a request
+
+    data should be a JSON object with the following structure:
+
+    {
+        "_id": "5f9b3b3b9b9b9b9b9b9b9b9b",
+    }
+
+    Returns:
+        Response: A JSON response with a message of "success" or "error"
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -267,24 +436,44 @@ def decline_request():
 
 @app.route("/api/get_fulfilled_requests", methods=["GET"])
 def get_fulfilled_requests():
+    """Get all fulfilled requests
+
+    Returns:
+        Response: A JSON response with all fulfilled requests
+    """
     requests = list(DB["requests"].find({"fulfilled": 1}))
     return json.dumps(requests)
 
 
 @app.route("/api/get_unfulfilled_requests", methods=["GET"])
 def get_unfulfilled_requests():
+    """Get all unfulfilled requests
+
+    Returns:
+        Response: A JSON response with all fulfilled requests
+    """
     requests = list(DB["requests"].find({"fulfilled": 0}))
     return json.dumps(requests)
 
 
 @app.route("/api/get_declined_requests", methods=["GET"])
 def get_declined_requests():
+    """Get all declined requests
+
+    Returns:
+        Response: A JSON response with all fulfilled requests
+    """
     requests = list(DB["requests"].find({"fulfilled": -1}))
     return json.dumps(requests)
 
 
 @app.route("/admin/get_logs", methods=["GET"])
 def get_logs():
+    """Get all logs
+
+    Returns:
+        Response: A JSON response with all logs, sorted by time descending
+    """
     logs = list(DB["log"].find())
     logs.sort(key=lambda x: x["time"])
     return json.dumps(logs)
