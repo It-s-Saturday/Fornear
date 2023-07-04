@@ -49,7 +49,7 @@ export default function Request() {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to get personal care products',
+          description: 'Unable to get personal care products',
         });
       });
   }, []);
