@@ -51,7 +51,7 @@ export default function Insert({ onInsert }) {
       } catch (err) {
         api.error({
           message: err.message,
-          description: 'Cannot able to insert item',
+          description: 'Unable to insert item',
         });
       }
     } else {
