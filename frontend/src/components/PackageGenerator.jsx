@@ -54,7 +54,7 @@ export default function PackageGenerator({ showRequest }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to get request data',
+          description: 'Unable to get request data',
         });
       });
   }, []);
