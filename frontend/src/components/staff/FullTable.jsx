@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Table } from 'antd';
+import { Input, Table, notification } from 'antd';
 import PropTypes from 'prop-types';
 import InputLabel from '../wrappers/InputLabel';
 
@@ -14,6 +14,7 @@ export default function FullTable({ refresh, onRefresh }) {
   const [viewData, setViewData] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     fetch('/api/get_inventory')
@@ -25,6 +26,13 @@ export default function FullTable({ refresh, onRefresh }) {
         }));
         setInventoryData(dataWithKey);
         setViewData(dataWithKey);
+        setLoading(false);
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to get inventory data',
+        });
         setLoading(false);
       });
     // eslint-disable-next-line no-sparse-arrays
@@ -74,6 +82,7 @@ export default function FullTable({ refresh, onRefresh }) {
 
   return (
     <>
+      {contextHolder}
       {loading && <h1>Please wait...</h1>}
       <h1 className="text-3xl font-bold text-center">Inventory</h1>
       <InputLabel label="Search for an item">

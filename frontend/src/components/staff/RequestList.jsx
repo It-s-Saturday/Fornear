@@ -22,7 +22,13 @@ export default function RequestList({ refresh, onRefresh }) {
   useEffect(() => {
     fetch('/api/get_requests')
       .then((res) => res.json())
-      .then((data) => setRequestData(data));
+      .then((data) => setRequestData(data))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to get requests data',
+        });
+      });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
@@ -37,8 +43,13 @@ export default function RequestList({ refresh, onRefresh }) {
       body: JSON.stringify({ _id: selectedRequest.packageId }),
     })
       .then((res) => res.json())
-      .then((data) => setPackageData(data));
-
+      .then((data) => setPackageData(data))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: `Cannot able to get package of ID: ${selectedRequest.packageId}`,
+        });
+      });
     // TODO: Better way of storing this data to reduce DB calls
     fetch('/api/get_personal_care_products_by_request_id', {
       method: 'POST',
@@ -48,7 +59,13 @@ export default function RequestList({ refresh, onRefresh }) {
       body: JSON.stringify({ _id: selectedRequest?._id }),
     })
       .then((res) => res.json())
-      .then((data) => setCurrentPersonalCareProducts(data));
+      .then((data) => setCurrentPersonalCareProducts(data))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: `Cannot able to get the product`,
+        });
+      });
   }, [selectedRequest]);
 
   // Set data to request and render, then open modal
@@ -77,6 +94,12 @@ export default function RequestList({ refresh, onRefresh }) {
           onRefresh();
           setModalOpen(false);
         }
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to fulfill the request',
+        });
       });
   };
 
@@ -99,6 +122,12 @@ export default function RequestList({ refresh, onRefresh }) {
           onRefresh();
           setModalOpen(false);
         }
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to decline request',
+        });
       });
   };
 

@@ -126,6 +126,13 @@ export default function Update({ refresh, onRefresh }) {
         }));
         setInventoryData(dataWithKey);
         setLoading(false);
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to get inventory data',
+        });
+        setLoading(false);
       });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
@@ -209,7 +216,10 @@ export default function Update({ refresh, onRefresh }) {
       // console.log(postData);
       onRefresh();
     } catch (err) {
-      // console.log(err);
+      api.error({
+        message: err.message,
+        description: 'Cannot able to get update inventory',
+      });
     }
   };
 

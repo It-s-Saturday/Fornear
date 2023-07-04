@@ -10,7 +10,9 @@ import FullTable from './FullTable';
  */
 export default function Inventory({ refresh, onRefresh }) {
   useEffect(() => {
-    onRefresh();
+    if (!onRefresh === undefined) {
+      onRefresh();
+    }
   }, [refresh, onRefresh]);
 
   return (

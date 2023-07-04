@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { notification } from 'antd';
 import Package from './Package';
 
 /**
@@ -10,6 +11,7 @@ import Package from './Package';
 export default function PackageGenerator({ showRequest }) {
   const [packageData, setPackageData] = useState(null);
   const [requestData, setRequestData] = useState(null);
+  const [api, contextHolder] = notification.useNotification();
 
   /**
    * https://stackoverflow.com/a/55642683/14879329
@@ -32,6 +34,12 @@ export default function PackageGenerator({ showRequest }) {
           key: index,
         }));
         setPackageData(dataWithKey);
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to get package data',
+        });
       });
 
     fetch('/api/get_requests')
@@ -42,6 +50,12 @@ export default function PackageGenerator({ showRequest }) {
           key: index,
         }));
         setRequestData(dataWithKey);
+      })
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to get request data',
+        });
       });
   }, []);
 
@@ -53,6 +67,7 @@ export default function PackageGenerator({ showRequest }) {
 
   return (
     <div className="flex flex-col items-center p-10">
+      {contextHolder}
       <h1 className="text-3xl font-bold">Published packages</h1>
       <div className="flex flex-row flex-wrap justify-center space-x-10 gap-y-10 align-middle items-center">
         {mergedData !== null &&

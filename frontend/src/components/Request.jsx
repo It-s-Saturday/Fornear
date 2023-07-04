@@ -36,11 +36,22 @@ export default function Request() {
       body: JSON.stringify({ _id }),
     })
       .then((res) => res.json())
-      .then((data) => setPackageData(data));
-
+      .then((data) => setPackageData(data))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: `Cannot able to get package of ID: ${_id}`,
+        });
+      });
     fetch('/api/get_personal_care_products')
       .then((res) => res.json())
-      .then((data) => setPersonalCareProducts(data));
+      .then((data) => setPersonalCareProducts(data))
+      .catch((err) => {
+        api.error({
+          message: err.message,
+          description: 'Cannot able to get personal care products',
+        });
+      });
   }, []);
 
   const [formData, setFormData] = useState({
@@ -125,7 +136,10 @@ export default function Request() {
       // If post is successful, redirect to home page
       redirect();
     } catch (error) {
-      // console.error(error);
+      api.error({
+        message: error.message,
+        description: 'Cannot able to get personal_care_products',
+      });
     }
   };
 
