@@ -223,7 +223,7 @@ def get_personal_care_products_by_request_id():
             if inventory_item is None:
                 continue
             products.append(inventory_item['itemName'])
-    return dump_json(products)
+    return json.dumps(products)
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
@@ -281,6 +281,8 @@ def update_item():
 
 @app.route("/api/get_personal_care_products", methods=["GET"])
 def get_personal_care_products():
+    products = list(DB["inventory"].find({"category": f"PersonalCareProduct"}))
+    return json.dumps(products)
     """Get all personal care products
 
     Returns:
