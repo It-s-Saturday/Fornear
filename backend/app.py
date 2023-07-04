@@ -301,13 +301,6 @@ def get_personal_care_products():
     """
     products = list(DB["inventory"].find({"category": "PersonalCareProduct"}))
     return json.dumps(products)
-    """Get all personal care products
-
-    Returns:
-        Response: A JSON response with all personal care products
-    """
-    products = list(DB["inventory"].find({"category": "PersonalCareProduct"}))
-    return json.dumps(products)
 
 
 @app.route("/api/create_package", methods=["POST"])
