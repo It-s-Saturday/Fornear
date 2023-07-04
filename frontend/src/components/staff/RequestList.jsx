@@ -98,7 +98,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to fulfill the request',
+          description: 'Unable to fulfill the request',
         });
       });
   };
