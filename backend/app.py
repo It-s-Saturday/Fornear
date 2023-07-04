@@ -26,10 +26,6 @@ else:
     CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 
 
-def dump_json(data):
-    return json.dumps(data, default=str)
-
-
 app = Flask(__name__)
 DB = CLIENT["fornear-v1"]
 
@@ -53,7 +49,7 @@ def log_action(action, notes="", data={}):
 @app.route("/api/get_inventory", methods=["GET"])
 def get_inventory():
     inventory = list(DB["inventory"].find())
-    return dump_json(inventory)
+    return json.dumps(inventory)
 
 
 @app.route("/api/update_inventory", methods=["POST"])
@@ -102,7 +98,7 @@ def get_requests():
             continue
         request["packageName"] = package["packageName"]
     requests.sort(key=lambda x: x["packageName"])
-    return dump_json(requests)
+    return json.dumps(requests)
 
 
 @app.route("/api/get_packages", methods=["GET"])
@@ -121,7 +117,7 @@ def get_packages():
             )
         package["quantityAvailable"] = curr_max
 
-    return dump_json(packages)
+    return json.dumps(packages)
 
 
 @app.route("/api/get_package_by_id", methods=["POST"])
@@ -130,7 +126,7 @@ def get_package_by_id():
     if data is None:
         return jsonify({"message": "error"})
     package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
-    return dump_json(package)
+    return json.dumps(package)
 
 @app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
 def get_personal_care_products_by_request_id():
@@ -149,7 +145,7 @@ def get_personal_care_products_by_request_id():
             if inventory_item is None:
                 continue
             products.append(inventory_item['itemName'])
-    return dump_json(products)
+    return json.dumps(products)
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
@@ -176,7 +172,7 @@ def update_item():
 @app.route("/api/get_personal_care_products", methods=["GET"])
 def get_personal_care_products():
     products = list(DB["inventory"].find({"category": f"PersonalCareProduct"}))
-    return dump_json(products)
+    return json.dumps(products)
 
 
 @app.route("/api/create_package", methods=["POST"])
@@ -272,26 +268,26 @@ def decline_request():
 @app.route("/api/get_fulfilled_requests", methods=["GET"])
 def get_fulfilled_requests():
     requests = list(DB["requests"].find({"fulfilled": 1}))
-    return dump_json(requests)
+    return json.dumps(requests)
 
 
 @app.route("/api/get_unfulfilled_requests", methods=["GET"])
 def get_unfulfilled_requests():
     requests = list(DB["requests"].find({"fulfilled": 0}))
-    return dump_json(requests)
+    return json.dumps(requests)
 
 
 @app.route("/api/get_declined_requests", methods=["GET"])
 def get_declined_requests():
     requests = list(DB["requests"].find({"fulfilled": -1}))
-    return dump_json(requests)
+    return json.dumps(requests)
 
 
 @app.route("/admin/get_logs", methods=["GET"])
 def get_logs():
     logs = list(DB["log"].find())
     logs.sort(key=lambda x: x["time"])
-    return dump_json(logs)
+    return json.dumps(logs)
 
 
 if __name__ == "__main__":
