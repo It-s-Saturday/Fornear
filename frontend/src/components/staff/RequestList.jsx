@@ -26,7 +26,7 @@ export default function RequestList({ refresh, onRefresh }) {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to get requests data',
+          description: 'Unable to get requests',
         });
       });
     // eslint-disable-next-line no-sparse-arrays
