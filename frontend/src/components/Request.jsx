@@ -40,7 +40,7 @@ export default function Request() {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: `Cannot able to get package of ID: ${_id}`,
+          description: `Unable to get package with _id: ${_id}`,
         });
       });
     fetch('/api/get_personal_care_products')
