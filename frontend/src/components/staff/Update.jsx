@@ -218,7 +218,7 @@ export default function Update({ refresh, onRefresh }) {
     } catch (err) {
       api.error({
         message: err.message,
-        description: 'Cannot able to get update inventory',
+        description: 'Unable to get update inventory',
       });
     }
   };
