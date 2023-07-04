@@ -208,6 +208,19 @@ def get_package_by_id():
 
 @app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
 def get_personal_care_products_by_request_id():
+    """Get a package by its ID
+    
+    data should be a JSON object with the following structure:
+    
+    {
+        "_id": {
+            "$oid": "649d258978ab9985ce22081b"
+        }
+    }
+
+    Returns:
+        Response: A JSON response; a list of personal care products in the request
+    """
     data = request.json
     if data is None:
         return jsonify({"message": "error"})
@@ -281,6 +294,11 @@ def update_item():
 
 @app.route("/api/get_personal_care_products", methods=["GET"])
 def get_personal_care_products():
+    """Get all personal care products
+
+    Returns:
+        Response: A JSON response with all personal care products
+    """
     products = list(DB["inventory"].find({"category": f"PersonalCareProduct"}))
     return json.dumps(products)
     """Get all personal care products
