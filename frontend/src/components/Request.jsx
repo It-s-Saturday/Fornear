@@ -138,7 +138,7 @@ export default function Request() {
     } catch (error) {
       api.error({
         message: error.message,
-        description: 'Cannot able to get personal_care_products',
+        description: 'Unable to request package at this time',
       });
     }
   };
