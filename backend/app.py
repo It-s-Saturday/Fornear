@@ -8,16 +8,22 @@ from flask import Flask, jsonify, request
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-import certifi
-
-
+# Run using local DB if "--local" is passed as an argument
 if "--local" in sys.argv:
     print("Running using local DB")
     ATLAS_URI = "mongodb://localhost:27017"
     CLIENT = MongoClient(ATLAS_URI)
 else:
-    from .fornear_secrets import ATLAS_URI
-
+# Run using Atlas DB. Developer must create and set ATLAS_URI in .fornear_secrets.py or environment variables.
+    try:
+        from .fornear_secrets import ATLAS_URI
+    except ImportError:
+        # use environment variables
+        import os
+        ATLAS_URI = os.environ.get("ATLAS_URI")
+    if ATLAS_URI is None:
+        raise Exception("ATLAS_URI not set")
+    import certifi
     CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 
 
