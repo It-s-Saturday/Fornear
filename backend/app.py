@@ -60,7 +60,7 @@ def get_inventory():
         Response: The inventory as a JSON response
     """
     inventory = list(DB["inventory"].find())
-    return json.dumps(inventory)
+    return json.dumps(inventory, default=str)
 
 
 @app.route("/api/update_inventory", methods=["POST"])
@@ -158,7 +158,7 @@ def get_requests():
             continue
         request_["packageName"] = package["packageName"]
     requests.sort(key=lambda x: x["packageName"])
-    return json.dumps(requests)
+    return json.dumps(requests, default=str)
 
 
 @app.route("/api/get_packages", methods=["GET"])
@@ -182,7 +182,7 @@ def get_packages():
             )
         package["quantityAvailable"] = curr_max
 
-    return json.dumps(packages)
+    return json.dumps(packages, default=str)
 
 
 @app.route("/api/get_package_by_id", methods=["POST"])
@@ -204,7 +204,7 @@ def get_package_by_id():
     if data is None:
         return jsonify({"message": "error"})
     package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
-    return json.dumps(package)
+    return json.dumps(package, default=str)
 
 @app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
 def get_personal_care_products_by_request_id():
@@ -236,7 +236,7 @@ def get_personal_care_products_by_request_id():
             if inventory_item is None:
                 continue
             products.append(inventory_item['itemName'])
-    return json.dumps(products)
+    return json.dumps(products, default=str)
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
@@ -443,7 +443,7 @@ def get_fulfilled_requests():
         Response: A JSON response with all fulfilled requests
     """
     requests = list(DB["requests"].find({"fulfilled": 1}))
-    return json.dumps(requests)
+    return json.dumps(requests, default=str)
 
 
 @app.route("/api/get_unfulfilled_requests", methods=["GET"])
@@ -454,7 +454,7 @@ def get_unfulfilled_requests():
         Response: A JSON response with all fulfilled requests
     """
     requests = list(DB["requests"].find({"fulfilled": 0}))
-    return json.dumps(requests)
+    return json.dumps(requests, default=str)
 
 
 @app.route("/api/get_declined_requests", methods=["GET"])
@@ -465,7 +465,7 @@ def get_declined_requests():
         Response: A JSON response with all fulfilled requests
     """
     requests = list(DB["requests"].find({"fulfilled": -1}))
-    return json.dumps(requests)
+    return json.dumps(requests, default=str)
 
 
 @app.route("/admin/get_logs", methods=["GET"])
@@ -477,7 +477,7 @@ def get_logs():
     """
     logs = list(DB["log"].find())
     logs.sort(key=lambda x: x["time"])
-    return json.dumps(logs)
+    return json.dumps(logs, default=str)
 
 
 if __name__ == "__main__":
