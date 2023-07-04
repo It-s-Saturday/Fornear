@@ -26,7 +26,6 @@ export default function FullTable({ refresh, onRefresh }) {
         }));
         setInventoryData(dataWithKey);
         setViewData(dataWithKey);
-        setLoading(false);
       })
       .catch((err) => {
         api.error({
