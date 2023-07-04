@@ -25,7 +25,7 @@ export default function Logs() {
       .catch((err) => {
         api.error({
           message: err.message,
-          description: 'Cannot able to fetch logs',
+          description: 'Unable to fetch logs',
         });
       });
     // console.log(logs);
