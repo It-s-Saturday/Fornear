@@ -75,8 +75,8 @@ export default function CreatePackage({ refresh, onRefresh }) {
           key: index,
         }));
         setInventoryData(dataWithKey);
-        setLoading(false);
       })
+      .then(() => setLoading(false))
       .catch((err) => {
         api.error({
           message: err.message,
