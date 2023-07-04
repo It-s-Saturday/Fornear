@@ -151,11 +151,11 @@ def get_requests():
             ]
         )
     )
-    for request in requests:
-        package = DB["packages"].find_one({"_id": ObjectId(request["_id"])})
+    for request_ in requests:
+        package = DB["packages"].find_one({"_id": ObjectId(request_["_id"])})
         if package is None:
             continue
-        request["packageName"] = package["packageName"]
+        request_["packageName"] = package["packageName"]
     requests.sort(key=lambda x: x["packageName"])
     return json.dumps(requests)
 
