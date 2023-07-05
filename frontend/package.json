@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jibranabsarulislam.github.io/Fornear/",
+  "homepage": "https://jibranabsarulislam.github.io/",
   "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
