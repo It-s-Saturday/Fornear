@@ -8,10 +8,13 @@ module.exports = {
     extend: {
       colors: {
         primary: '#ffdd00',
-        secondary: '#bbb0a5',
+        secondary: '#f5f5f5',
         'accent-blue': '#71b2c9',
         'accent-blue-hover': '#497281',
         'accent-red': '#c8102e',
+        'accent-grey': '#d9d9d9',
+        'light-grey': '#f5f5f5',
+        'dark-grey': '#9a9a9a',
       },
     },
   },
