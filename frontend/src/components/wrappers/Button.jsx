@@ -13,12 +13,15 @@ export default function Button({
   linkTo,
   onClick,
   className,
+  full,
   children,
   color,
 }) {
   const classes =
     className ??
-    `${color} hover:bg-accent-blue text-black font-bold py-2 px-4 rounded`;
+    `${color} hover:bg-accent-blue text-black font-bold py-2 px-4 rounded-2xl${
+      full ? ' w-full' : ''
+    }`;
 
   return (
     <Link to={linkTo}>
@@ -33,6 +36,7 @@ Button.propTypes = {
   linkTo: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
+  full: PropTypes.bool,
   children: PropTypes.node,
   color: PropTypes.string,
 };
@@ -41,5 +45,6 @@ Button.defaultProps = {
   linkTo: undefined,
   color: 'bg-primary',
   className: undefined,
+  full: false,
   children: undefined,
 };
