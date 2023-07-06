@@ -7,7 +7,9 @@
 <!--- This project only accepts pull requests related to open issues -->
 <!--- If suggesting a new feature or change, please discuss it in an issue first -->
 <!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
-Issue: 
+
+<!-- add the issue number below i.e. #57-->
+This PR resolves 
 
 ## Screenshots (if appropriate):
 
@@ -15,6 +17,6 @@ Issue:
 <!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
 - [ ] Bug fix
 - [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
 - [ ] Documentation
+- [ ] Design
 - [ ] Other (please describe)
