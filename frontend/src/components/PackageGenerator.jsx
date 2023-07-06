@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { notification } from 'antd';
 import Package from './Package';
+import SectionTitle from './SectionTitle';
 
 /**
  * Displays all packages
@@ -66,16 +67,18 @@ export default function PackageGenerator({ showRequest }) {
   }
 
   return (
-    <div className="flex flex-col items-center p-10">
+    <>
       {contextHolder}
-      <h1 className="text-3xl font-bold">Published packages</h1>
-      <div className="flex flex-row flex-wrap justify-center space-x-10 gap-y-10 align-middle items-center">
-        {mergedData !== null &&
-          mergedData.map((data) => (
-            <Package key={data._id} data={data} showRequest={showRequest} />
-          ))}
+      <SectionTitle text="Available Packages" />
+      <div className="flex justify-center">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
+          {mergedData !== null &&
+            mergedData.map((data) => (
+              <Package key={data._id} data={data} showRequest={showRequest} />
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
