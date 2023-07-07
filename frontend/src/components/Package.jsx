@@ -30,26 +30,22 @@ export default function Package(props) {
           </span>
         </div>
       </div>
-      {showRequest ? (
+      {
         <div className="flex items-center px-6 py-4 justify-end">
           <Chip label={`${data.quantityAvailable ?? '0'} available`} />
-          <Link to={`request/${data._id}`}>
-            <button
-              type="button"
-              className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded"
-            >
-              {/* TODO: Disable button if quantityAvailable < 1 */}
-              Request
-            </button>
-          </Link>
+          {showRequest && (
+            <Link to={`request/${data._id}`}>
+              <button
+                type="button"
+                className="bg-primary hover:bg-accent-blue text-black font-bold py-2 px-4 rounded"
+              >
+                {/* TODO: Disable button if quantityAvailable < 1 */}
+                Request
+              </button>
+            </Link>
+          )}
         </div>
-      ) : (
-        <div className="flex items-center px-6 py-4 justify-end">
-          <Chip
-            label={`${data.requests ? data.requests.length : '0'} requested`}
-          />
-        </div>
-      )}
+      }
     </div>
   );
 }
