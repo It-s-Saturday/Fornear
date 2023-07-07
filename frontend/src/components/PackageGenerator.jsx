@@ -32,6 +32,7 @@ export default function PackageGenerator(props) {
           ...item,
           key: index,
         }));
+        dataWithKey.filter((item) => item.fulfilled === 0);
         setRequestData(dataWithKey);
       });
   }, []);
