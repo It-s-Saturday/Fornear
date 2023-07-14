@@ -15,6 +15,7 @@ export default function RequestTable({ type, refresh, onRefresh }) {
   const [api, contextHolder] = notification.useNotification();
   // Set first letter to uppercase for usage in column and table titles
   const headerText = type.charAt(0).toUpperCase() + type.slice(1);
+  let fulfilled;
 
   const columns = [
     {
@@ -56,8 +57,24 @@ export default function RequestTable({ type, refresh, onRefresh }) {
     });
   }
 
+  if (type === 'unfulfilled') {
+    fulfilled = 0;
+  }
+  if (type === 'fulfilled') {
+    fulfilled = 1;
+  }
+  if (type === 'declined') {
+    fulfilled = -1;
+  }
+
   useEffect(() => {
-    fetch(`/api/get_${type}_requests`)
+    fetch(`/api/get_special_requests`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fulfilled: fulfilled }),
+    })
       .then((res) => res.json())
       .then((data) => {
         const keyAddedData = data.map((item) => ({

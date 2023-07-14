@@ -153,11 +153,11 @@ def get_requests():
         )
     )
     for request_ in requests:
-        package = DB["packages"].find_one({"_id": ObjectId(request_["_id"])})
+        package = DB["packages"].find_one({"_id": request_["requests"][0]["_id"]})
         if package is None:
             continue
         request_["packageName"] = package["packageName"]
-    requests.sort(key=lambda x: x["packageName"])
+    requests.sort(key=lambda x: x["requests"][0]["packageName"])
     return json.dumps(requests, default=str)
 
 
@@ -235,7 +235,7 @@ def get_personal_care_products_by_request_id():
             inventory_item = DB["inventory"].find_one({"_id": ObjectId(_id)})
             if inventory_item is None:
                 continue
-            products.append(inventory_item['itemName'])
+            products.append(inventory_item["itemName"])
     return json.dumps(products, default=str)
 
 @app.route("/api/insert_item", methods=["POST"])
@@ -300,7 +300,7 @@ def get_personal_care_products():
         Response: A JSON response with all personal care products
     """
     products = list(DB["inventory"].find({"category": "PersonalCareProduct"}))
-    return json.dumps(products)
+    return json.dumps(products, default=str)
 
 
 @app.route("/api/create_package", methods=["POST"])
@@ -386,12 +386,7 @@ def fullfil_request():
                 continue
             DB["inventory"].update_one(
                 {"_id": ObjectId(_id)},
-                {
-                    "$set": {
-                        "itemCount": int(inventory_item["itemCount"])
-                        - 1
-                    }
-                },
+                {"$set": {"itemCount": int(inventory_item["itemCount"]) - 1}},
             )
 
     DB["requests"].update_one(
@@ -435,17 +430,27 @@ def decline_request():
     return jsonify({"message": "success"})
 
 
-@app.route("/api/get_fulfilled_requests", methods=["GET"])
-def get_fulfilled_requests():
+@app.route("/api/get_special_requests", methods=["POST"])
+def get_special_requests():
     """Get all fulfilled requests
 
+    data should be a JSON object with the following structure:
+
+    {
+        "fulfilled": 0,
+    }
+
+
     Returns:
-        Response: A JSON response with all fulfilled requests
+        Response: A JSON response with all special( fulfilled, unfulfilled, declined) requests
     """
-    requests = list(DB["requests"].find({"fulfilled": 1}))
+    data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
+    requests = list(DB["requests"].find({"fulfilled": data["fulfilled"]}))
     return json.dumps(requests, default=str)
 
-
+'''
 @app.route("/api/get_unfulfilled_requests", methods=["GET"])
 def get_unfulfilled_requests():
     """Get all unfulfilled requests
@@ -466,7 +471,7 @@ def get_declined_requests():
     """
     requests = list(DB["requests"].find({"fulfilled": -1}))
     return json.dumps(requests, default=str)
-
+    '''
 
 @app.route("/admin/get_logs", methods=["GET"])
 def get_logs():
