@@ -13,16 +13,18 @@ if "--local" in sys.argv:
     ATLAS_URI = "mongodb://localhost:27017"
     CLIENT = MongoClient(ATLAS_URI)
 else:
-# Run using Atlas DB. Developer must create and set ATLAS_URI in .fornear_secrets.py or environment variables.
+    # Run using Atlas DB. Developer must create and set ATLAS_URI in .fornear_secrets.py or environment variables.
     try:
         from .fornear_secrets import ATLAS_URI
     except ImportError:
         # use environment variables
         import os
+
         ATLAS_URI = os.environ.get("ATLAS_URI")
     if ATLAS_URI is None:
         raise Exception("ATLAS_URI not set")
     import certifi
+
     CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 
 
@@ -153,11 +155,11 @@ def get_requests():
         )
     )
     for request_ in requests:
-        package = DB["packages"].find_one({"_id": ObjectId(request_["_id"])})
+        package = DB["packages"].find_one({"_id": request_["requests"][0]["_id"]})
         if package is None:
             continue
         request_["packageName"] = package["packageName"]
-    requests.sort(key=lambda x: x["packageName"])
+    requests.sort(key=lambda x: x["requests"][0]["packageName"])
     return json.dumps(requests, default=str)
 
 
@@ -206,12 +208,13 @@ def get_package_by_id():
     package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
     return json.dumps(package, default=str)
 
+
 @app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
 def get_personal_care_products_by_request_id():
     """Get a package by its ID
-    
+
     data should be a JSON object with the following structure:
-    
+
     {
         "_id": {
             "$oid": "649d258978ab9985ce22081b"
@@ -235,8 +238,9 @@ def get_personal_care_products_by_request_id():
             inventory_item = DB["inventory"].find_one({"_id": ObjectId(_id)})
             if inventory_item is None:
                 continue
-            products.append(inventory_item['itemName'])
+            products.append(inventory_item["itemName"])
     return json.dumps(products, default=str)
+
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
@@ -386,12 +390,7 @@ def fullfil_request():
                 continue
             DB["inventory"].update_one(
                 {"_id": ObjectId(_id)},
-                {
-                    "$set": {
-                        "itemCount": int(inventory_item["itemCount"])
-                        - 1
-                    }
-                },
+                {"$set": {"itemCount": int(inventory_item["itemCount"]) - 1}},
             )
 
     DB["requests"].update_one(
