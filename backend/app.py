@@ -440,7 +440,6 @@ def get_special_requests():
         "fulfilled": 0,
     }
 
-
     Returns:
         Response: A JSON response with all special( fulfilled, unfulfilled, declined) requests
     """
@@ -449,29 +448,6 @@ def get_special_requests():
         return jsonify({"message": "error"})
     requests = list(DB["requests"].find({"fulfilled": data["fulfilled"]}))
     return json.dumps(requests, default=str)
-
-'''
-@app.route("/api/get_unfulfilled_requests", methods=["GET"])
-def get_unfulfilled_requests():
-    """Get all unfulfilled requests
-
-    Returns:
-        Response: A JSON response with all fulfilled requests
-    """
-    requests = list(DB["requests"].find({"fulfilled": 0}))
-    return json.dumps(requests, default=str)
-
-
-@app.route("/api/get_declined_requests", methods=["GET"])
-def get_declined_requests():
-    """Get all declined requests
-
-    Returns:
-        Response: A JSON response with all fulfilled requests
-    """
-    requests = list(DB["requests"].find({"fulfilled": -1}))
-    return json.dumps(requests, default=str)
-    '''
 
 @app.route("/admin/get_logs", methods=["GET"])
 def get_logs():

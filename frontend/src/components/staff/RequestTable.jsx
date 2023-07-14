@@ -57,14 +57,18 @@ export default function RequestTable({ type, refresh, onRefresh }) {
     });
   }
 
-  if (type === 'unfulfilled') {
-    fulfilled = 0;
-  }
-  if (type === 'fulfilled') {
-    fulfilled = 1;
-  }
-  if (type === 'declined') {
-    fulfilled = -1;
+  switch (type) {
+    case 'unfulfilled':
+      fulfilled = 0;
+      break;
+    case 'fulfilled':
+      fulfilled = 1;
+      break;
+    case 'declined':
+      fulfilled = -1;
+      break;
+    default:
+      break;
   }
 
   useEffect(() => {
@@ -73,7 +77,7 @@ export default function RequestTable({ type, refresh, onRefresh }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fulfilled: fulfilled }),
+      body: JSON.stringify({ fulfilled }),
     })
       .then((res) => res.json())
       .then((data) => {
