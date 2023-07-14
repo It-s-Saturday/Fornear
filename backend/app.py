@@ -13,16 +13,18 @@ if "--local" in sys.argv:
     ATLAS_URI = "mongodb://localhost:27017"
     CLIENT = MongoClient(ATLAS_URI)
 else:
-# Run using Atlas DB. Developer must create and set ATLAS_URI in .fornear_secrets.py or environment variables.
+    # Run using Atlas DB. Developer must create and set ATLAS_URI in .fornear_secrets.py or environment variables.
     try:
         from .fornear_secrets import ATLAS_URI
     except ImportError:
         # use environment variables
         import os
+
         ATLAS_URI = os.environ.get("ATLAS_URI")
     if ATLAS_URI is None:
         raise Exception("ATLAS_URI not set")
     import certifi
+
     CLIENT = MongoClient(ATLAS_URI, tlsCAFile=certifi.where())
 
 
@@ -206,12 +208,13 @@ def get_package_by_id():
     package = DB["packages"].find_one({"_id": ObjectId(data["_id"])})
     return json.dumps(package, default=str)
 
+
 @app.route("/api/get_personal_care_products_by_request_id", methods=["POST"])
 def get_personal_care_products_by_request_id():
     """Get a package by its ID
-    
+
     data should be a JSON object with the following structure:
-    
+
     {
         "_id": {
             "$oid": "649d258978ab9985ce22081b"
@@ -237,6 +240,7 @@ def get_personal_care_products_by_request_id():
                 continue
             products.append(inventory_item["itemName"])
     return json.dumps(products, default=str)
+
 
 @app.route("/api/insert_item", methods=["POST"])
 def insert_item():
