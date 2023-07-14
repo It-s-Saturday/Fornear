@@ -64,6 +64,16 @@
         "ideas",
         "design"
       ]
+    },
+    {
+      "login": "chan-0912",
+      "name": "Chanchal Yadav",
+      "avatar_url": "https://avatars.githubusercontent.com/u/92747598?v=4",
+      "profile": "https://github.com/chan-0912",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
