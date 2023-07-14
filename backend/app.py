@@ -304,7 +304,7 @@ def get_personal_care_products():
         Response: A JSON response with all personal care products
     """
     products = list(DB["inventory"].find({"category": "PersonalCareProduct"}))
-    return json.dumps(products)
+    return json.dumps(products, default=str)
 
 
 @app.route("/api/create_package", methods=["POST"])
@@ -434,38 +434,24 @@ def decline_request():
     return jsonify({"message": "success"})
 
 
-@app.route("/api/get_fulfilled_requests", methods=["GET"])
-def get_fulfilled_requests():
+@app.route("/api/get_special_requests", methods=["POST"])
+def get_special_requests():
     """Get all fulfilled requests
 
-    Returns:
-        Response: A JSON response with all fulfilled requests
-    """
-    requests = list(DB["requests"].find({"fulfilled": 1}))
-    return json.dumps(requests, default=str)
+    data should be a JSON object with the following structure:
 
-
-@app.route("/api/get_unfulfilled_requests", methods=["GET"])
-def get_unfulfilled_requests():
-    """Get all unfulfilled requests
+    {
+        "fulfilled": 0,
+    }
 
     Returns:
-        Response: A JSON response with all fulfilled requests
+        Response: A JSON response with all special( fulfilled, unfulfilled, declined) requests
     """
-    requests = list(DB["requests"].find({"fulfilled": 0}))
+    data = request.json
+    if data is None:
+        return jsonify({"message": "error"})
+    requests = list(DB["requests"].find({"fulfilled": data["fulfilled"]}))
     return json.dumps(requests, default=str)
-
-
-@app.route("/api/get_declined_requests", methods=["GET"])
-def get_declined_requests():
-    """Get all declined requests
-
-    Returns:
-        Response: A JSON response with all fulfilled requests
-    """
-    requests = list(DB["requests"].find({"fulfilled": -1}))
-    return json.dumps(requests, default=str)
-
 
 @app.route("/admin/get_logs", methods=["GET"])
 def get_logs():
