@@ -73,7 +73,7 @@ export default function RequestTable({ type, refresh, onRefresh }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fulfilled: fulfilled }),
+      body: JSON.stringify({ "fulfilled": fulfilled }),
     })
       .then((res) => res.json())
       .then((data) => {
